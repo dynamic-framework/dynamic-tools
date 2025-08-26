@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Framework Theme Generator</title>
+    <meta name="description" content="Professional Bootstrap theme generator with real-time preview. Create custom color schemes for fintech, AI startups, and modern web applications.">
+    <meta name="keywords" content="Bootstrap, theme generator, CSS customizer, fintech design, AI startup themes">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!-- Sidebar with Controls -->
+    <div class="sidebar">
+        <div class="p-4">
+            <h4 class="mb-4">
+                <i class="fas fa-palette"></i> Dynamic Framework<br>
+                <small class="text-muted" style="font-size: 0.8rem;">Theme Generator</small>
+            </h4>
+
+            <!-- Color Variables -->
+            <div class="variable-group">
+                <h6 class="text-uppercase text-muted mb-3">Colores del Tema</h6>
+                
+                <div class="variable-item">
+                    <label for="primary">Primary</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="primary" value="#0d6efd">
+                        <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+                    </div>
+                </div>
+
+                <div class="variable-item">
+                    <label for="secondary">Secondary</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="secondary" value="#6c757d">
+                        <input type="text" class="form-control form-control-sm color-value" value="#6c757d">
+                    </div>
+                </div>
+
+                <div class="variable-item">
+                    <label for="success">Success</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="success" value="#198754">
+                        <input type="text" class="form-control form-control-sm color-value" value="#198754">
+                    </div>
+                </div>
+
+                <div class="variable-item">
+                    <label for="danger">Danger</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="danger" value="#dc3545">
+                        <input type="text" class="form-control form-control-sm color-value" value="#dc3545">
+                    </div>
+                </div>
+
+                <div class="variable-item">
+                    <label for="warning">Warning</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="warning" value="#ffc107">
+                        <input type="text" class="form-control form-control-sm color-value" value="#ffc107">
+                    </div>
+                </div>
+
+                <div class="variable-item">
+                    <label for="info">Info</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="info" value="#0dcaf0">
+                        <input type="text" class="form-control form-control-sm color-value" value="#0dcaf0">
+                    </div>
+                </div>
+
+                <div class="variable-item">
+                    <label for="light">Light</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="light" value="#f8f9fa">
+                        <input type="text" class="form-control form-control-sm color-value" value="#f8f9fa">
+                    </div>
+                </div>
+
+                <div class="variable-item">
+                    <label for="dark">Dark</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="dark" value="#212529">
+                        <input type="text" class="form-control form-control-sm color-value" value="#212529">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typography Variables -->
+            <div class="variable-group">
+                <h6 class="text-uppercase text-muted mb-3">Tipografía</h6>
+                
+                <div class="variable-item">
+                    <label for="fontSize">Font Size</label>
+                    <select class="form-select form-select-sm" id="fontSize">
+                        <option value="0.875rem">Small (0.875rem)</option>
+                        <option value="1rem" selected>Normal (1rem)</option>
+                        <option value="1.125rem">Large (1.125rem)</option>
+                        <option value="1.25rem">X-Large (1.25rem)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="lineHeight">Line Height</label>
+                    <select class="form-select form-select-sm" id="lineHeight">
+                        <option value="1.25">Compact (1.25)</option>
+                        <option value="1.5" selected>Normal (1.5)</option>
+                        <option value="1.75">Relaxed (1.75)</option>
+                        <option value="2">Loose (2)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Border Radius Variables -->
+            <div class="variable-group">
+                <h6 class="text-uppercase text-muted mb-3">Border Radius</h6>
+                
+                <div class="variable-item">
+                    <label for="borderRadius">Default</label>
+                    <select class="form-select form-select-sm" id="borderRadius">
+                        <option value="0">None (0)</option>
+                        <option value="0.25rem">Small (0.25rem)</option>
+                        <option value="0.375rem" selected>Normal (0.375rem)</option>
+                        <option value="0.5rem">Large (0.5rem)</option>
+                        <option value="0.75rem">X-Large (0.75rem)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="borderRadiusSm">Small</label>
+                    <select class="form-select form-select-sm" id="borderRadiusSm">
+                        <option value="0">None (0)</option>
+                        <option value="0.125rem">X-Small (0.125rem)</option>
+                        <option value="0.25rem" selected>Small (0.25rem)</option>
+                        <option value="0.375rem">Normal (0.375rem)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="borderRadiusLg">Large</label>
+                    <select class="form-select form-select-sm" id="borderRadiusLg">
+                        <option value="0.375rem">Normal (0.375rem)</option>
+                        <option value="0.5rem" selected>Large (0.5rem)</option>
+                        <option value="0.75rem">X-Large (0.75rem)</option>
+                        <option value="1rem">XX-Large (1rem)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2 px-3 pb-3">
+                <button class="btn btn-primary" onclick="toggleCssView()">
+                    <i class="fas fa-code"></i> Ver CSS Generado
+                </button>
+                <button class="btn btn-warning" onclick="surpriseMe()">
+                    <i class="fas fa-magic"></i> ¡Sorpréndeme!
+                </button>
+                <button class="btn btn-outline-danger btn-sm" onclick="resetDefaults()">
+                    <i class="fas fa-undo"></i> Restaurar Valores por Defecto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content with Preview -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <h2 class="mb-4">Vista Previa de Componentes</h2>
+
+            <!-- Buttons Preview -->
+            <div class="preview-section">
+                <h5 class="preview-title">Botones</h5>
+                <div class="row g-3">
+                    <div class="col-auto">
+                        <button class="btn btn-primary">Primary</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-secondary">Secondary</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-success">Success</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-danger">Danger</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-warning">Warning</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-info">Info</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-light">Light</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-dark">Dark</button>
+                    </div>
+                </div>
+                <div class="row g-3 mt-2">
+                    <div class="col-auto">
+                        <button class="btn btn-sm btn-primary">Small Button</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-lg btn-primary">Large Button</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-primary rounded-pill">Pill Button</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-outline-primary">Outline Primary</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts Preview -->
+            <div class="preview-section">
+                <h5 class="preview-title">Alertas</h5>
+                <div class="alert alert-primary" role="alert">
+                    <i class="fas fa-info-circle"></i> This is a primary alert with custom color
+                </div>
+                <div class="alert alert-success" role="alert">
+                    <i class="fas fa-check-circle"></i> Success! Your changes have been saved
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
+                </div>
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle"></i> Info message with helpful details
+                </div>
+            </div>
+
+            <!-- Cards Preview -->
+            <div class="preview-section">
+                <h5 class="preview-title">Cards</h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                Featured Card
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card Title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-success">
+                            <div class="card-body">
+                                <h5 class="card-title text-success">Success Card</h5>
+                                <p class="card-text">This card has a success border color.</p>
+                                <button class="btn btn-success">Success Action</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Dark Card</h5>
+                                <p class="card-text">This is a dark themed card with white text.</p>
+                                <button class="btn btn-light">Light Button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms Preview -->
+            <div class="preview-section">
+                <h5 class="preview-title">Formularios</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="exampleInput" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInput" placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleSelect" class="form-label">Select Option</label>
+                            <select class="form-select" id="exampleSelect">
+                                <option selected>Choose...</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleTextarea" class="form-label">Textarea</label>
+                            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Checkboxes</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check1" checked>
+                                <label class="form-check-label" for="check1">Default checkbox</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check2">
+                                <label class="form-check-label" for="check2">Second checkbox</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Radio buttons</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radios" id="radio1" checked>
+                                <label class="form-check-label" for="radio1">Default radio</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radios" id="radio2">
+                                <label class="form-check-label" for="radio2">Second radio</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Switches</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="switch1" checked>
+                                <label class="form-check-label" for="switch1">Toggle this switch</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Preview -->
+            <div class="preview-section">
+                <h5 class="preview-title">Tabs y Navegación</h5>
+                <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button">Home</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile" type="button">Profile</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button">Contact</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home">
+                        <p>Home tab content. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <div class="tab-pane fade" id="profile">
+                        <p>Profile tab content. Sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                    </div>
+                    <div class="tab-pane fade" id="contact">
+                        <p>Contact tab content. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                    </div>
+                </div>
+
+                <h6 class="mt-4 mb-3">Pills Navigation</h6>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Active</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Another Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Dropdowns and Modals -->
+            <div class="preview-section">
+                <h5 class="preview-title">Dropdowns y Modales</h5>
+                <div class="row g-3">
+                    <div class="col-auto">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Dropdown button
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Launch Modal
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
+                            Hover for Tooltip
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bars -->
+            <div class="preview-section">
+                <h5 class="preview-title">Progress Bars</h5>
+                <div class="progress mb-3">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">25%</div>
+                </div>
+                <div class="progress mb-3">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%">50%</div>
+                </div>
+                <div class="progress mb-3">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%">75%</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%">100%</div>
+                </div>
+            </div>
+
+            <!-- Badges and Pills -->
+            <div class="preview-section">
+                <h5 class="preview-title">Badges y Pills</h5>
+                <div class="row g-2">
+                    <div class="col-auto">
+                        <span class="badge bg-primary">Primary</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="badge bg-secondary">Secondary</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="badge bg-success">Success</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="badge bg-danger">Danger</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="badge bg-warning text-dark">Warning</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="badge bg-info text-dark">Info</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="badge rounded-pill bg-primary">Pill Badge</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List Group -->
+            <div class="preview-section">
+                <h5 class="preview-title">List Group</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item active">Active item</li>
+                            <li class="list-group-item">A second item</li>
+                            <li class="list-group-item">A third item</li>
+                            <li class="list-group-item">A fourth item</li>
+                            <li class="list-group-item disabled">Disabled item</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">Primary list item</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-success">Success list item</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-danger">Danger list item</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Warning list item</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-info">Info list item</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSS Output Modal -->
+            <div class="modal fade" id="cssModal" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                <i class="fas fa-code"></i> CSS Personalizado Generado
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-muted">Puedes copiar este CSS y usarlo en tu proyecto</span>
+                                <button class="btn btn-sm btn-primary" onclick="copyCssFromModal()">
+                                    <i class="fas fa-copy"></i> Copiar CSS
+                                </button>
+                            </div>
+                            <pre id="cssOutput" style="background: #f8f9fa; padding: 20px; border-radius: 5px; max-height: 500px; overflow-y: auto;"></pre>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-success" onclick="downloadCss()">
+                                <i class="fas fa-download"></i> Descargar CSS
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Modal Title</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This is a modal with customized colors based on your theme.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast for copy notification -->
+    <div class="toast-container">
+        <div class="toast align-items-center text-white bg-success border-0" role="alert" id="copyToast">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fas fa-check-circle me-2"></i>
+                    CSS copiado al portapapeles!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="assets/js/theme-generator.js"></script>
+</body>
+</html>
