@@ -1,0 +1,146 @@
+.tabs {
+  width: 100%;
+}
+
+.tabs__header {
+  display: flex;
+  border-bottom: 2px solid #e5e7eb;
+  background: white;
+}
+
+.tabs__tab {
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.tabs__tab:hover:not(.tabs__tab--disabled) {
+  color: #374151;
+  background-color: #f9fafb;
+}
+
+.tabs__tab--active {
+  color: #646cff;
+  border-bottom-color: #646cff;
+  background-color: rgba(100, 108, 255, 0.05);
+}
+
+.tabs__tab--disabled {
+  color: #d1d5db;
+  cursor: not-allowed;
+}
+
+.tabs__icon {
+  font-size: 16px;
+}
+
+.tabs__label {
+  white-space: nowrap;
+}
+
+.tabs__badge {
+  background: #ef4444;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.tabs__content {
+  padding: 24px 0;
+  min-height: 200px;
+}
+
+/* Variants */
+.tabs--pills .tabs__header {
+  border-bottom: none;
+  gap: 8px;
+  padding: 8px;
+  background: #f9fafb;
+  border-radius: 12px;
+}
+
+.tabs--pills .tabs__tab {
+  border-radius: 8px;
+  border-bottom: none;
+}
+
+.tabs--pills .tabs__tab--active {
+  background-color: #646cff;
+  color: white;
+}
+
+.tabs--pills .tabs__tab--active .tabs__badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.tabs--minimal .tabs__header {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabs--minimal .tabs__tab {
+  padding: 8px 16px;
+}
+
+/* Sizes */
+.tabs--small .tabs__tab {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.tabs--small .tabs__icon {
+  font-size: 14px;
+}
+
+.tabs--small .tabs__content {
+  padding: 16px 0;
+}
+
+.tabs--medium .tabs__tab {
+  padding: 12px 20px;
+  font-size: 16px;
+}
+
+.tabs--large .tabs__tab {
+  padding: 16px 24px;
+  font-size: 18px;
+}
+
+.tabs--large .tabs__icon {
+  font-size: 20px;
+}
+
+.tabs--large .tabs__content {
+  padding: 32px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tabs__header {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .tabs__header::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .tabs__tab {
+    flex-shrink: 0;
+  }
+}
