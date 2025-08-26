@@ -296,11 +296,11 @@ function generateCss() {
         // Typography
         '--bs-font-family': document.getElementById('fontFamily').value,
         '--bs-heading-font-family': document.getElementById('headingFontFamily').value,
-        '--bs-body-font-size': document.getElementById('fontSize').value,
+        '--bs-body-font-size': (document.getElementById('fontSize').value / 16) + 'rem',
         '--bs-font-weight': document.getElementById('fontWeight').value,
         '--bs-heading-weight': document.getElementById('headingWeight').value,
         '--bs-body-line-height': document.getElementById('lineHeight').value,
-        '--bs-letter-spacing': document.getElementById('letterSpacing').value,
+        '--bs-letter-spacing': document.getElementById('letterSpacing').value + 'em',
         
         // Spacing
         '--bs-spacing-base': document.getElementById('spacingBase').value,
@@ -308,10 +308,10 @@ function generateCss() {
         '--bs-component-padding': document.getElementById('componentPadding').value,
         
         // Borders
-        '--bs-border-radius': document.getElementById('borderRadius').value,
-        '--bs-border-radius-sm': document.getElementById('borderRadiusSm').value,
-        '--bs-border-radius-lg': document.getElementById('borderRadiusLg').value,
-        '--bs-border-width': document.getElementById('borderWidth').value,
+        '--bs-border-radius': (document.getElementById('borderRadius').value / 16) + 'rem',
+        '--bs-border-radius-sm': (document.getElementById('borderRadiusSm').value / 16) + 'rem',
+        '--bs-border-radius-lg': (document.getElementById('borderRadiusLg').value / 16) + 'rem',
+        '--bs-border-width': document.getElementById('borderWidth').value + 'px',
         '--bs-border-style': document.getElementById('borderStyle').value,
         
         // Shadows & Effects
@@ -325,6 +325,32 @@ function generateCss() {
         '--bs-transition-timing': document.getElementById('transitionTiming').value,
         '--bs-hover-scale': document.getElementById('hoverScale').value,
         '--bs-animation-intensity': document.getElementById('animationIntensity').value,
+        
+        // Links & Focus States
+        '--bs-link-color': document.getElementById('linkColor')?.value || '#0d6efd',
+        '--bs-link-hover-color': document.getElementById('linkHoverColor')?.value || '#0a58ca',
+        '--bs-link-decoration': document.getElementById('linkDecoration')?.value || 'underline',
+        '--bs-focus-ring-color': document.getElementById('focusRingColor')?.value || '#0d6efd',
+        '--bs-focus-ring-width': (document.getElementById('focusRingWidth')?.value || 3) + 'px',
+        '--bs-focus-ring-opacity': document.getElementById('focusRingOpacity')?.value || '0.25',
+        
+        // Forms & Inputs
+        '--bs-input-bg': document.getElementById('inputBg')?.value || '#ffffff',
+        '--bs-input-border-color': document.getElementById('inputBorderColor')?.value || '#ced4da',
+        '--bs-input-focus-border-color': document.getElementById('inputFocusColor')?.value || '#0d6efd',
+        '--bs-input-placeholder-color': document.getElementById('inputPlaceholderColor')?.value || '#6c757d',
+        '--bs-input-disabled-bg': document.getElementById('inputDisabledBg')?.value || '#e9ecef',
+        '--bs-input-padding-y': (document.getElementById('inputPaddingY')?.value || 6) / 16 + 'rem',
+        '--bs-input-padding-x': (document.getElementById('inputPaddingX')?.value || 12) / 16 + 'rem',
+        '--bs-form-label-font-size': (document.getElementById('formLabelSize')?.value || 14) / 16 + 'rem',
+        
+        // Grid System
+        '--bs-grid-columns': document.getElementById('gridColumns')?.value || 12,
+        '--bs-grid-gutter-width': (document.getElementById('gridGutterWidth')?.value || 24) + 'px',
+        '--bs-container-max-width-sm': (document.getElementById('containerMaxWidthSm')?.value || 540) + 'px',
+        '--bs-container-max-width-md': (document.getElementById('containerMaxWidthMd')?.value || 720) + 'px',
+        '--bs-container-max-width-lg': (document.getElementById('containerMaxWidthLg')?.value || 960) + 'px',
+        '--bs-container-max-width-xl': (document.getElementById('containerMaxWidthXl')?.value || 1140) + 'px',
     };
 
     let cssOutput = '/* Bootstrap Custom Variables */\n:root {\n';
@@ -357,6 +383,25 @@ function generateCss() {
     cssOutput += `.bg-danger { background-color: var(--bs-danger) !important; }\n`;
     cssOutput += `.bg-warning { background-color: var(--bs-warning) !important; }\n`;
     cssOutput += `.bg-info { background-color: var(--bs-info) !important; }\n\n`;
+    
+    cssOutput += '/* Links & Focus */\n';
+    cssOutput += `a {\n    color: var(--bs-link-color);\n    text-decoration: var(--bs-link-decoration);\n}\n\n`;
+    cssOutput += `a:hover {\n    color: var(--bs-link-hover-color);\n}\n\n`;
+    cssOutput += `*:focus {\n    outline: var(--bs-focus-ring-width) solid rgba(var(--bs-focus-ring-color), var(--bs-focus-ring-opacity));\n    outline-offset: 2px;\n}\n\n`;
+    
+    cssOutput += '/* Forms & Inputs */\n';
+    cssOutput += `.form-control, .form-select {\n    background-color: var(--bs-input-bg);\n    border-color: var(--bs-input-border-color);\n    padding: var(--bs-input-padding-y) var(--bs-input-padding-x);\n}\n\n`;
+    cssOutput += `.form-control:focus, .form-select:focus {\n    border-color: var(--bs-input-focus-border-color);\n    box-shadow: 0 0 0 0.25rem rgba(var(--bs-input-focus-border-color), 0.25);\n}\n\n`;
+    cssOutput += `.form-control::placeholder {\n    color: var(--bs-input-placeholder-color);\n}\n\n`;
+    cssOutput += `.form-control:disabled, .form-select:disabled {\n    background-color: var(--bs-input-disabled-bg);\n}\n\n`;
+    cssOutput += `.form-label {\n    font-size: var(--bs-form-label-font-size);\n}\n\n`;
+    
+    cssOutput += '/* Grid System */\n';
+    cssOutput += `.container {\n    --bs-gutter-x: var(--bs-grid-gutter-width);\n}\n\n`;
+    cssOutput += `@media (min-width: 576px) {\n    .container { max-width: var(--bs-container-max-width-sm); }\n}\n`;
+    cssOutput += `@media (min-width: 768px) {\n    .container { max-width: var(--bs-container-max-width-md); }\n}\n`;
+    cssOutput += `@media (min-width: 992px) {\n    .container { max-width: var(--bs-container-max-width-lg); }\n}\n`;
+    cssOutput += `@media (min-width: 1200px) {\n    .container { max-width: var(--bs-container-max-width-xl); }\n}\n\n`;
     
     cssOutput += '/* Typography */\n';
     cssOutput += `body {\n    font-family: var(--bs-font-family);\n    font-size: var(--bs-body-font-size);\n    font-weight: var(--bs-font-weight);\n    line-height: var(--bs-body-line-height);\n    letter-spacing: var(--bs-letter-spacing);\n}\n\n`;
@@ -456,6 +501,202 @@ function bindEventListeners() {
     document.querySelectorAll('select').forEach(select => {
         select.addEventListener('change', updateCssVariables);
     });
+
+    // Bind slider event listeners
+    bindSliderListeners();
+}
+
+// Bind slider listeners and update display values
+function bindSliderListeners() {
+    // Font Size Slider
+    const fontSizeSlider = document.getElementById('fontSize');
+    if (fontSizeSlider) {
+        fontSizeSlider.addEventListener('input', function() {
+            document.getElementById('fontSizeValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-body-font-size', (this.value / 16) + 'rem');
+            generateCss();
+        });
+    }
+
+    // Font Weight Slider
+    const fontWeightSlider = document.getElementById('fontWeight');
+    if (fontWeightSlider) {
+        fontWeightSlider.addEventListener('input', function() {
+            document.getElementById('fontWeightValue').textContent = this.value;
+            document.documentElement.style.setProperty('--bs-font-weight', this.value);
+            generateCss();
+        });
+    }
+
+    // Heading Weight Slider
+    const headingWeightSlider = document.getElementById('headingWeight');
+    if (headingWeightSlider) {
+        headingWeightSlider.addEventListener('input', function() {
+            document.getElementById('headingWeightValue').textContent = this.value;
+            document.documentElement.style.setProperty('--bs-heading-weight', this.value);
+            generateCss();
+        });
+    }
+
+    // Line Height Slider
+    const lineHeightSlider = document.getElementById('lineHeight');
+    if (lineHeightSlider) {
+        lineHeightSlider.addEventListener('input', function() {
+            document.getElementById('lineHeightValue').textContent = this.value;
+            document.documentElement.style.setProperty('--bs-body-line-height', this.value);
+            generateCss();
+        });
+    }
+
+    // Letter Spacing Slider
+    const letterSpacingSlider = document.getElementById('letterSpacing');
+    if (letterSpacingSlider) {
+        letterSpacingSlider.addEventListener('input', function() {
+            document.getElementById('letterSpacingValue').textContent = this.value + 'em';
+            document.documentElement.style.setProperty('--bs-letter-spacing', this.value + 'em');
+            generateCss();
+        });
+    }
+
+    // Border Radius Sliders
+    const borderRadiusSlider = document.getElementById('borderRadius');
+    if (borderRadiusSlider) {
+        borderRadiusSlider.addEventListener('input', function() {
+            document.getElementById('borderRadiusValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-border-radius', (this.value / 16) + 'rem');
+            generateCss();
+        });
+    }
+
+    const borderRadiusSmSlider = document.getElementById('borderRadiusSm');
+    if (borderRadiusSmSlider) {
+        borderRadiusSmSlider.addEventListener('input', function() {
+            document.getElementById('borderRadiusSmValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-border-radius-sm', (this.value / 16) + 'rem');
+            generateCss();
+        });
+    }
+
+    const borderRadiusLgSlider = document.getElementById('borderRadiusLg');
+    if (borderRadiusLgSlider) {
+        borderRadiusLgSlider.addEventListener('input', function() {
+            document.getElementById('borderRadiusLgValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-border-radius-lg', (this.value / 16) + 'rem');
+            generateCss();
+        });
+    }
+
+    // Border Width Slider
+    const borderWidthSlider = document.getElementById('borderWidth');
+    if (borderWidthSlider) {
+        borderWidthSlider.addEventListener('input', function() {
+            document.getElementById('borderWidthValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-border-width', this.value + 'px');
+            generateCss();
+        });
+    }
+
+    // Links & Focus State Sliders
+    const focusRingWidthSlider = document.getElementById('focusRingWidth');
+    if (focusRingWidthSlider) {
+        focusRingWidthSlider.addEventListener('input', function() {
+            document.getElementById('focusRingWidthValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-focus-ring-width', this.value + 'px');
+            generateCss();
+        });
+    }
+
+    const focusRingOpacitySlider = document.getElementById('focusRingOpacity');
+    if (focusRingOpacitySlider) {
+        focusRingOpacitySlider.addEventListener('input', function() {
+            document.getElementById('focusRingOpacityValue').textContent = this.value;
+            document.documentElement.style.setProperty('--bs-focus-ring-opacity', this.value);
+            generateCss();
+        });
+    }
+
+    // Form Input Sliders
+    const inputPaddingYSlider = document.getElementById('inputPaddingY');
+    if (inputPaddingYSlider) {
+        inputPaddingYSlider.addEventListener('input', function() {
+            document.getElementById('inputPaddingYValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-input-padding-y', (this.value / 16) + 'rem');
+            generateCss();
+        });
+    }
+
+    const inputPaddingXSlider = document.getElementById('inputPaddingX');
+    if (inputPaddingXSlider) {
+        inputPaddingXSlider.addEventListener('input', function() {
+            document.getElementById('inputPaddingXValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-input-padding-x', (this.value / 16) + 'rem');
+            generateCss();
+        });
+    }
+
+    const formLabelSizeSlider = document.getElementById('formLabelSize');
+    if (formLabelSizeSlider) {
+        formLabelSizeSlider.addEventListener('input', function() {
+            document.getElementById('formLabelSizeValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-form-label-font-size', (this.value / 16) + 'rem');
+            generateCss();
+        });
+    }
+
+    // Grid System Sliders
+    const gridColumnsSlider = document.getElementById('gridColumns');
+    if (gridColumnsSlider) {
+        gridColumnsSlider.addEventListener('input', function() {
+            document.getElementById('gridColumnsValue').textContent = this.value;
+            document.documentElement.style.setProperty('--bs-grid-columns', this.value);
+            generateCss();
+        });
+    }
+
+    const gridGutterWidthSlider = document.getElementById('gridGutterWidth');
+    if (gridGutterWidthSlider) {
+        gridGutterWidthSlider.addEventListener('input', function() {
+            document.getElementById('gridGutterWidthValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-grid-gutter-width', this.value + 'px');
+            generateCss();
+        });
+    }
+
+    const containerMaxWidthSmSlider = document.getElementById('containerMaxWidthSm');
+    if (containerMaxWidthSmSlider) {
+        containerMaxWidthSmSlider.addEventListener('input', function() {
+            document.getElementById('containerMaxWidthSmValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-container-max-width-sm', this.value + 'px');
+            generateCss();
+        });
+    }
+
+    const containerMaxWidthMdSlider = document.getElementById('containerMaxWidthMd');
+    if (containerMaxWidthMdSlider) {
+        containerMaxWidthMdSlider.addEventListener('input', function() {
+            document.getElementById('containerMaxWidthMdValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-container-max-width-md', this.value + 'px');
+            generateCss();
+        });
+    }
+
+    const containerMaxWidthLgSlider = document.getElementById('containerMaxWidthLg');
+    if (containerMaxWidthLgSlider) {
+        containerMaxWidthLgSlider.addEventListener('input', function() {
+            document.getElementById('containerMaxWidthLgValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-container-max-width-lg', this.value + 'px');
+            generateCss();
+        });
+    }
+
+    const containerMaxWidthXlSlider = document.getElementById('containerMaxWidthXl');
+    if (containerMaxWidthXlSlider) {
+        containerMaxWidthXlSlider.addEventListener('input', function() {
+            document.getElementById('containerMaxWidthXlValue').textContent = this.value + 'px';
+            document.documentElement.style.setProperty('--bs-container-max-width-xl', this.value + 'px');
+            generateCss();
+        });
+    }
 }
 
 // Copy CSS to clipboard
