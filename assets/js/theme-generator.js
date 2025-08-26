@@ -5,16 +5,42 @@ document.addEventListener('DOMContentLoaded', function() {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     });
     
-    // Listen for tab changes to generate CSS when Code tab is shown
+    // Debug: Check if tabs are properly initialized
+    const previewTab = document.getElementById('preview-tab');
     const codeTab = document.getElementById('code-tab');
+    const previewContent = document.getElementById('preview-content');
+    const codeContent = document.getElementById('code-content');
+    
+    // Tab elements initialized
+    
+    // Manually initialize Bootstrap tabs if needed
+    if (previewTab && codeTab) {
+        const tabList = [previewTab, codeTab];
+        tabList.forEach(tabEl => {
+            new bootstrap.Tab(tabEl);
+        });
+    }
+    
+    // Listen for tab changes to generate CSS when Code tab is shown
     if (codeTab) {
         codeTab.addEventListener('shown.bs.tab', function() {
-            generateCss();
+            // Generate CSS when Code tab is shown
+            setTimeout(() => {
+                const outputEl = document.getElementById('cssOutput');
+                if (outputEl) {
+                    generateCss();
+                }
+            }, 200);
         });
     }
 
-    // Initial generation
-    generateCss();
+    // Initial generation - wait for DOM to be fully ready
+    setTimeout(() => {
+        const outputEl = document.getElementById('cssOutput');
+        if (outputEl) {
+            generateCss();
+        }
+    }, 500);
 
     // Bind event listeners
     bindEventListeners();
@@ -251,78 +277,446 @@ const themes = [
             sm: '0.375rem',
             lg: '0.625rem'
         }
+    },
+    {
+        name: 'Ocean Breeze',
+        description: 'Azules oceánicos refrescantes',
+        colors: {
+            primary: '#0077b6',
+            secondary: '#90e0ef',
+            success: '#52b788',
+            danger: '#d00000',
+            warning: '#ffb700',
+            info: '#00b4d8',
+            light: '#caf0f8',
+            dark: '#03045e'
+        },
+        typography: {
+            fontSize: '1.05rem',
+            lineHeight: '1.7'
+        },
+        borderRadius: {
+            default: '0.625rem',
+            sm: '0.425rem',
+            lg: '0.825rem'
+        }
+    },
+    {
+        name: 'Sunset Glow',
+        description: 'Colores cálidos del atardecer',
+        colors: {
+            primary: '#ff6b35',
+            secondary: '#f77f00',
+            success: '#06ffa5',
+            danger: '#d62828',
+            warning: '#fcbf49',
+            info: '#f4a261',
+            light: '#fff3b0',
+            dark: '#540b0e'
+        },
+        typography: {
+            fontSize: '0.975rem',
+            lineHeight: '1.55'
+        },
+        borderRadius: {
+            default: '0.875rem',
+            sm: '0.625rem',
+            lg: '1.25rem'
+        }
+    },
+    {
+        name: 'Forest Green',
+        description: 'Verde naturaleza profundo',
+        colors: {
+            primary: '#2d6a4f',
+            secondary: '#40916c',
+            success: '#52b788',
+            danger: '#c1121f',
+            warning: '#fca311',
+            info: '#74c69d',
+            light: '#d8f3dc',
+            dark: '#081c15'
+        },
+        typography: {
+            fontSize: '1rem',
+            lineHeight: '1.65'
+        },
+        borderRadius: {
+            default: '0.425rem',
+            sm: '0.275rem',
+            lg: '0.625rem'
+        }
+    },
+    {
+        name: 'Royal Purple',
+        description: 'Elegancia púrpura real',
+        colors: {
+            primary: '#6a0dad',
+            secondary: '#9d4edd',
+            success: '#06ffa5',
+            danger: '#ff006e',
+            warning: '#ffbe0b',
+            info: '#c77dff',
+            light: '#e7c6ff',
+            dark: '#240046'
+        },
+        typography: {
+            fontSize: '1.025rem',
+            lineHeight: '1.5'
+        },
+        borderRadius: {
+            default: '0.325rem',
+            sm: '0.225rem',
+            lg: '0.525rem'
+        }
+    },
+    {
+        name: 'Coral Reef',
+        description: 'Coral vibrante tropical',
+        colors: {
+            primary: '#ff4365',
+            secondary: '#ffd23f',
+            success: '#0ead69',
+            danger: '#ee6055',
+            warning: '#ffa62b',
+            info: '#00bcd4',
+            light: '#fbfef9',
+            dark: '#1a1423'
+        },
+        typography: {
+            fontSize: '1.05rem',
+            lineHeight: '1.45'
+        },
+        borderRadius: {
+            default: '1.125rem',
+            sm: '0.875rem',
+            lg: '1.625rem'
+        }
+    },
+    {
+        name: 'Midnight Blue',
+        description: 'Azul medianoche sofisticado',
+        colors: {
+            primary: '#003566',
+            secondary: '#001d3d',
+            success: '#06ffa5',
+            danger: '#ba181b',
+            warning: '#ffd60a',
+            info: '#0077b6',
+            light: '#caf0f8',
+            dark: '#000814'
+        },
+        typography: {
+            fontSize: '0.95rem',
+            lineHeight: '1.6'
+        },
+        borderRadius: {
+            default: '0.175rem',
+            sm: '0.125rem',
+            lg: '0.275rem'
+        }
+    },
+    {
+        name: 'Pastel Dreams',
+        description: 'Colores pastel suaves',
+        colors: {
+            primary: '#a8dadc',
+            secondary: '#f1faee',
+            success: '#95d5b2',
+            danger: '#ffb3ba',
+            warning: '#ffdfba',
+            info: '#bae1ff',
+            light: '#fffacd',
+            dark: '#457b9d'
+        },
+        typography: {
+            fontSize: '1.025rem',
+            lineHeight: '1.75'
+        },
+        borderRadius: {
+            default: '0.775rem',
+            sm: '0.525rem',
+            lg: '1.025rem'
+        }
+    },
+    {
+        name: 'Cyberpunk',
+        description: 'Neón futurista urbano',
+        colors: {
+            primary: '#ff00ff',
+            secondary: '#00ffff',
+            success: '#00ff00',
+            danger: '#ff0040',
+            warning: '#ffff00',
+            info: '#ff00a0',
+            light: '#1a1a2e',
+            dark: '#0f0f0f'
+        },
+        typography: {
+            fontSize: '0.975rem',
+            lineHeight: '1.4'
+        },
+        borderRadius: {
+            default: '0',
+            sm: '0',
+            lg: '0.125rem'
+        }
+    },
+    {
+        name: 'Earth Tones',
+        description: 'Tonos tierra naturales',
+        colors: {
+            primary: '#8b4513',
+            secondary: '#a0826d',
+            success: '#556b2f',
+            danger: '#a52a2a',
+            warning: '#daa520',
+            info: '#708090',
+            light: '#faebd7',
+            dark: '#3e2723'
+        },
+        typography: {
+            fontSize: '1.05rem',
+            lineHeight: '1.65'
+        },
+        borderRadius: {
+            default: '0.525rem',
+            sm: '0.375rem',
+            lg: '0.725rem'
+        }
+    },
+    {
+        name: 'Arctic Ice',
+        description: 'Frío ártico minimalista',
+        colors: {
+            primary: '#4cc9f0',
+            secondary: '#7209b7',
+            success: '#4895ef',
+            danger: '#f72585',
+            warning: '#ffd166',
+            info: '#4361ee',
+            light: '#f0f3ff',
+            dark: '#03071e'
+        },
+        typography: {
+            fontSize: '0.975rem',
+            lineHeight: '1.55'
+        },
+        borderRadius: {
+            default: '0.425rem',
+            sm: '0.325rem',
+            lg: '0.625rem'
+        }
+    },
+    {
+        name: 'Vintage Rose',
+        description: 'Rosa vintage romántico',
+        colors: {
+            primary: '#d4717f',
+            secondary: '#c5668e',
+            success: '#88b04b',
+            danger: '#ad5277',
+            warning: '#f0ad4e',
+            info: '#b565a7',
+            light: '#fce4ec',
+            dark: '#4a0e4e'
+        },
+        typography: {
+            fontSize: '1.025rem',
+            lineHeight: '1.7'
+        },
+        borderRadius: {
+            default: '0.925rem',
+            sm: '0.675rem',
+            lg: '1.375rem'
+        }
+    },
+    {
+        name: 'Electric Lime',
+        description: 'Lima eléctrica energética',
+        colors: {
+            primary: '#ccff00',
+            secondary: '#173f5f',
+            success: '#20bda3',
+            danger: '#ed553b',
+            warning: '#f6d55c',
+            info: '#3caea3',
+            light: '#f5f5dc',
+            dark: '#0b132b'
+        },
+        typography: {
+            fontSize: '1rem',
+            lineHeight: '1.5'
+        },
+        borderRadius: {
+            default: '0.225rem',
+            sm: '0.125rem',
+            lg: '0.425rem'
+        }
+    },
+    {
+        name: 'Cherry Blossom',
+        description: 'Sakura japonés delicado',
+        colors: {
+            primary: '#ffb7c5',
+            secondary: '#ffc0cb',
+            success: '#98d8c8',
+            danger: '#f06292',
+            warning: '#ffcc80',
+            info: '#ce93d8',
+            light: '#fff0f5',
+            dark: '#5d0012'
+        },
+        typography: {
+            fontSize: '1.025rem',
+            lineHeight: '1.65'
+        },
+        borderRadius: {
+            default: '1.225rem',
+            sm: '0.925rem',
+            lg: '1.825rem'
+        }
+    },
+    {
+        name: 'Deep Space',
+        description: 'Espacio profundo misterioso',
+        colors: {
+            primary: '#5e60ce',
+            secondary: '#5390d9',
+            success: '#4ea8de',
+            danger: '#e63946',
+            warning: '#ffb703',
+            info: '#6930c3',
+            light: '#e0e1dd',
+            dark: '#0d1b2a'
+        },
+        typography: {
+            fontSize: '0.975rem',
+            lineHeight: '1.5'
+        },
+        borderRadius: {
+            default: '0.375rem',
+            sm: '0.225rem',
+            lg: '0.525rem'
+        }
+    },
+    {
+        name: 'Golden Sunset',
+        description: 'Dorado cálido atardecer',
+        colors: {
+            primary: '#faa307',
+            secondary: '#d00000',
+            success: '#38b000',
+            danger: '#9d0208',
+            warning: '#ffba08',
+            info: '#f48c06',
+            light: '#ffedd8',
+            dark: '#370617'
+        },
+        typography: {
+            fontSize: '1.025rem',
+            lineHeight: '1.6'
+        },
+        borderRadius: {
+            default: '0.725rem',
+            sm: '0.525rem',
+            lg: '1rem'
+        }
+    },
+    {
+        name: 'Mint Fresh',
+        description: 'Menta fresca y limpia',
+        colors: {
+            primary: '#00b4a6',
+            secondary: '#00d9ff',
+            success: '#00ff88',
+            danger: '#ff3366',
+            warning: '#ffcc00',
+            info: '#00cccc',
+            light: '#e6fffa',
+            dark: '#00332c'
+        },
+        typography: {
+            fontSize: '1rem',
+            lineHeight: '1.55'
+        },
+        borderRadius: {
+            default: '0.825rem',
+            sm: '0.625rem',
+            lg: '1.125rem'
+        }
+    },
+    {
+        name: 'Retro Wave',
+        description: 'Retro synthwave de los 80s',
+        colors: {
+            primary: '#ff006e',
+            secondary: '#8338ec',
+            success: '#06ff00',
+            danger: '#ff0050',
+            warning: '#ffbe0b',
+            info: '#3a86ff',
+            light: '#fb5607',
+            dark: '#0f0e17'
+        },
+        typography: {
+            fontSize: '0.975rem',
+            lineHeight: '1.45'
+        },
+        borderRadius: {
+            default: '0.125rem',
+            sm: '0',
+            lg: '0.25rem'
+        }
+    },
+    {
+        name: 'Desert Sand',
+        description: 'Arena del desierto cálida',
+        colors: {
+            primary: '#e76f51',
+            secondary: '#f4a261',
+            success: '#2a9d8f',
+            danger: '#e63946',
+            warning: '#e9c46a',
+            info: '#264653',
+            light: '#f1faee',
+            dark: '#264653'
+        },
+        typography: {
+            fontSize: '1.05rem',
+            lineHeight: '1.7'
+        },
+        borderRadius: {
+            default: '0.425rem',
+            sm: '0.325rem',
+            lg: '0.625rem'
+        }
+    },
+    {
+        name: 'Nordic Frost',
+        description: 'Frío nórdico minimalista',
+        colors: {
+            primary: '#5e81ac',
+            secondary: '#81a1c1',
+            success: '#a3be8c',
+            danger: '#bf616a',
+            warning: '#ebcb8b',
+            info: '#88c0d0',
+            light: '#eceff4',
+            dark: '#2e3440'
+        },
+        typography: {
+            fontSize: '0.975rem',
+            lineHeight: '1.6'
+        },
+        borderRadius: {
+            default: '0.325rem',
+            sm: '0.225rem',
+            lg: '0.425rem'
+        }
     }
 ];
 
-// Function to add syntax highlighting to CSS
-function highlightCSS(css) {
-    // Escape HTML first to prevent injection
-    css = css.replace(/&/g, '&amp;')
-             .replace(/</g, '&lt;')
-             .replace(/>/g, '&gt;');
-    
-    // Apply highlighting in specific order for correct precedence
-    
-    // 1. CSS Comments
-    css = css.replace(/(\/\*[^*]*\*+(?:[^/*][^*]*\*+)*\/)/g, '<span class="css-comment">$1</span>');
-    
-    // 2. CSS Variables in property names (must be before general properties)
-    css = css.replace(/(--[\w-]+)(\s*:)/g, '<span class="css-variable">$1</span>$2');
-    
-    // 3. CSS Selectors (at the beginning of lines)
-    css = css.replace(/^([^\{]*?)(\s*\{)/gm, function(match, selector, bracket) {
-        // Don't highlight if it contains a colon (unless it's a pseudo-class)
-        if (selector.includes(':') && !selector.match(/:hover|:focus|:active|:visited|:first-child|:last-child|:nth-child|::before|::after/)) {
-            return match;
-        }
-        return '<span class="css-selector">' + selector + '</span>' + bracket;
-    });
-    
-    // 4. CSS Properties (more precise pattern)
-    css = css.replace(/(\n\s*|;\s*|\{\s*)([\w-]+)(\s*:)(?!:)/g, function(match, prefix, prop, colon) {
-        // Skip if it's already wrapped (CSS variable)
-        if (prop.startsWith('--')) {
-            return match;
-        }
-        return prefix + '<span class="css-property">' + prop + '</span>' + colon;
-    });
-    
-    // 5. CSS Values - process everything after colons
-    css = css.replace(/(:\s*)([^;}\n]+)/g, function(match, colon, value) {
-        // Important flag
-        value = value.replace(/(!important)/gi, '<span class="css-important">$1</span>');
-        
-        // CSS Variables in values
-        value = value.replace(/(var\([^)]+\))/g, '<span class="css-variable">$1</span>');
-        
-        // Color values (hex) - more precise
-        value = value.replace(/(#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?(?:[0-9a-fA-F]{2})?)\b/g, '<span class="css-color">$1</span>');
-        
-        // Color functions and other CSS functions
-        value = value.replace(/\b(rgb|rgba|hsl|hsla|linear-gradient|radial-gradient|scale|translate|rotate|calc)(\([^)]*\))/g, 
-            '<span class="css-function">$1</span>$2');
-        
-        // Numbers with units (more comprehensive)
-        value = value.replace(/\b(\d*\.?\d+)(px|rem|em|%|vh|vw|vmin|vmax|ms|s|deg|fr|ch|ex)\b/g, 
-            '<span class="css-number">$1$2</span>');
-        
-        // Plain numbers (without units)
-        value = value.replace(/\b(\d+(?:\.\d+)?)\b(?![a-z])/g, '<span class="css-number">$1</span>');
-        
-        // String values in quotes
-        value = value.replace(/(["'][^"']*["'])/g, '<span class="css-string">$1</span>');
-        
-        // Keywords (common CSS keywords)
-        value = value.replace(/\b(none|auto|inherit|initial|unset|normal|bold|italic|underline|solid|dashed|dotted|hidden|visible|block|inline|flex|grid|absolute|relative|fixed|sticky)\b/g, 
-            '<span class="css-keyword">$1</span>');
-        
-        return colon + value;
-    });
-    
-    return css;
-}
-
-// Generate CSS output
 function generateCss() {
     const variables = {
         // Colors
@@ -465,8 +859,18 @@ function generateCss() {
     cssOutput += `.text-shadow {\n    text-shadow: var(--bs-text-shadow);\n}\n\n`;
     cssOutput += `.glow {\n    box-shadow: var(--bs-glow-effect);\n}`;
 
-    // Apply syntax highlighting
-    document.getElementById('cssOutput').innerHTML = highlightCSS(cssOutput);
+    // Store raw CSS for copy/download operations
+    window.rawCssOutput = cssOutput;
+    
+    // Display the CSS with Prism.js syntax highlighting
+    const outputElement = document.getElementById('cssOutput');
+    if (outputElement) {
+        outputElement.textContent = cssOutput;
+        // Apply Prism highlighting if available
+        if (typeof Prism !== 'undefined') {
+            Prism.highlightElement(outputElement);
+        }
+    }
     return cssOutput;
 }
 
@@ -778,17 +1182,9 @@ function bindSliderListeners() {
 }
 
 // Copy CSS to clipboard
+// Copy CSS to clipboard (using raw CSS without highlighting)
 function copyCss() {
-    const css = generateCss();
-    navigator.clipboard.writeText(css).then(() => {
-        const toast = new bootstrap.Toast(document.getElementById('copyToast'));
-        toast.show();
-    });
-}
-
-// Copy CSS to clipboard
-function copyCss() {
-    const css = generateCss();
+    const css = window.rawCssOutput || generateCss();
     navigator.clipboard.writeText(css).then(() => {
         // Show toast notification
         const toastEl = document.getElementById('copyToast');
@@ -797,9 +1193,9 @@ function copyCss() {
     });
 }
 
-// Download CSS file
+// Download CSS file (using raw CSS without highlighting)
 function downloadCss() {
-    const css = generateCss();
+    const css = window.rawCssOutput || generateCss();
     const blob = new Blob([css], { type: 'text/css' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');

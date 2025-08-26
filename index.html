@@ -1,921 +1,1527 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Framework Theme Generator</title>
-    <meta name="description" content="Professional Bootstrap theme generator with real-time preview. Create custom color schemes for fintech, AI startups, and modern web applications.">
-    <meta name="keywords" content="Bootstrap, theme generator, CSS customizer, fintech design, AI startup themes">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts - Popular Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Nunito:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Framework - Theme Generator</title>
+  <meta name="description"
+        content="Professional Bootstrap theme generator with real-time preview. Create custom color schemes for fintech, AI startups, and modern web applications.">
+  <meta name="keywords" content="Bootstrap, theme generator, CSS customizer, fintech design, AI startup themes">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts - Popular Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Nunito:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Sidebar with Controls -->
-    <div class="sidebar">
-        <!-- Fixed Header -->
-        <div class="sidebar-header">
-            <h2 class="mb-3">
-                Dynamic Framework<br>
-                <small class="text-muted" style="font-size: 0.9rem;">Theme Generator</small>
-            </h2>
-            <!-- Surprise Me Button -->
-            <div class="d-grid">
-                <button class="btn btn-gradient-ai" onclick="surpriseMe()">
-                    ✨ Surprise Me!
-                </button>
-            </div>
-        </div>
-        
-        <!-- Scrollable Content -->
-        <div class="sidebar-content">
-            <!-- Accordion Container -->
-            <div class="accordion accordion-flush" id="customizationAccordion">
-                
-                <!-- Colors Accordion -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingColors">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseColors" aria-expanded="true">
-                            <i class="fas fa-palette me-2"></i> Theme Colors
-                        </button>
-                    </h2>
-                    <div id="collapseColors" class="accordion-collapse collapse show" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item">
-                    <label for="primary">Primary</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="primary" value="#0d6efd">
-                        <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="secondary">Secondary</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="secondary" value="#6c757d">
-                        <input type="text" class="form-control form-control-sm color-value" value="#6c757d">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="success">Success</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="success" value="#198754">
-                        <input type="text" class="form-control form-control-sm color-value" value="#198754">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="danger">Danger</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="danger" value="#dc3545">
-                        <input type="text" class="form-control form-control-sm color-value" value="#dc3545">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="warning">Warning</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="warning" value="#ffc107">
-                        <input type="text" class="form-control form-control-sm color-value" value="#ffc107">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="info">Info</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="info" value="#0dcaf0">
-                        <input type="text" class="form-control form-control-sm color-value" value="#0dcaf0">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="light">Light</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="light" value="#f8f9fa">
-                        <input type="text" class="form-control form-control-sm color-value" value="#f8f9fa">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="dark">Dark</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="dark" value="#212529">
-                        <input type="text" class="form-control form-control-sm color-value" value="#212529">
-                    </div>
-                </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Typography Accordion -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTypography">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypography" aria-expanded="false">
-                            <i class="fas fa-font me-2"></i> Typography
-                        </button>
-                    </h2>
-                    <div id="collapseTypography" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item">
-                    <label for="fontFamily">Font Family</label>
-                    <select class="form-select form-select-sm" id="fontFamily">
-                        <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">System Default</option>
-                        <option value="'Inter', sans-serif" selected>Inter (Modern Tech)</option>
-                        <option value="'Roboto', sans-serif">Roboto (Google)</option>
-                        <option value="'Open Sans', sans-serif">Open Sans (Clean)</option>
-                        <option value="'Poppins', sans-serif">Poppins (Rounded)</option>
-                        <option value="'Montserrat', sans-serif">Montserrat (Professional)</option>
-                        <option value="'Raleway', sans-serif">Raleway (Elegant)</option>
-                        <option value="'Lato', sans-serif">Lato (Friendly)</option>
-                        <option value="'Nunito', sans-serif">Nunito (Soft)</option>
-                        <option value="'Work Sans', sans-serif">Work Sans (Simple)</option>
-                        <option value="'Source Sans 3', sans-serif">Source Sans 3</option>
-                        <option value="'DM Sans', sans-serif">DM Sans (Geometric)</option>
-                        <option value="'Manrope', sans-serif">Manrope (Modern)</option>
-                        <option value="'Space Grotesk', sans-serif">Space Grotesk (Tech)</option>
-                        <option value="'Outfit', sans-serif">Outfit (Contemporary)</option>
-                        <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="headingFontFamily">Heading Font</label>
-                    <select class="form-select form-select-sm" id="headingFontFamily">
-                        <option value="inherit">Same as Body</option>
-                        <option value="'Inter', sans-serif">Inter</option>
-                        <option value="'Poppins', sans-serif">Poppins</option>
-                        <option value="'Montserrat', sans-serif">Montserrat</option>
-                        <option value="'Raleway', sans-serif">Raleway</option>
-                        <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
-                        <option value="'DM Sans', sans-serif">DM Sans</option>
-                        <option value="'Outfit', sans-serif">Outfit</option>
-                        <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
-                    </select>
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="fontSize">Base Font Size <span class="slider-value" id="fontSizeValue">16px</span></label>
-                    <input type="range" class="form-range" id="fontSize" min="12" max="24" step="1" value="16">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="fontWeight">Font Weight <span class="slider-value" id="fontWeightValue">400</span></label>
-                    <input type="range" class="form-range" id="fontWeight" min="300" max="700" step="100" value="400">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="headingWeight">Heading Weight <span class="slider-value" id="headingWeightValue">600</span></label>
-                    <input type="range" class="form-range" id="headingWeight" min="400" max="700" step="100" value="600">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="lineHeight">Line Height <span class="slider-value" id="lineHeightValue">1.5</span></label>
-                    <input type="range" class="form-range" id="lineHeight" min="1" max="2" step="0.05" value="1.5">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="letterSpacing">Letter Spacing <span class="slider-value" id="letterSpacingValue">0em</span></label>
-                    <input type="range" class="form-range" id="letterSpacing" min="-0.05" max="0.1" step="0.005" value="0">
-                </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Spacing Accordion -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingSpacing">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpacing" aria-expanded="false">
-                            <i class="fas fa-expand-arrows-alt me-2"></i> Spacing
-                        </button>
-                    </h2>
-                    <div id="collapseSpacing" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item">
-                    <label for="spacingBase">Base Spacing</label>
-                    <select class="form-select form-select-sm" id="spacingBase">
-                        <option value="0.25rem">Tight (0.25rem)</option>
-                        <option value="0.5rem">Compact (0.5rem)</option>
-                        <option value="1rem" selected>Normal (1rem)</option>
-                        <option value="1.25rem">Comfortable (1.25rem)</option>
-                        <option value="1.5rem">Spacious (1.5rem)</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="containerPadding">Container Padding</label>
-                    <select class="form-select form-select-sm" id="containerPadding">
-                        <option value="1rem">Small (1rem)</option>
-                        <option value="1.5rem" selected>Normal (1.5rem)</option>
-                        <option value="2rem">Large (2rem)</option>
-                        <option value="3rem">X-Large (3rem)</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="componentPadding">Component Padding</label>
-                    <select class="form-select form-select-sm" id="componentPadding">
-                        <option value="0.375rem 0.75rem">Small</option>
-                        <option value="0.5rem 1rem" selected>Normal</option>
-                        <option value="0.75rem 1.5rem">Large</option>
-                        <option value="1rem 2rem">X-Large</option>
-                    </select>
-                </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Borders Accordion -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingBorders">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBorders" aria-expanded="false">
-                            <i class="fas fa-border-style me-2"></i> Borders & Shapes
-                        </button>
-                    </h2>
-                    <div id="collapseBorders" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item slider-item">
-                    <label for="borderRadius">Border Radius <span class="slider-value" id="borderRadiusValue">6px</span></label>
-                    <input type="range" class="form-range" id="borderRadius" min="0" max="24" step="1" value="6">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="borderRadiusSm">Small Radius <span class="slider-value" id="borderRadiusSmValue">4px</span></label>
-                    <input type="range" class="form-range" id="borderRadiusSm" min="0" max="12" step="1" value="4">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="borderRadiusLg">Large Radius <span class="slider-value" id="borderRadiusLgValue">8px</span></label>
-                    <input type="range" class="form-range" id="borderRadiusLg" min="0" max="32" step="1" value="8">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="borderWidth">Border Width <span class="slider-value" id="borderWidthValue">1px</span></label>
-                    <input type="range" class="form-range" id="borderWidth" min="0" max="5" step="1" value="1">
-                </div>
-
-                <div class="variable-item">
-                    <label for="borderStyle">Border Style</label>
-                    <select class="form-select form-select-sm" id="borderStyle">
-                        <option value="solid" selected>Solid</option>
-                        <option value="dashed">Dashed</option>
-                        <option value="dotted">Dotted</option>
-                        <option value="double">Double</option>
-                    </select>
-                </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Shadows Accordion -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingShadows">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShadows" aria-expanded="false">
-                            <i class="fas fa-layer-group me-2"></i> Shadows & Effects
-                        </button>
-                    </h2>
-                    <div id="collapseShadows" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item">
-                    <label for="boxShadow">Box Shadow</label>
-                    <select class="form-select form-select-sm" id="boxShadow">
-                        <option value="none">None</option>
-                        <option value="0 1px 2px rgba(0,0,0,0.05)">Subtle</option>
-                        <option value="0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)" selected>Small</option>
-                        <option value="0 4px 6px rgba(0,0,0,0.1)">Medium</option>
-                        <option value="0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)">Large</option>
-                        <option value="0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)">X-Large</option>
-                        <option value="0 25px 50px -12px rgba(0,0,0,0.25)">Dramatic</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="boxShadowHover">Hover Shadow</label>
-                    <select class="form-select form-select-sm" id="boxShadowHover">
-                        <option value="none">None</option>
-                        <option value="0 4px 6px rgba(0,0,0,0.1)">Subtle Lift</option>
-                        <option value="0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)" selected>Medium Lift</option>
-                        <option value="0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)">High Lift</option>
-                        <option value="0 25px 50px -12px rgba(0,0,0,0.25)">Dramatic Lift</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="textShadow">Text Shadow</label>
-                    <select class="form-select form-select-sm" id="textShadow">
-                        <option value="none" selected>None</option>
-                        <option value="0 1px 2px rgba(0,0,0,0.1)">Subtle</option>
-                        <option value="0 2px 4px rgba(0,0,0,0.1)">Soft</option>
-                        <option value="1px 1px 2px rgba(0,0,0,0.2)">Classic</option>
-                        <option value="2px 2px 4px rgba(0,0,0,0.2)">Strong</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="glowEffect">Glow Effect</label>
-                    <select class="form-select form-select-sm" id="glowEffect">
-                        <option value="none" selected>None</option>
-                        <option value="0 0 10px rgba(13,110,253,0.25)">Subtle Blue</option>
-                        <option value="0 0 20px rgba(13,110,253,0.35)">Medium Blue</option>
-                        <option value="0 0 30px rgba(13,110,253,0.45)">Strong Blue</option>
-                        <option value="0 0 20px rgba(255,255,255,0.5)">White Glow</option>
-                    </select>
-                </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Animations Accordion -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingAnimations">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAnimations" aria-expanded="false">
-                            <i class="fas fa-magic me-2"></i> Animations & Transitions
-                        </button>
-                    </h2>
-                    <div id="collapseAnimations" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item">
-                    <label for="transitionDuration">Transition Duration</label>
-                    <select class="form-select form-select-sm" id="transitionDuration">
-                        <option value="0ms">None</option>
-                        <option value="150ms">Fast (150ms)</option>
-                        <option value="300ms" selected>Normal (300ms)</option>
-                        <option value="500ms">Slow (500ms)</option>
-                        <option value="750ms">X-Slow (750ms)</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="transitionTiming">Transition Timing</label>
-                    <select class="form-select form-select-sm" id="transitionTiming">
-                        <option value="linear">Linear</option>
-                        <option value="ease" selected>Ease</option>
-                        <option value="ease-in">Ease In</option>
-                        <option value="ease-out">Ease Out</option>
-                        <option value="ease-in-out">Ease In-Out</option>
-                        <option value="cubic-bezier(0.4, 0, 0.2, 1)">Material Design</option>
-                        <option value="cubic-bezier(0.68, -0.55, 0.265, 1.55)">Bounce</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="hoverScale">Hover Scale</label>
-                    <select class="form-select form-select-sm" id="hoverScale">
-                        <option value="1" selected>None</option>
-                        <option value="1.02">Subtle (1.02)</option>
-                        <option value="1.05">Small (1.05)</option>
-                        <option value="1.1">Medium (1.1)</option>
-                        <option value="1.15">Large (1.15)</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="animationIntensity">Animation Style</label>
-                    <select class="form-select form-select-sm" id="animationIntensity">
-                        <option value="none">No Animations</option>
-                        <option value="subtle" selected>Subtle</option>
-                        <option value="smooth">Smooth</option>
-                        <option value="playful">Playful</option>
-                        <option value="energetic">Energetic</option>
-                    </select>
-                </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Links & Focus States -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingLinks">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLinks" aria-expanded="false">
-                            <i class="fas fa-link me-2"></i> Links & Focus States
-                        </button>
-                    </h2>
-                    <div id="collapseLinks" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item">
-                    <label for="linkColor">Link Color</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="linkColor" value="#0d6efd">
-                        <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="linkHoverColor">Link Hover Color</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="linkHoverColor" value="#0a58ca">
-                        <input type="text" class="form-control form-control-sm color-value" value="#0a58ca">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="linkDecoration">Link Decoration</label>
-                    <select class="form-select form-select-sm" id="linkDecoration">
-                        <option value="none">None</option>
-                        <option value="underline" selected>Underline</option>
-                        <option value="overline">Overline</option>
-                        <option value="line-through">Line Through</option>
-                    </select>
-                </div>
-
-                <div class="variable-item">
-                    <label for="focusRingColor">Focus Ring Color</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="focusRingColor" value="#0d6efd">
-                        <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
-                    </div>
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="focusRingWidth">Focus Ring Width <span class="slider-value" id="focusRingWidthValue">3px</span></label>
-                    <input type="range" class="form-range" id="focusRingWidth" min="0" max="8" step="1" value="3">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="focusRingOpacity">Focus Ring Opacity <span class="slider-value" id="focusRingOpacityValue">0.25</span></label>
-                    <input type="range" class="form-range" id="focusRingOpacity" min="0" max="1" step="0.05" value="0.25">
-                </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Forms & Inputs -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingForms">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForms" aria-expanded="false">
-                            <i class="fas fa-edit me-2"></i> Forms & Inputs
-                        </button>
-                    </h2>
-                    <div id="collapseForms" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item">
-                    <label for="inputBg">Input Background</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="inputBg" value="#ffffff">
-                        <input type="text" class="form-control form-control-sm color-value" value="#ffffff">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="inputBorderColor">Input Border Color</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="inputBorderColor" value="#ced4da">
-                        <input type="text" class="form-control form-control-sm color-value" value="#ced4da">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="inputFocusColor">Input Focus Color</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="inputFocusColor" value="#0d6efd">
-                        <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="inputPlaceholderColor">Placeholder Color</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="inputPlaceholderColor" value="#6c757d">
-                        <input type="text" class="form-control form-control-sm color-value" value="#6c757d">
-                    </div>
-                </div>
-
-                <div class="variable-item">
-                    <label for="inputDisabledBg">Disabled Background</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="inputDisabledBg" value="#e9ecef">
-                        <input type="text" class="form-control form-control-sm color-value" value="#e9ecef">
-                    </div>
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="inputPaddingY">Vertical Padding <span class="slider-value" id="inputPaddingYValue">6px</span></label>
-                    <input type="range" class="form-range" id="inputPaddingY" min="2" max="16" step="1" value="6">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="inputPaddingX">Horizontal Padding <span class="slider-value" id="inputPaddingXValue">12px</span></label>
-                    <input type="range" class="form-range" id="inputPaddingX" min="4" max="24" step="1" value="12">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="formLabelSize">Label Font Size <span class="slider-value" id="formLabelSizeValue">14px</span></label>
-                    <input type="range" class="form-range" id="formLabelSize" min="10" max="18" step="1" value="14">
-                </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Grid System -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingGrid">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGrid" aria-expanded="false">
-                            <i class="fas fa-th me-2"></i> Grid System
-                        </button>
-                    </h2>
-                    <div id="collapseGrid" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item slider-item">
-                    <label for="gridColumns">Grid Columns <span class="slider-value" id="gridColumnsValue">12</span></label>
-                    <input type="range" class="form-range" id="gridColumns" min="1" max="24" step="1" value="12">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="gridGutterWidth">Gutter Width <span class="slider-value" id="gridGutterWidthValue">24px</span></label>
-                    <input type="range" class="form-range" id="gridGutterWidth" min="0" max="48" step="4" value="24">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="containerMaxWidthSm">Container SM <span class="slider-value" id="containerMaxWidthSmValue">540px</span></label>
-                    <input type="range" class="form-range" id="containerMaxWidthSm" min="400" max="700" step="20" value="540">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="containerMaxWidthMd">Container MD <span class="slider-value" id="containerMaxWidthMdValue">720px</span></label>
-                    <input type="range" class="form-range" id="containerMaxWidthMd" min="600" max="900" step="20" value="720">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="containerMaxWidthLg">Container LG <span class="slider-value" id="containerMaxWidthLgValue">960px</span></label>
-                    <input type="range" class="form-range" id="containerMaxWidthLg" min="800" max="1200" step="20" value="960">
-                </div>
-
-                <div class="variable-item slider-item">
-                    <label for="containerMaxWidthXl">Container XL <span class="slider-value" id="containerMaxWidthXlValue">1140px</span></label>
-                    <input type="range" class="form-range" id="containerMaxWidthXl" min="1000" max="1400" step="20" value="1140">
-                </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            <!-- End Accordion -->
-        </div>
-        
-        <!-- Fixed Footer with Action Buttons -->
-        <div class="sidebar-footer">
-            <div class="d-grid gap-2">
-                <button class="btn btn-light" onclick="resetDefaults()">
-                    <i class="fas fa-undo"></i> Reset to Defaults
-                </button>
-            </div>
-        </div>
+<!-- Sidebar with Controls -->
+<div class="sidebar">
+  <!-- Fixed Header -->
+  <div class="sidebar-header">
+    <img src="https://cdn.modyo.cloud/uploads/8c051a86-0d5b-4064-b5fd-76fb346e0fb0/original/logo_dynamic_white.svg"
+         alt="Dynamic Framework"
+         class="sidebar-logo mb-4">
+    <!-- Surprise Me Button -->
+    <div class="d-grid">
+      <button class="btn btn-gradient-ai" onclick="surpriseMe()">
+        ✨ Surprise Me!
+      </button>
     </div>
+  </div>
 
-    <!-- Main Content with Preview -->
-    <div class="main-content">
-        <!-- Fixed Tab Navigation -->
-        <div class="preview-tabs-header">
-            <ul class="nav nav-tabs" id="previewTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-content" type="button" role="tab" aria-controls="preview-content" aria-selected="true">
-                        <i class="fas fa-eye me-2"></i>Preview
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="code-tab" data-bs-toggle="tab" data-bs-target="#code-content" type="button" role="tab" aria-controls="code-content" aria-selected="false">
-                        <i class="fas fa-code me-2"></i>Code
-                    </button>
-                </li>
-            </ul>
+  <!-- Scrollable Content -->
+  <div class="sidebar-content">
+    <!-- Accordion Container -->
+    <div class="accordion accordion-flush" id="customizationAccordion">
+
+      <!-- Colors Accordion -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingColors">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseColors" aria-expanded="true">
+            <i class="fas fa-palette me-2"></i> Theme Colors
+          </button>
+        </h2>
+        <div id="collapseColors" class="accordion-collapse collapse show"
+             data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item">
+              <label for="primary">Primary</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="primary" value="#0d6efd">
+                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="secondary">Secondary</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="secondary" value="#6c757d">
+                <input type="text" class="form-control form-control-sm color-value" value="#6c757d">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="success">Success</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="success" value="#198754">
+                <input type="text" class="form-control form-control-sm color-value" value="#198754">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="danger">Danger</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="danger" value="#dc3545">
+                <input type="text" class="form-control form-control-sm color-value" value="#dc3545">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="warning">Warning</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="warning" value="#ffc107">
+                <input type="text" class="form-control form-control-sm color-value" value="#ffc107">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="info">Info</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="info" value="#0dcaf0">
+                <input type="text" class="form-control form-control-sm color-value" value="#0dcaf0">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="light">Light</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="light" value="#f8f9fa">
+                <input type="text" class="form-control form-control-sm color-value" value="#f8f9fa">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="dark">Dark</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="dark" value="#212529">
+                <input type="text" class="form-control form-control-sm color-value" value="#212529">
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <!-- Tab Content -->
-        <div class="tab-content" id="previewTabContent">
-            <!-- Preview Tab -->
-            <div class="tab-pane fade show active theme-preview" id="preview-content" role="tabpanel" aria-labelledby="preview-tab">
-                <div class="container-fluid">
-                    <!-- Two Column Layout -->
-                    <div class="row">
-                <!-- Left Column -->
-                <div class="col-xl-6">
-                    
+      </div>
+
+      <!-- Spacing Accordion -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSpacing">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseSpacing" aria-expanded="false">
+            <i class="fas fa-expand-arrows-alt me-2"></i> Spacing
+          </button>
+        </h2>
+        <div id="collapseSpacing" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item">
+              <label for="spacingBase">Base Spacing</label>
+              <select class="form-select form-select-sm" id="spacingBase">
+                <option value="0.25rem">Tight (0.25rem)</option>
+                <option value="0.5rem">Compact (0.5rem)</option>
+                <option value="1rem" selected>Normal (1rem)</option>
+                <option value="1.25rem">Comfortable (1.25rem)</option>
+                <option value="1.5rem">Spacious (1.5rem)</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="containerPadding">Container Padding</label>
+              <select class="form-select form-select-sm" id="containerPadding">
+                <option value="1rem">Small (1rem)</option>
+                <option value="1.5rem" selected>Normal (1.5rem)</option>
+                <option value="2rem">Large (2rem)</option>
+                <option value="3rem">X-Large (3rem)</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="componentPadding">Component Padding</label>
+              <select class="form-select form-select-sm" id="componentPadding">
+                <option value="0.375rem 0.75rem">Small</option>
+                <option value="0.5rem 1rem" selected>Normal</option>
+                <option value="0.75rem 1.5rem">Large</option>
+                <option value="1rem 2rem">X-Large</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Borders Accordion -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingBorders">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseBorders" aria-expanded="false">
+            <i class="fas fa-border-style me-2"></i> Borders & Shapes
+          </button>
+        </h2>
+        <div id="collapseBorders" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item slider-item">
+              <label for="borderRadius">Border Radius <span class="slider-value"
+                                                            id="borderRadiusValue">6px</span></label>
+              <input type="range" class="form-range" id="borderRadius" min="0" max="24" step="1"
+                     value="6">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="borderRadiusSm">Small Radius <span class="slider-value"
+                                                             id="borderRadiusSmValue">4px</span></label>
+              <input type="range" class="form-range" id="borderRadiusSm" min="0" max="12" step="1"
+                     value="4">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="borderRadiusLg">Large Radius <span class="slider-value"
+                                                             id="borderRadiusLgValue">8px</span></label>
+              <input type="range" class="form-range" id="borderRadiusLg" min="0" max="32" step="1"
+                     value="8">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="borderWidth">Border Width <span class="slider-value"
+                                                          id="borderWidthValue">1px</span></label>
+              <input type="range" class="form-range" id="borderWidth" min="0" max="5" step="1" value="1">
+            </div>
+
+            <div class="variable-item">
+              <label for="borderStyle">Border Style</label>
+              <select class="form-select form-select-sm" id="borderStyle">
+                <option value="solid" selected>Solid</option>
+                <option value="dashed">Dashed</option>
+                <option value="dotted">Dotted</option>
+                <option value="double">Double</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shadows Accordion -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingShadows">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseShadows" aria-expanded="false">
+            <i class="fas fa-layer-group me-2"></i> Shadows & Effects
+          </button>
+        </h2>
+        <div id="collapseShadows" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item">
+              <label for="boxShadow">Box Shadow</label>
+              <select class="form-select form-select-sm" id="boxShadow">
+                <option value="none">None</option>
+                <option value="0 1px 2px rgba(0,0,0,0.05)">Subtle</option>
+                <option value="0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)" selected>Small
+                </option>
+                <option value="0 4px 6px rgba(0,0,0,0.1)">Medium</option>
+                <option value="0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)">
+                  Large
+                </option>
+                <option value="0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)">
+                  X-Large
+                </option>
+                <option value="0 25px 50px -12px rgba(0,0,0,0.25)">Dramatic</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="boxShadowHover">Hover Shadow</label>
+              <select class="form-select form-select-sm" id="boxShadowHover">
+                <option value="none">None</option>
+                <option value="0 4px 6px rgba(0,0,0,0.1)">Subtle Lift</option>
+                <option value="0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)"
+                        selected>Medium Lift
+                </option>
+                <option value="0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)">High
+                  Lift
+                </option>
+                <option value="0 25px 50px -12px rgba(0,0,0,0.25)">Dramatic Lift</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="textShadow">Text Shadow</label>
+              <select class="form-select form-select-sm" id="textShadow">
+                <option value="none" selected>None</option>
+                <option value="0 1px 2px rgba(0,0,0,0.1)">Subtle</option>
+                <option value="0 2px 4px rgba(0,0,0,0.1)">Soft</option>
+                <option value="1px 1px 2px rgba(0,0,0,0.2)">Classic</option>
+                <option value="2px 2px 4px rgba(0,0,0,0.2)">Strong</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="glowEffect">Glow Effect</label>
+              <select class="form-select form-select-sm" id="glowEffect">
+                <option value="none" selected>None</option>
+                <option value="0 0 10px rgba(13,110,253,0.25)">Subtle Blue</option>
+                <option value="0 0 20px rgba(13,110,253,0.35)">Medium Blue</option>
+                <option value="0 0 30px rgba(13,110,253,0.45)">Strong Blue</option>
+                <option value="0 0 20px rgba(255,255,255,0.5)">White Glow</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animations Accordion -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingAnimations">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseAnimations" aria-expanded="false">
+            <i class="fas fa-magic me-2"></i> Animations & Transitions
+          </button>
+        </h2>
+        <div id="collapseAnimations" class="accordion-collapse collapse"
+             data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item">
+              <label for="transitionDuration">Transition Duration</label>
+              <select class="form-select form-select-sm" id="transitionDuration">
+                <option value="0ms">None</option>
+                <option value="150ms">Fast (150ms)</option>
+                <option value="300ms" selected>Normal (300ms)</option>
+                <option value="500ms">Slow (500ms)</option>
+                <option value="750ms">X-Slow (750ms)</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="transitionTiming">Transition Timing</label>
+              <select class="form-select form-select-sm" id="transitionTiming">
+                <option value="linear">Linear</option>
+                <option value="ease" selected>Ease</option>
+                <option value="ease-in">Ease In</option>
+                <option value="ease-out">Ease Out</option>
+                <option value="ease-in-out">Ease In-Out</option>
+                <option value="cubic-bezier(0.4, 0, 0.2, 1)">Material Design</option>
+                <option value="cubic-bezier(0.68, -0.55, 0.265, 1.55)">Bounce</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="hoverScale">Hover Scale</label>
+              <select class="form-select form-select-sm" id="hoverScale">
+                <option value="1" selected>None</option>
+                <option value="1.02">Subtle (1.02)</option>
+                <option value="1.05">Small (1.05)</option>
+                <option value="1.1">Medium (1.1)</option>
+                <option value="1.15">Large (1.15)</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="animationIntensity">Animation Style</label>
+              <select class="form-select form-select-sm" id="animationIntensity">
+                <option value="none">No Animations</option>
+                <option value="subtle" selected>Subtle</option>
+                <option value="smooth">Smooth</option>
+                <option value="playful">Playful</option>
+                <option value="energetic">Energetic</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Links & Focus States -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingLinks">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseLinks" aria-expanded="false">
+            <i class="fas fa-link me-2"></i> Links & Focus States
+          </button>
+        </h2>
+        <div id="collapseLinks" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item">
+              <label for="linkColor">Link Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="linkColor" value="#0d6efd">
+                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="linkHoverColor">Link Hover Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="linkHoverColor" value="#0a58ca">
+                <input type="text" class="form-control form-control-sm color-value" value="#0a58ca">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="linkDecoration">Link Decoration</label>
+              <select class="form-select form-select-sm" id="linkDecoration">
+                <option value="none">None</option>
+                <option value="underline" selected>Underline</option>
+                <option value="overline">Overline</option>
+                <option value="line-through">Line Through</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="focusRingColor">Focus Ring Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="focusRingColor" value="#0d6efd">
+                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+              </div>
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="focusRingWidth">Focus Ring Width <span class="slider-value"
+                                                                 id="focusRingWidthValue">3px</span></label>
+              <input type="range" class="form-range" id="focusRingWidth" min="0" max="8" step="1"
+                     value="3">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="focusRingOpacity">Focus Ring Opacity <span class="slider-value"
+                                                                     id="focusRingOpacityValue">0.25</span></label>
+              <input type="range" class="form-range" id="focusRingOpacity" min="0" max="1" step="0.05"
+                     value="0.25">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Forms & Inputs -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingForms">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseForms" aria-expanded="false">
+            <i class="fas fa-edit me-2"></i> Forms & Inputs
+          </button>
+        </h2>
+        <div id="collapseForms" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item">
+              <label for="inputBg">Input Background</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="inputBg" value="#ffffff">
+                <input type="text" class="form-control form-control-sm color-value" value="#ffffff">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="inputBorderColor">Input Border Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="inputBorderColor" value="#ced4da">
+                <input type="text" class="form-control form-control-sm color-value" value="#ced4da">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="inputFocusColor">Input Focus Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="inputFocusColor" value="#0d6efd">
+                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="inputPlaceholderColor">Placeholder Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="inputPlaceholderColor" value="#6c757d">
+                <input type="text" class="form-control form-control-sm color-value" value="#6c757d">
+              </div>
+            </div>
+
+            <div class="variable-item">
+              <label for="inputDisabledBg">Disabled Background</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="inputDisabledBg" value="#e9ecef">
+                <input type="text" class="form-control form-control-sm color-value" value="#e9ecef">
+              </div>
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="inputPaddingY">Vertical Padding <span class="slider-value"
+                                                                id="inputPaddingYValue">6px</span></label>
+              <input type="range" class="form-range" id="inputPaddingY" min="2" max="16" step="1"
+                     value="6">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="inputPaddingX">Horizontal Padding <span class="slider-value"
+                                                                  id="inputPaddingXValue">12px</span></label>
+              <input type="range" class="form-range" id="inputPaddingX" min="4" max="24" step="1"
+                     value="12">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="formLabelSize">Label Font Size <span class="slider-value"
+                                                               id="formLabelSizeValue">14px</span></label>
+              <input type="range" class="form-range" id="formLabelSize" min="10" max="18" step="1"
+                     value="14">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography Accordion -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTypography">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTypography" aria-expanded="false">
+            <i class="fas fa-font me-2"></i> Typography
+          </button>
+        </h2>
+        <div id="collapseTypography" class="accordion-collapse collapse"
+             data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item">
+              <label for="fontFamily">Font Family</label>
+              <select class="form-select form-select-sm" id="fontFamily">
+                <option
+                    value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+                  System Default
+                </option>
+                <option value="'Inter', sans-serif" selected>Inter (Modern Tech)</option>
+                <option value="'Roboto', sans-serif">Roboto (Google)</option>
+                <option value="'Open Sans', sans-serif">Open Sans (Clean)</option>
+                <option value="'Poppins', sans-serif">Poppins (Rounded)</option>
+                <option value="'Montserrat', sans-serif">Montserrat (Professional)</option>
+                <option value="'Raleway', sans-serif">Raleway (Elegant)</option>
+                <option value="'Lato', sans-serif">Lato (Friendly)</option>
+                <option value="'Nunito', sans-serif">Nunito (Soft)</option>
+                <option value="'Work Sans', sans-serif">Work Sans (Simple)</option>
+                <option value="'Source Sans 3', sans-serif">Source Sans 3</option>
+                <option value="'DM Sans', sans-serif">DM Sans (Geometric)</option>
+                <option value="'Manrope', sans-serif">Manrope (Modern)</option>
+                <option value="'Space Grotesk', sans-serif">Space Grotesk (Tech)</option>
+                <option value="'Outfit', sans-serif">Outfit (Contemporary)</option>
+                <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
+              </select>
+            </div>
+
+            <div class="variable-item">
+              <label for="headingFontFamily">Heading Font</label>
+              <select class="form-select form-select-sm" id="headingFontFamily">
+                <option value="inherit">Same as Body</option>
+                <option value="'Inter', sans-serif">Inter</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Montserrat', sans-serif">Montserrat</option>
+                <option value="'Raleway', sans-serif">Raleway</option>
+                <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
+                <option value="'DM Sans', sans-serif">DM Sans</option>
+                <option value="'Outfit', sans-serif">Outfit</option>
+                <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
+              </select>
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="fontSize">Base Font Size <span class="slider-value"
+                                                         id="fontSizeValue">16px</span></label>
+              <input type="range" class="form-range" id="fontSize" min="12" max="24" step="1" value="16">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="fontWeight">Font Weight <span class="slider-value"
+                                                        id="fontWeightValue">400</span></label>
+              <input type="range" class="form-range" id="fontWeight" min="300" max="700" step="100"
+                     value="400">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="headingWeight">Heading Weight <span class="slider-value"
+                                                              id="headingWeightValue">600</span></label>
+              <input type="range" class="form-range" id="headingWeight" min="400" max="700" step="100"
+                     value="600">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="lineHeight">Line Height <span class="slider-value"
+                                                        id="lineHeightValue">1.5</span></label>
+              <input type="range" class="form-range" id="lineHeight" min="1" max="2" step="0.05"
+                     value="1.5">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="letterSpacing">Letter Spacing <span class="slider-value"
+                                                              id="letterSpacingValue">0em</span></label>
+              <input type="range" class="form-range" id="letterSpacing" min="-0.05" max="0.1" step="0.005"
+                     value="0">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid System -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingGrid">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseGrid" aria-expanded="false">
+            <i class="fas fa-th me-2"></i> Grid System
+          </button>
+        </h2>
+        <div id="collapseGrid" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item slider-item">
+              <label for="gridColumns">Grid Columns <span class="slider-value"
+                                                          id="gridColumnsValue">12</span></label>
+              <input type="range" class="form-range" id="gridColumns" min="1" max="24" step="1"
+                     value="12">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="gridGutterWidth">Gutter Width <span class="slider-value"
+                                                              id="gridGutterWidthValue">24px</span></label>
+              <input type="range" class="form-range" id="gridGutterWidth" min="0" max="48" step="4"
+                     value="24">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="containerMaxWidthSm">Container SM <span class="slider-value"
+                                                                  id="containerMaxWidthSmValue">540px</span></label>
+              <input type="range" class="form-range" id="containerMaxWidthSm" min="400" max="700"
+                     step="20" value="540">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="containerMaxWidthMd">Container MD <span class="slider-value"
+                                                                  id="containerMaxWidthMdValue">720px</span></label>
+              <input type="range" class="form-range" id="containerMaxWidthMd" min="600" max="900"
+                     step="20" value="720">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="containerMaxWidthLg">Container LG <span class="slider-value"
+                                                                  id="containerMaxWidthLgValue">960px</span></label>
+              <input type="range" class="form-range" id="containerMaxWidthLg" min="800" max="1200"
+                     step="20" value="960">
+            </div>
+
+            <div class="variable-item slider-item">
+              <label for="containerMaxWidthXl">Container XL <span class="slider-value"
+                                                                  id="containerMaxWidthXlValue">1140px</span></label>
+              <input type="range" class="form-range" id="containerMaxWidthXl" min="1000" max="1400"
+                     step="20" value="1140">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- End Accordion -->
+  </div>
+
+  <!-- Fixed Footer with Action Buttons -->
+  <div class="sidebar-footer">
+    <div class="d-grid gap-2">
+      <button class="btn btn-light" onclick="resetDefaults()">
+        <i class="fas fa-undo"></i> Reset to Defaults
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content with Preview -->
+<div class="main-content">
+  <!-- Fixed Tab Navigation -->
+  <div class="preview-tabs-header">
+    <ul class="nav nav-tabs" id="previewTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-content"
+                type="button" role="tab" aria-controls="preview-content" aria-selected="true">
+          <i class="fas fa-eye me-2"></i>Preview
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="code-tab" data-bs-toggle="tab" data-bs-target="#code-content" type="button"
+                role="tab" aria-controls="code-content" aria-selected="false">
+          <i class="fas fa-code me-2"></i>Code
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content" id="previewTabContent">
+    <!-- Preview Tab -->
+    <div class="tab-pane fade show active theme-preview" id="preview-content" role="tabpanel"
+         aria-labelledby="preview-tab">
+      <div class="container-fluid">
+        <!-- Two Column Layout -->
+        <div class="row">
+          <!-- Left Column -->
+          <div class="col-xl-6">
+
             <!-- Buttons Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Buttons</h5>
-                <div class="row g-3">
-                    <div class="col-auto">
-                        <button class="btn btn-primary">Primary</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-secondary">Secondary</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-success">Success</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-danger">Danger</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-warning">Warning</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-info">Info</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-light">Light</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-dark">Dark</button>
-                    </div>
+              <h5 class="preview-title">Buttons</h5>
+              <div class="row g-3">
+                <div class="col-auto">
+                  <button class="btn btn-primary">Primary</button>
                 </div>
-                <div class="row g-3 mt-2">
-                    <div class="col-auto">
-                        <button class="btn btn-sm btn-primary">Small Button</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-lg btn-primary">Large Button</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-primary rounded-pill">Pill Button</button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-outline-primary">Outline Primary</button>
-                    </div>
+                <div class="col-auto">
+                  <button class="btn btn-secondary">Secondary</button>
                 </div>
+                <div class="col-auto">
+                  <button class="btn btn-success">Success</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-danger">Danger</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-warning">Warning</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-info">Info</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-light">Light</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-dark">Dark</button>
+                </div>
+              </div>
+              <div class="row g-3 mt-2">
+                <div class="col-auto">
+                  <button class="btn btn-sm btn-primary">Small Button</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-lg btn-primary">Large Button</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary rounded-pill">Pill Button</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-outline-primary">Outline Primary</button>
+                </div>
+              </div>
             </div>
 
             <!-- Forms Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Forms</h5>
-                <div class="mb-3">
-                    <label for="exampleInput" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInput" placeholder="name@example.com">
+              <h5 class="preview-title">Forms</h5>
+              <div class="mb-3">
+                <label for="exampleInput" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInput"
+                       placeholder="name@example.com">
+              </div>
+              <div class="mb-3">
+                <label for="exampleSelect" class="form-label">Select Option</label>
+                <select class="form-select" id="exampleSelect">
+                  <option selected>Choose...</option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Checkboxes and Switches</label>
+                <div class="d-flex gap-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="check1" checked>
+                    <label class="form-check-label" for="check1">Checked</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="switch1" checked>
+                    <label class="form-check-label" for="switch1">Switch</label>
+                  </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleSelect" class="form-label">Select Option</label>
-                    <select class="form-select" id="exampleSelect">
-                        <option selected>Choose...</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Checkboxes and Switches</label>
-                    <div class="d-flex gap-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="check1" checked>
-                            <label class="form-check-label" for="check1">Checked</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="switch1" checked>
-                            <label class="form-check-label" for="switch1">Switch</label>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-            
+
             <!-- Tabs Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Alerts</h5>
-                <div class="alert alert-primary" role="alert">
-                    <i class="fas fa-info-circle"></i> This is a primary alert with custom color
-                </div>
-                <div class="alert alert-success" role="alert">
-                    <i class="fas fa-check-circle"></i> Success! Your changes have been saved
-                </div>
-                <div class="alert alert-danger" role="alert">
-                    <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
-                </div>
-                <div class="alert alert-warning" role="alert">
-                    <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
-                </div>
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle"></i> Info message with helpful details
-                </div>
+              <h5 class="preview-title">Alerts</h5>
+              <div class="alert alert-primary" role="alert">
+                <i class="fas fa-info-circle"></i> This is a primary alert with custom color
+              </div>
+              <div class="alert alert-success" role="alert">
+                <i class="fas fa-check-circle"></i> Success! Your changes have been saved
+              </div>
+              <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
+              </div>
+              <div class="alert alert-warning" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
+              </div>
+              <div class="alert alert-info" role="alert">
+                <i class="fas fa-info-circle"></i> Info message with helpful details
+              </div>
             </div>
-            
+
             <!-- Tabs Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Tabs & Navigation</h5>
-                <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button">Home</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile" type="button">Profile</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button">Contact</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home">
-                        <p>Home tab content. Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    <div class="tab-pane fade" id="profile">
-                        <p>Profile tab content. Sed do eiusmod tempor incididunt.</p>
-                    </div>
-                    <div class="tab-pane fade" id="contact">
-                        <p>Contact tab content. Ut enim ad minim veniam.</p>
-                    </div>
-                </div>
+              <h5 class="preview-title">Tabs & Navigation</h5>
+              <ul class="nav nav-tabs mb-3">
+                <li class="nav-item">
+                  <button class="nav-link active">Home</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link">Profile</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link">Contact</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link disabled">Disabled</button>
+                </li>
+              </ul>
+
+              <!-- Pills variation -->
+              <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Another</a>
+                </li>
+              </ul>
             </div>
-            
+
             <!-- Progress Bars -->
             <div class="preview-section">
-                <h5 class="preview-title">Progress Bars</h5>
-                <div class="progress mb-3">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">25%</div>
+              <h5 class="preview-title">Progress Bars</h5>
+              <div class="progress mb-3">
+                <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">25%</div>
+              </div>
+              <div class="progress mb-3">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 50%">50%</div>
+              </div>
+              <div class="progress mb-3">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%">75%</div>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                     role="progressbar" style="width: 100%">100%
                 </div>
-                <div class="progress mb-3">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%">50%</div>
-                </div>
-                <div class="progress mb-3">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%">75%</div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%">100%</div>
-                </div>
+              </div>
             </div>
-            
+
+            <!-- Tables -->
+            <div class="preview-section">
+              <h5 class="preview-title">Tables</h5>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Premium Plan</td>
+                    <td>$99.99</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Standard Plan</td>
+                    <td>$49.99</td>
+                    <td><span class="badge bg-warning text-dark">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Basic Plan</td>
+                    <td>$19.99</td>
+                    <td><span class="badge bg-danger">Expired</span></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="preview-section">
+              <h5 class="preview-title">Pagination</h5>
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                  </li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+
+            <!-- Steps/Stepper -->
+            <div class="preview-section">
+              <h5 class="preview-title">Process Steps</h5>
+              <div class="position-relative">
+                <!-- Progress lines positioned absolutely -->
+                <div class="position-absolute"
+                     style="top: 20px; left: 60px; right: 60px; display: flex; align-items: center;">
+                  <div class="progress flex-grow-1 mx-2" style="height: 3px;">
+                    <div class="progress-bar bg-primary" style="width: 100%;"></div>
+                  </div>
+                  <div class="progress flex-grow-1 mx-2" style="height: 3px;">
+                    <div class="progress-bar bg-primary" style="width: 50%;"></div>
+                  </div>
+                  <div class="progress flex-grow-1 mx-2" style="height: 3px;">
+                    <div class="progress-bar bg-secondary" style="width: 0%;"></div>
+                  </div>
                 </div>
-                <!-- End Left Column -->
-                
-                <!-- Right Column -->
-                <div class="col-xl-6">
+                <!-- Steps with circles -->
+                <div class="d-flex justify-content-between mb-4 position-relative">
+                  <div class="text-center" style="z-index: 1;">
+                    <div
+                        class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-2"
+                        style="width: 40px; height: 40px;">
+                      <span>1</span>
+                    </div>
+                    <small class="text-primary fw-bold">Setup</small>
+                  </div>
+                  <div class="text-center" style="z-index: 1;">
+                    <div
+                        class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-2"
+                        style="width: 40px; height: 40px;">
+                      <span>2</span>
+                    </div>
+                    <small class="text-primary fw-bold">Configure</small>
+                  </div>
+                  <div class="text-center" style="z-index: 1;">
+                    <div
+                        class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center mx-auto mb-2"
+                        style="width: 40px; height: 40px;">
+                      <span>3</span>
+                    </div>
+                    <small class="text-muted">Review</small>
+                  </div>
+                  <div class="text-center" style="z-index: 1;">
+                    <div
+                        class="rounded-circle bg-light text-muted d-flex align-items-center justify-content-center mx-auto mb-2"
+                        style="width: 40px; height: 40px;">
+                      <span>4</span>
+                    </div>
+                    <small class="text-muted">Complete</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="preview-section">
+              <h5 class="preview-title">Timeline</h5>
+              <div class="position-relative">
+                <div class="d-flex mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-primary rounded-circle p-2 text-white">
+                      <i class="fas fa-flag" style="font-size: 12px;"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1">Project Started</h6>
+                    <p class="text-muted small mb-0">Initial setup and configuration completed</p>
+                    <small class="text-muted">2 hours ago</small>
+                  </div>
+                </div>
+                <div class="d-flex mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-success rounded-circle p-2 text-white">
+                      <i class="fas fa-check" style="font-size: 12px;"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1">Milestone Reached</h6>
+                    <p class="text-muted small mb-0">50% of tasks completed successfully</p>
+                    <small class="text-muted">1 day ago</small>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <div class="bg-warning rounded-circle p-2 text-white">
+                      <i class="fas fa-clock" style="font-size: 12px;"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1">Review Pending</h6>
+                    <p class="text-muted small mb-0">Waiting for client approval</p>
+                    <small class="text-muted">3 days ago</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- End Left Column -->
+
+          <!-- Right Column -->
+          <div class="col-xl-6">
 
             <!-- Alerts Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Alerts</h5>
-                <div class="alert alert-primary" role="alert">
-                    <i class="fas fa-info-circle"></i> This is a primary alert with custom color
-                </div>
-                <div class="alert alert-success" role="alert">
-                    <i class="fas fa-check-circle"></i> Success! Your changes have been saved
-                </div>
-                <div class="alert alert-danger" role="alert">
-                    <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
-                </div>
-                <div class="alert alert-warning" role="alert">
-                    <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
-                </div>
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle"></i> Info message with helpful details
-                </div>
+              <h5 class="preview-title">Alerts</h5>
+              <div class="alert alert-primary" role="alert">
+                <i class="fas fa-info-circle"></i> This is a primary alert with custom color
+              </div>
+              <div class="alert alert-success" role="alert">
+                <i class="fas fa-check-circle"></i> Success! Your changes have been saved
+              </div>
+              <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
+              </div>
+              <div class="alert alert-warning" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
+              </div>
+              <div class="alert alert-info" role="alert">
+                <i class="fas fa-info-circle"></i> Info message with helpful details
+              </div>
             </div>
 
             <!-- Cards Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Cards</h5>
-                <div class="card mb-3">
-                    <div class="card-header bg-primary text-white">
-                        Featured Card
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card Title</h5>
-                        <p class="card-text">Example text to build on the card title.</p>
-                        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-                    </div>
+              <h5 class="preview-title">Cards</h5>
+              <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                  Featured Card
                 </div>
-                <div class="card border-success mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title text-success">Success Card</h5>
-                        <p class="card-text">This card has a success border color.</p>
-                        <button class="btn btn-success btn-sm">Success Action</button>
-                    </div>
+                <div class="card-body">
+                  <h5 class="card-title">Card Title</h5>
+                  <p class="card-text">Example text to build on the card title.</p>
+                  <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
                 </div>
+              </div>
+              <div class="card border-success mb-3">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Success Card</h5>
+                  <p class="card-text">This card has a success border color.</p>
+                  <button class="btn btn-success btn-sm">Success Action</button>
+                </div>
+              </div>
             </div>
 
             <!-- Badges & Pills -->
             <div class="preview-section">
-                <h5 class="preview-title">Badges & Pills</h5>
-                <div class="mb-3">
-                    <span class="badge bg-primary me-2">Primary</span>
-                    <span class="badge bg-secondary me-2">Secondary</span>
-                    <span class="badge bg-success me-2">Success</span>
-                    <span class="badge bg-danger me-2">Danger</span>
-                    <span class="badge bg-warning text-dark me-2">Warning</span>
-                    <span class="badge bg-info text-dark me-2">Info</span>
-                </div>
-                <div>
-                    <span class="badge rounded-pill bg-primary me-2">Pill Badge</span>
-                    <span class="badge rounded-pill bg-success me-2">Success Pill</span>
-                    <span class="badge rounded-pill bg-danger">Danger Pill</span>
-                </div>
+              <h5 class="preview-title">Badges & Pills</h5>
+              <div class="mb-3">
+                <span class="badge bg-primary me-2">Primary</span>
+                <span class="badge bg-secondary me-2">Secondary</span>
+                <span class="badge bg-success me-2">Success</span>
+                <span class="badge bg-danger me-2">Danger</span>
+                <span class="badge bg-warning text-dark me-2">Warning</span>
+                <span class="badge bg-info text-dark me-2">Info</span>
+              </div>
+              <div>
+                <span class="badge rounded-pill bg-primary me-2">Pill Badge</span>
+                <span class="badge rounded-pill bg-success me-2">Success Pill</span>
+                <span class="badge rounded-pill bg-danger">Danger Pill</span>
+              </div>
             </div>
-            
+
             <!-- Dropdowns and Modals -->
             <div class="preview-section">
-                <h5 class="preview-title">Dropdowns & Modals</h5>
-                <div class="d-flex gap-2 flex-wrap">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            Dropdown button
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Launch Modal
-                    </button>
-                    <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
-                        Hover for Tooltip
-                    </button>
+              <h5 class="preview-title">Dropdowns & Modals</h5>
+              <div class="d-flex gap-2 flex-wrap">
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button"
+                          data-bs-toggle="dropdown">
+                    Dropdown button
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
                 </div>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                  Launch Modal
+                </button>
+                <button type="button" class="btn btn-info" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Tooltip on top">
+                  Hover for Tooltip
+                </button>
+              </div>
             </div>
-            
+
             <!-- List Group -->
             <div class="preview-section">
-                <h5 class="preview-title">List Group</h5>
-                <ul class="list-group">
-                    <li class="list-group-item active">Active item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                    <li class="list-group-item disabled">Disabled item</li>
-                </ul>
+              <h5 class="preview-title">List Group</h5>
+              <ul class="list-group">
+                <li class="list-group-item active">Active item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item disabled">Disabled item</li>
+              </ul>
             </div>
-            
-                </div>
-                <!-- End Right Column -->
-                    </div>
-                    <!-- End Two Column Layout -->
-                </div>
-            </div>
-            
-            <!-- Code Tab -->
-            <div class="tab-pane fade" id="code-content" role="tabpanel" aria-labelledby="code-tab">
-                <div class="container-fluid">
-                    <div class="code-output-container">
-                        <div class="code-header">
-                            <h5 class="mb-0">Generated CSS</h5>
-                            <div class="code-actions">
-                                <button class="btn btn-sm btn-light" onclick="copyCss()">
-                                    <i class="fas fa-copy me-2"></i>Copy to Clipboard
-                                </button>
-                                <button class="btn btn-sm btn-light" onclick="downloadCss()">
-                                    <i class="fas fa-download me-2"></i>Download CSS
-                                </button>
-                            </div>
+
+
+            <!-- Statistics Cards -->
+            <div class="preview-section">
+              <h5 class="preview-title">Statistics</h5>
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0 me-3">
+                          <i class="fas fa-users text-primary fa-2x"></i>
                         </div>
-                        <pre id="cssOutput" class="code-output"></pre>
+                        <div class="flex-grow-1">
+                          <h6 class="text-muted mb-1">Total Users</h6>
+                          <h3 class="mb-0">8,249</h3>
+                          <small class="text-success"><i class="fas fa-arrow-up"></i>
+                            12.5%</small>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+                <div class="col-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0 me-3">
+                          <i class="fas fa-dollar-sign text-success fa-2x"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                          <h6 class="text-muted mb-1">Revenue</h6>
+                          <h3 class="mb-0">$34.5k</h3>
+                          <small class="text-danger"><i class="fas fa-arrow-down"></i>
+                            3.2%</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
 
-        </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title">Modal Title</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            <!-- Activity Feed -->
+            <div class="preview-section">
+              <h5 class="preview-title">Activity Feed</h5>
+              <div class="list-group list-group-flush">
+                <div class="list-group-item">
+                  <div class="d-flex align-items-start">
+                    <div class="bg-primary rounded-circle p-2 text-white me-3">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <div class="d-flex justify-content-between">
+                        <h6 class="mb-1">John Doe commented on your post</h6>
+                        <small class="text-muted">5 min ago</small>
+                      </div>
+                      <p class="mb-1 text-muted small">Great work on this project! Looking forward
+                        to seeing more.</p>
+                      <div>
+                        <button class="btn btn-sm btn-outline-primary me-2">Reply</button>
+                        <button class="btn btn-sm btn-outline-secondary">Like</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-body">
-                    <p>This is a modal with customized colors based on your theme.</p>
+                <div class="list-group-item">
+                  <div class="d-flex align-items-start">
+                    <div class="bg-success rounded-circle p-2 text-white me-3">
+                      <i class="fas fa-check"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <div class="d-flex justify-content-between">
+                        <h6 class="mb-1">Task completed successfully</h6>
+                        <small class="text-muted">2 hours ago</small>
+                      </div>
+                      <p class="mb-0 text-muted small">Your deployment has been completed without
+                        any errors.</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="list-group-item">
+                  <div class="d-flex align-items-start">
+                    <div class="bg-warning rounded-circle p-2 text-white me-3">
+                      <i class="fas fa-exclamation"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <div class="d-flex justify-content-between">
+                        <h6 class="mb-1">System update available</h6>
+                        <small class="text-muted">1 day ago</small>
+                      </div>
+                      <p class="mb-0 text-muted small">A new version 2.5.0 is available for
+                        download.</p>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Toast for copy notification -->
-    <div class="toast-container">
-        <div class="toast align-items-center text-white bg-success border-0" role="alert" id="copyToast">
-            <div class="d-flex">
-                <div class="toast-body">
-                    <i class="fas fa-check-circle me-2"></i>
-                    CSS copied to clipboard!
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            <!-- Breadcrumb -->
+            <div class="preview-section">
+              <h5 class="preview-title">Breadcrumb</h5>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Products</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Theme Generator</li>
+                </ol>
+              </nav>
             </div>
-        </div>
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="assets/js/theme-generator.js"></script>
-    <script src="assets/js/surprise-me.js"></script>
+            <!-- List with Icons -->
+            <div class="preview-section">
+              <h5 class="preview-title">Feature List</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  Responsive design for all devices
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  Built with Bootstrap 5
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  Customizable color schemes
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  Modern and clean interface
+                </li>
+              </ul>
+            </div>
+
+            <!-- Avatars -->
+            <div class="preview-section">
+              <h5 class="preview-title">Avatars</h5>
+              <div class="d-flex align-items-center gap-3 flex-wrap">
+                <!-- Single avatars -->
+                <div class="d-flex align-items-center">
+                  <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                       style="width: 40px; height: 40px;">
+                    <span class="fw-bold">JD</span>
+                  </div>
+                  <span class="ms-2">John Doe</span>
+                </div>
+
+                <div class="d-flex align-items-center">
+                  <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
+                       style="width: 40px; height: 40px;">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <span class="ms-2">User Profile</span>
+                </div>
+
+                <!-- Avatar sizes -->
+                <div class="d-flex align-items-center gap-2">
+                  <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center"
+                       style="width: 32px; height: 32px; font-size: 0.75rem;">
+                    <span>SM</span>
+                  </div>
+                  <div class="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center"
+                       style="width: 40px; height: 40px;">
+                    <span>MD</span>
+                  </div>
+                  <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center"
+                       style="width: 56px; height: 56px; font-size: 1.25rem;">
+                    <span>LG</span>
+                  </div>
+                </div>
+
+                <!-- Avatar group -->
+                <div class="d-flex">
+                  <div
+                      class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center border border-2 border-white"
+                      style="width: 40px; height: 40px;">
+                    <span>A</span>
+                  </div>
+                  <div
+                      class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center border border-2 border-white"
+                      style="width: 40px; height: 40px; margin-left: -10px;">
+                    <span>B</span>
+                  </div>
+                  <div
+                      class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center border border-2 border-white"
+                      style="width: 40px; height: 40px; margin-left: -10px;">
+                    <span>C</span>
+                  </div>
+                  <div
+                      class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center border border-2 border-white"
+                      style="width: 40px; height: 40px; margin-left: -10px;">
+                    <small>+5</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Avatar with status indicator -->
+              <div class="mt-3">
+                <div class="d-flex gap-3">
+                  <div class="position-relative d-inline-block">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                         style="width: 48px; height: 48px;">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <span
+                        class="position-absolute bottom-0 end-0 bg-success rounded-circle border border-2 border-white"
+                        style="width: 14px; height: 14px;"></span>
+                  </div>
+                  <div class="position-relative d-inline-block">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center"
+                         style="width: 48px; height: 48px;">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <span
+                        class="position-absolute bottom-0 end-0 bg-warning rounded-circle border border-2 border-white"
+                        style="width: 14px; height: 14px;"></span>
+                  </div>
+                  <div class="position-relative d-inline-block">
+                    <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center"
+                         style="width: 48px; height: 48px;">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <span class="position-absolute bottom-0 end-0 bg-danger rounded-circle border border-2 border-white"
+                          style="width: 14px; height: 14px;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Typography Preview -->
+            <div class="preview-section">
+              <h5 class="preview-title">Typography</h5>
+
+              <!-- Headings -->
+              <div class="mb-4">
+                <h1>Heading 1 - Main Title</h1>
+                <h2>Heading 2 - Section Title</h2>
+                <h3>Heading 3 - Subsection</h3>
+                <h4>Heading 4 - Article Title</h4>
+                <h5>Heading 5 - Card Title</h5>
+                <h6>Heading 6 - Small Title</h6>
+              </div>
+
+              <!-- Display Headings -->
+              <div class="mb-4">
+                <h1 class="display-1">Display 1</h1>
+                <h2 class="display-2">Display 2</h2>
+                <h3 class="display-3">Display 3</h3>
+                <h4 class="display-4">Display 4</h4>
+              </div>
+
+              <!-- Lead Paragraph -->
+              <p class="lead mb-4">
+                This is a lead paragraph. It stands out from regular paragraphs with larger text size
+                and font weight. Perfect for introductions and key messages.
+              </p>
+
+              <!-- Regular Paragraphs -->
+              <p>
+                This is a regular paragraph with <strong>bold text</strong>, <em>italic text</em>, and
+                <u>underlined text</u>.
+                You can also use
+                <mark>highlighted text</mark>
+                and <small>small text</small> for additional emphasis.
+              </p>
+
+              <p>
+                Another paragraph demonstrating <code>inline code</code>, <kbd>keyboard input</kbd>, and
+                <var>variables</var>.
+                You can also show <samp>sample output</samp> from a program.
+              </p>
+
+              <!-- Text Colors -->
+              <div class="mb-4">
+                <p class="text-primary">.text-primary - Primary colored text</p>
+                <p class="text-secondary">.text-secondary - Secondary colored text</p>
+                <p class="text-success">.text-success - Success colored text</p>
+                <p class="text-danger">.text-danger - Danger colored text</p>
+                <p class="text-warning">.text-warning - Warning colored text</p>
+                <p class="text-info">.text-info - Info colored text</p>
+                <p class="text-muted">.text-muted - Muted text for secondary information</p>
+              </div>
+
+              <!-- Text Alignment -->
+              <div class="mb-4">
+                <p class="text-start">Left aligned text using .text-start</p>
+                <p class="text-center">Center aligned text using .text-center</p>
+                <p class="text-end">Right aligned text using .text-end</p>
+              </div>
+
+              <!-- Font Weights -->
+              <div class="mb-4">
+                <p class="fw-light">Light weight text (.fw-light)</p>
+                <p class="fw-normal">Normal weight text (.fw-normal)</p>
+                <p class="fw-semibold">Semibold weight text (.fw-semibold)</p>
+                <p class="fw-bold">Bold weight text (.fw-bold)</p>
+              </div>
+
+              <!-- Font Styles -->
+              <div class="mb-4">
+                <p class="fst-italic">Italic text style (.fst-italic)</p>
+                <p class="fst-normal">Normal text style (.fst-normal)</p>
+                <p class="text-decoration-underline">Underlined text</p>
+                <p class="text-decoration-line-through">Strikethrough text</p>
+              </div>
+
+              <!-- Blockquotes -->
+              <figure class="mb-4">
+                <blockquote class="blockquote">
+                  <p>A well-known quote, contained in a blockquote element.</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                  Someone famous in <cite title="Source Title">Source Title</cite>
+                </figcaption>
+              </figure>
+
+              <!-- Lists -->
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <h6>Unordered List</h6>
+                  <ul>
+                    <li>First item in the list</li>
+                    <li>Second item with nested list
+                      <ul>
+                        <li>Nested item one</li>
+                        <li>Nested item two</li>
+                      </ul>
+                    </li>
+                    <li>Third item in the list</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <h6>Ordered List</h6>
+                  <ol>
+                    <li>First numbered item</li>
+                    <li>Second numbered item
+                      <ol>
+                        <li>Sub-item A</li>
+                        <li>Sub-item B</li>
+                      </ol>
+                    </li>
+                    <li>Third numbered item</li>
+                  </ol>
+                </div>
+              </div>
+
+              <!-- Description List -->
+              <dl class="row">
+                <dt class="col-sm-3">Description Term</dt>
+                <dd class="col-sm-9">A description for the term above.</dd>
+
+                <dt class="col-sm-3">Another Term</dt>
+                <dd class="col-sm-9">
+                  <p>Another description with more details.</p>
+                  <p>Can include multiple paragraphs.</p>
+                </dd>
+
+                <dt class="col-sm-3 text-truncate">Truncated term that is too long</dt>
+                <dd class="col-sm-9">This term text is truncated with ellipsis.</dd>
+              </dl>
+
+              <!-- Abbreviations -->
+              <p>
+                <abbr title="HyperText Markup Language">HTML</abbr> and
+                <abbr title="Cascading Style Sheets" class="initialism">CSS</abbr> are fundamental web
+                technologies.
+              </p>
+            </div>
+
+            <!-- End Right Column -->
+          </div>
+          <!-- End Two Column Layout -->
+        </div>
+      </div>
+    </div>
+    <!-- End Preview Tab -->
+
+    <!-- Code Tab -->
+    <div class="tab-pane fade" id="code-content" role="tabpanel" aria-labelledby="code-tab">
+      <div class="code-output-container">
+        <div class="code-header">
+          <h5 class="mb-0">Generated CSS</h5>
+          <div class="code-actions">
+            <button class="btn btn-sm btn-light" onclick="copyCss()">
+              <i class="fas fa-copy me-2"></i>Copy to Clipboard
+            </button>
+            <button class="btn btn-sm btn-light" onclick="downloadCss()">
+              <i class="fas fa-download me-2"></i>Download CSS
+            </button>
+          </div>
+        </div>
+        <pre><code id="cssOutput" class="language-css code-output">/* Loading CSS... */</code></pre>
+      </div>
+    </div>
+    <!-- End Code Tab -->
+  </div>
+  <!-- End tab-content -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Modal Title</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>This is a modal with customized colors based on your theme.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast for copy notification -->
+  <div class="toast-container">
+    <div class="toast align-items-center text-white bg-success border-0" role="alert" id="copyToast">
+      <div class="d-flex">
+        <div class="toast-body">
+          <i class="fas fa-check-circle me-2"></i>
+          CSS copied to clipboard!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="assets/js/theme-generator.js"></script>
+  <script src="assets/js/surprise-me.js"></script>
 </body>
 </html>
