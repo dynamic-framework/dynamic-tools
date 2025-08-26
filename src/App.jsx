@@ -4,6 +4,7 @@ import Card from './components/Card';
 import Input from './components/Input';
 import Dropdown from './components/Dropdown';
 import Tabs from './components/Tabs';
+import BootstrapCustomizer from './components/BootstrapCustomizer';
 import './App.css';
 
 function App() {
@@ -21,6 +22,17 @@ function App() {
 
   // Sample data for tabs
   const tabsData = [
+    {
+      label: 'Bootstrap Customizer',
+      icon: '🎨',
+      content: (
+        <div className="component-showcase">
+          <h3>Bootstrap Customizer</h3>
+          <p>Herramienta interactiva para personalizar variables de Bootstrap con selectores de color y controles intuitivos.</p>
+          <BootstrapCustomizer />
+        </div>
+      )
+    },
     {
       label: 'Botones',
       icon: '🔘',
@@ -198,7 +210,7 @@ function App() {
     {
       label: 'Más Componentes',
       icon: '🧩',
-      badge: '4',
+      badge: '5',
       content: (
         <div className="component-showcase">
           <h3>Componentes Adicionales</h3>
@@ -259,8 +271,8 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>🧰 Dynamic Tools - Showcase de Componentes</h1>
-        <p>Biblioteca de componentes UI reutilizables para aplicaciones web modernas</p>
+        <h1>🧰 Dynamic Tools - Herramientas de Desarrollo UI</h1>
+        <p>Colección completa de herramientas de desarrollo que incluye un customizador de Bootstrap y una biblioteca de componentes UI reutilizables</p>
       </header>
       
       <main className="app-main">
@@ -274,7 +286,7 @@ function App() {
       </main>
       
       <footer className="app-footer">
-        <p>© 2024 Dynamic Framework - Componentes de UI</p>
+        <p>© 2024 Dynamic Framework - Herramientas de Desarrollo UI</p>
       </footer>
     </div>
   );

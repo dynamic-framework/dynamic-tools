@@ -1,12 +1,27 @@
-# 🧰 Dynamic Tools - Showcase de Componentes
+# 🧰 Dynamic Tools - Herramientas de Desarrollo UI
 
-Biblioteca de componentes UI reutilizables para aplicaciones web modernas, construida con React y Vite.
+Colección completa de herramientas de desarrollo UI que incluye un showcase de componentes reutilizables y un customizador de Bootstrap, construido con React y Vite.
 
 ![Component Showcase](https://github.com/user-attachments/assets/a360021b-dc7b-4dc1-9b6a-e305d3d59b86)
 
-## 🚀 Características
+## 🚀 Herramientas Incluidas
 
-Este proyecto incluye una colección completa de componentes UI listos para usar:
+### 🎨 Bootstrap Customizer
+Herramienta interactiva para personalizar variables de Bootstrap con selectores de color y controles intuitivos.
+
+**Características:**
+- **Color Pickers Interactivos**: Personaliza los colores del tema de Bootstrap (Primary, Secondary, Success, Warning, Danger, Info)
+- **Controles de Tipografía**: Ajusta la familia de fuentes y tamaño base  
+- **Configuración de Bordes**: Modifica el radio de borde con controles deslizantes
+- **Vista Previa en Tiempo Real**: Ve los cambios aplicados instantáneamente en componentes de Bootstrap
+- **Copiar CSS**: Copia fácilmente el CSS generado al portapapeles
+- **Descargar CSS**: Descarga el archivo CSS personalizado
+- **Restablecer**: Vuelve a los valores predeterminados de Bootstrap
+
+### 🧩 Showcase de Componentes UI
+Biblioteca de componentes UI reutilizables para aplicaciones web modernas.
+
+**Componentes Incluidos:**
 
 ### 🔘 Botones
 - **Variantes**: Primario, Secundario, Éxito, Peligro, Advertencia
@@ -38,6 +53,17 @@ Este proyecto incluye una colección completa de componentes UI listos para usar
 - **Soporte para**: Contenido personalizado, navegación con teclado
 - **Responsive**: Scroll horizontal en dispositivos móviles
 
+## 📱 Estructura de la Aplicación
+
+La aplicación utiliza un sistema de tabs que permite acceder a todas las herramientas:
+
+- **🎨 Bootstrap Customizer**: Personalización de variables CSS de Bootstrap
+- **🔘 Botones**: Showcase de componentes de botones con múltiples variantes
+- **🃏 Tarjetas**: Ejemplos de componentes de tarjetas con diferentes estilos
+- **📝 Inputs**: Campos de entrada con validación y estados
+- **⬇️ Dropdowns**: Menús desplegables con funcionalidad completa
+- **🧩 Más Componentes**: Tabs anidados y combinaciones de componentes
+
 ## 🛠️ Tecnologías
 
 - **React 19** - Biblioteca de componentes UI
@@ -61,7 +87,21 @@ npm run dev
 npm run build
 ```
 
-## 🎨 Uso de Componentes
+## 🎯 Uso
+
+### Bootstrap Customizer
+
+La herramienta de personalización de Bootstrap permite:
+
+1. **Ajustar Colores**: Usa los color pickers para modificar los colores del tema de Bootstrap
+2. **Modificar Tipografía**: Cambia la familia de fuentes y el tamaño base
+3. **Personalizar Bordes**: Ajusta el radio de borde con controles deslizantes
+4. **Vista Previa en Tiempo Real**: Observa los cambios instantáneamente en componentes de ejemplo
+5. **Exportar CSS**: Copia o descarga el CSS generado para usar en tus proyectos
+
+### Componentes UI Showcase
+
+La biblioteca de componentes incluye ejemplos listos para usar:
 
 ### Ejemplo: Button
 ```jsx
