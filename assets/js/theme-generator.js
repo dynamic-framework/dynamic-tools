@@ -246,9 +246,44 @@ const themes = [
     }
 ];
 
+// Function to add syntax highlighting to CSS
+function highlightCSS(css) {
+    // Replace CSS comments
+    css = css.replace(/(\/\*[^*]*\*+(?:[^/*][^*]*\*+)*\/)/g, '<span class="css-comment">$1</span>');
+    
+    // Replace CSS selectors (simplified)
+    css = css.replace(/^([^{]+){/gm, function(match, selector) {
+        // Handle property lines inside curly braces
+        if (selector.includes(':')) return match;
+        return '<span class="css-selector">' + selector + '</span>{';
+    });
+    
+    // Replace CSS properties
+    css = css.replace(/([\w-]+)\s*:/g, '<span class="css-property">$1</span>:');
+    
+    // Replace CSS values (colors)
+    css = css.replace(/(#[0-9a-fA-F]{3,8})/g, '<span class="css-color">$1</span>');
+    
+    // Replace CSS values (numbers with units)
+    css = css.replace(/(\d+(?:\.\d+)?(?:px|rem|em|%|ms|s|deg))/g, '<span class="css-number">$1</span>');
+    
+    // Replace CSS important
+    css = css.replace(/(!important)/g, '<span class="css-important">$1</span>');
+    
+    // Replace CSS variables
+    css = css.replace(/(var\([^)]+\))/g, '<span class="css-variable">$1</span>');
+    css = css.replace(/(--[\w-]+)/g, '<span class="css-variable">$1</span>');
+    
+    // Replace CSS functions
+    css = css.replace(/(rgba?|scale|translate|rotate)\(/g, '<span class="css-function">$1</span>(');
+    
+    return css;
+}
+
 // Generate CSS output
 function generateCss() {
     const variables = {
+        // Colors
         '--bs-primary': document.getElementById('primary').value,
         '--bs-secondary': document.getElementById('secondary').value,
         '--bs-success': document.getElementById('success').value,
@@ -257,11 +292,39 @@ function generateCss() {
         '--bs-info': document.getElementById('info').value,
         '--bs-light': document.getElementById('light').value,
         '--bs-dark': document.getElementById('dark').value,
+        
+        // Typography
+        '--bs-font-family': document.getElementById('fontFamily').value,
+        '--bs-heading-font-family': document.getElementById('headingFontFamily').value,
         '--bs-body-font-size': document.getElementById('fontSize').value,
+        '--bs-font-weight': document.getElementById('fontWeight').value,
+        '--bs-heading-weight': document.getElementById('headingWeight').value,
         '--bs-body-line-height': document.getElementById('lineHeight').value,
+        '--bs-letter-spacing': document.getElementById('letterSpacing').value,
+        
+        // Spacing
+        '--bs-spacing-base': document.getElementById('spacingBase').value,
+        '--bs-container-padding': document.getElementById('containerPadding').value,
+        '--bs-component-padding': document.getElementById('componentPadding').value,
+        
+        // Borders
         '--bs-border-radius': document.getElementById('borderRadius').value,
         '--bs-border-radius-sm': document.getElementById('borderRadiusSm').value,
         '--bs-border-radius-lg': document.getElementById('borderRadiusLg').value,
+        '--bs-border-width': document.getElementById('borderWidth').value,
+        '--bs-border-style': document.getElementById('borderStyle').value,
+        
+        // Shadows & Effects
+        '--bs-box-shadow': document.getElementById('boxShadow').value,
+        '--bs-box-shadow-hover': document.getElementById('boxShadowHover').value,
+        '--bs-text-shadow': document.getElementById('textShadow').value,
+        '--bs-glow-effect': document.getElementById('glowEffect').value,
+        
+        // Animations
+        '--bs-transition-duration': document.getElementById('transitionDuration').value,
+        '--bs-transition-timing': document.getElementById('transitionTiming').value,
+        '--bs-hover-scale': document.getElementById('hoverScale').value,
+        '--bs-animation-intensity': document.getElementById('animationIntensity').value,
     };
 
     let cssOutput = '/* Bootstrap Custom Variables */\n:root {\n';
@@ -296,21 +359,35 @@ function generateCss() {
     cssOutput += `.bg-info { background-color: var(--bs-info) !important; }\n\n`;
     
     cssOutput += '/* Typography */\n';
-    cssOutput += `body {\n    font-size: var(--bs-body-font-size);\n    line-height: var(--bs-body-line-height);\n}\n\n`;
+    cssOutput += `body {\n    font-family: var(--bs-font-family);\n    font-size: var(--bs-body-font-size);\n    font-weight: var(--bs-font-weight);\n    line-height: var(--bs-body-line-height);\n    letter-spacing: var(--bs-letter-spacing);\n}\n\n`;
+    cssOutput += `h1, h2, h3, h4, h5, h6 {\n    font-family: var(--bs-heading-font-family);\n    font-weight: var(--bs-heading-weight);\n}\n\n`;
     
-    cssOutput += '/* Border Radius */\n';
-    cssOutput += `.btn, .card, .alert, .modal-content, .dropdown-menu,\n.form-control, .form-select {\n    border-radius: var(--bs-border-radius);\n}\n\n`;
+    cssOutput += '/* Spacing */\n';
+    cssOutput += `.container, .container-fluid {\n    padding-left: var(--bs-container-padding);\n    padding-right: var(--bs-container-padding);\n}\n\n`;
+    cssOutput += `.btn {\n    padding: var(--bs-component-padding);\n}\n\n`;
+    
+    cssOutput += '/* Borders & Radius */\n';
+    cssOutput += `.btn, .card, .alert, .modal-content, .dropdown-menu,\n.form-control, .form-select {\n    border-radius: var(--bs-border-radius);\n    border-width: var(--bs-border-width);\n    border-style: var(--bs-border-style);\n}\n\n`;
     cssOutput += `.btn-sm { border-radius: var(--bs-border-radius-sm); }\n`;
     cssOutput += `.btn-lg { border-radius: var(--bs-border-radius-lg); }\n`;
-    cssOutput += `.rounded-pill { border-radius: 50rem !important; }`;
+    cssOutput += `.rounded-pill { border-radius: 50rem !important; }\n\n`;
+    
+    cssOutput += '/* Shadows & Effects */\n';
+    cssOutput += `.card, .btn, .dropdown-menu {\n    box-shadow: var(--bs-box-shadow);\n    transition: all var(--bs-transition-duration) var(--bs-transition-timing);\n}\n\n`;
+    cssOutput += `.btn:hover, .card:hover {\n    box-shadow: var(--bs-box-shadow-hover);\n    transform: scale(var(--bs-hover-scale));\n}\n\n`;
+    cssOutput += `.text-shadow {\n    text-shadow: var(--bs-text-shadow);\n}\n\n`;
+    cssOutput += `.glow {\n    box-shadow: var(--bs-glow-effect);\n}`;
 
-    document.getElementById('cssOutput').textContent = cssOutput;
+    // Apply syntax highlighting
+    document.getElementById('cssOutput').innerHTML = highlightCSS(cssOutput);
     return cssOutput;
 }
 
 // Update CSS variables in real-time
 function updateCssVariables() {
     const root = document.documentElement;
+    
+    // Colors
     root.style.setProperty('--bs-primary', document.getElementById('primary').value);
     root.style.setProperty('--bs-secondary', document.getElementById('secondary').value);
     root.style.setProperty('--bs-success', document.getElementById('success').value);
@@ -319,11 +396,40 @@ function updateCssVariables() {
     root.style.setProperty('--bs-info', document.getElementById('info').value);
     root.style.setProperty('--bs-light', document.getElementById('light').value);
     root.style.setProperty('--bs-dark', document.getElementById('dark').value);
+    
+    // Typography
+    root.style.setProperty('--bs-font-family', document.getElementById('fontFamily').value);
+    root.style.setProperty('--bs-heading-font-family', document.getElementById('headingFontFamily').value);
     root.style.setProperty('--bs-body-font-size', document.getElementById('fontSize').value);
+    root.style.setProperty('--bs-font-weight', document.getElementById('fontWeight').value);
+    root.style.setProperty('--bs-heading-weight', document.getElementById('headingWeight').value);
     root.style.setProperty('--bs-body-line-height', document.getElementById('lineHeight').value);
+    root.style.setProperty('--bs-letter-spacing', document.getElementById('letterSpacing').value);
+    
+    // Spacing
+    root.style.setProperty('--bs-spacing-base', document.getElementById('spacingBase').value);
+    root.style.setProperty('--bs-container-padding', document.getElementById('containerPadding').value);
+    root.style.setProperty('--bs-component-padding', document.getElementById('componentPadding').value);
+    
+    // Borders
     root.style.setProperty('--bs-border-radius', document.getElementById('borderRadius').value);
     root.style.setProperty('--bs-border-radius-sm', document.getElementById('borderRadiusSm').value);
     root.style.setProperty('--bs-border-radius-lg', document.getElementById('borderRadiusLg').value);
+    root.style.setProperty('--bs-border-width', document.getElementById('borderWidth').value);
+    root.style.setProperty('--bs-border-style', document.getElementById('borderStyle').value);
+    
+    // Shadows & Effects
+    root.style.setProperty('--bs-box-shadow', document.getElementById('boxShadow').value);
+    root.style.setProperty('--bs-box-shadow-hover', document.getElementById('boxShadowHover').value);
+    root.style.setProperty('--bs-text-shadow', document.getElementById('textShadow').value);
+    root.style.setProperty('--bs-glow-effect', document.getElementById('glowEffect').value);
+    
+    // Animations
+    root.style.setProperty('--bs-transition-duration', document.getElementById('transitionDuration').value);
+    root.style.setProperty('--bs-transition-timing', document.getElementById('transitionTiming').value);
+    root.style.setProperty('--bs-hover-scale', document.getElementById('hoverScale').value);
+    root.style.setProperty('--bs-animation-intensity', document.getElementById('animationIntensity').value);
+    
     generateCss();
 }
 

@@ -11,21 +11,45 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Popular Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Nunito:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
     <!-- Sidebar with Controls -->
     <div class="sidebar">
-        <div class="p-4">
-            <h4 class="mb-4">
-                <i class="fas fa-palette"></i> Dynamic Framework<br>
-                <small class="text-muted" style="font-size: 0.8rem;">Theme Generator</small>
-            </h4>
+        <!-- Fixed Header -->
+        <div class="sidebar-header">
+            <h2 class="mb-0">
+                Dynamic Framework<br>
+                <small class="text-muted" style="font-size: 0.9rem;">Theme Generator</small>
+            </h2>
+        </div>
+        
+        <!-- Scrollable Content -->
+        <div class="sidebar-content">
+            <!-- Surprise Me Button -->
+            <div class="d-grid mb-3 mt-3">
+                <button class="btn btn-gradient-ai" onclick="surpriseMe()">
+                    ✨ Surprise Me!
+                </button>
+            </div>
 
-            <!-- Color Variables -->
-            <div class="variable-group">
-                <h6 class="text-uppercase text-muted mb-3">Colores del Tema</h6>
+            <!-- Accordion Container -->
+            <div class="accordion accordion-flush" id="customizationAccordion">
+                
+                <!-- Colors Accordion -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingColors">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseColors" aria-expanded="true">
+                            <i class="fas fa-palette me-2"></i> Theme Colors
+                        </button>
+                    </h2>
+                    <div id="collapseColors" class="accordion-collapse collapse show" data-bs-parent="#customizationAccordion">
+                        <div class="accordion-body">
                 
                 <div class="variable-item">
                     <label for="primary">Primary</label>
@@ -90,19 +114,87 @@
                         <input type="text" class="form-control form-control-sm color-value" value="#212529">
                     </div>
                 </div>
-            </div>
-
-            <!-- Typography Variables -->
-            <div class="variable-group">
-                <h6 class="text-uppercase text-muted mb-3">Tipografía</h6>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Typography Accordion -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTypography">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypography" aria-expanded="false">
+                            <i class="fas fa-font me-2"></i> Typography
+                        </button>
+                    </h2>
+                    <div id="collapseTypography" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+                        <div class="accordion-body">
                 
                 <div class="variable-item">
-                    <label for="fontSize">Font Size</label>
+                    <label for="fontFamily">Font Family</label>
+                    <select class="form-select form-select-sm" id="fontFamily">
+                        <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">System Default</option>
+                        <option value="'Inter', sans-serif" selected>Inter (Modern Tech)</option>
+                        <option value="'Roboto', sans-serif">Roboto (Google)</option>
+                        <option value="'Open Sans', sans-serif">Open Sans (Clean)</option>
+                        <option value="'Poppins', sans-serif">Poppins (Rounded)</option>
+                        <option value="'Montserrat', sans-serif">Montserrat (Professional)</option>
+                        <option value="'Raleway', sans-serif">Raleway (Elegant)</option>
+                        <option value="'Lato', sans-serif">Lato (Friendly)</option>
+                        <option value="'Nunito', sans-serif">Nunito (Soft)</option>
+                        <option value="'Work Sans', sans-serif">Work Sans (Simple)</option>
+                        <option value="'Source Sans 3', sans-serif">Source Sans 3</option>
+                        <option value="'DM Sans', sans-serif">DM Sans (Geometric)</option>
+                        <option value="'Manrope', sans-serif">Manrope (Modern)</option>
+                        <option value="'Space Grotesk', sans-serif">Space Grotesk (Tech)</option>
+                        <option value="'Outfit', sans-serif">Outfit (Contemporary)</option>
+                        <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="headingFontFamily">Heading Font</label>
+                    <select class="form-select form-select-sm" id="headingFontFamily">
+                        <option value="inherit">Same as Body</option>
+                        <option value="'Inter', sans-serif">Inter</option>
+                        <option value="'Poppins', sans-serif">Poppins</option>
+                        <option value="'Montserrat', sans-serif">Montserrat</option>
+                        <option value="'Raleway', sans-serif">Raleway</option>
+                        <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
+                        <option value="'DM Sans', sans-serif">DM Sans</option>
+                        <option value="'Outfit', sans-serif">Outfit</option>
+                        <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="fontSize">Base Font Size</label>
                     <select class="form-select form-select-sm" id="fontSize">
-                        <option value="0.875rem">Small (0.875rem)</option>
-                        <option value="1rem" selected>Normal (1rem)</option>
-                        <option value="1.125rem">Large (1.125rem)</option>
-                        <option value="1.25rem">X-Large (1.25rem)</option>
+                        <option value="0.875rem">Small (14px)</option>
+                        <option value="0.9375rem">Medium (15px)</option>
+                        <option value="1rem" selected>Normal (16px)</option>
+                        <option value="1.0625rem">Large (17px)</option>
+                        <option value="1.125rem">X-Large (18px)</option>
+                        <option value="1.25rem">XX-Large (20px)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="fontWeight">Font Weight</label>
+                    <select class="form-select form-select-sm" id="fontWeight">
+                        <option value="300">Light (300)</option>
+                        <option value="400" selected>Regular (400)</option>
+                        <option value="500">Medium (500)</option>
+                        <option value="600">Semi Bold (600)</option>
+                        <option value="700">Bold (700)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="headingWeight">Heading Weight</label>
+                    <select class="form-select form-select-sm" id="headingWeight">
+                        <option value="400">Regular (400)</option>
+                        <option value="500">Medium (500)</option>
+                        <option value="600" selected>Semi Bold (600)</option>
+                        <option value="700">Bold (700)</option>
                     </select>
                 </div>
 
@@ -111,71 +203,282 @@
                     <select class="form-select form-select-sm" id="lineHeight">
                         <option value="1.25">Compact (1.25)</option>
                         <option value="1.5" selected>Normal (1.5)</option>
+                        <option value="1.625">Comfortable (1.625)</option>
                         <option value="1.75">Relaxed (1.75)</option>
                         <option value="2">Loose (2)</option>
                     </select>
                 </div>
-            </div>
 
-            <!-- Border Radius Variables -->
-            <div class="variable-group">
-                <h6 class="text-uppercase text-muted mb-3">Border Radius</h6>
+                <div class="variable-item">
+                    <label for="letterSpacing">Letter Spacing</label>
+                    <select class="form-select form-select-sm" id="letterSpacing">
+                        <option value="-0.02em">Tight (-0.02em)</option>
+                        <option value="-0.01em">Slight Tight (-0.01em)</option>
+                        <option value="0" selected>Normal (0)</option>
+                        <option value="0.01em">Slight Wide (0.01em)</option>
+                        <option value="0.02em">Wide (0.02em)</option>
+                        <option value="0.05em">Extra Wide (0.05em)</option>
+                    </select>
+                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Spacing Accordion -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSpacing">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpacing" aria-expanded="false">
+                            <i class="fas fa-expand-arrows-alt me-2"></i> Spacing
+                        </button>
+                    </h2>
+                    <div id="collapseSpacing" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+                        <div class="accordion-body">
                 
                 <div class="variable-item">
-                    <label for="borderRadius">Default</label>
-                    <select class="form-select form-select-sm" id="borderRadius">
-                        <option value="0">None (0)</option>
-                        <option value="0.25rem">Small (0.25rem)</option>
-                        <option value="0.375rem" selected>Normal (0.375rem)</option>
-                        <option value="0.5rem">Large (0.5rem)</option>
-                        <option value="0.75rem">X-Large (0.75rem)</option>
+                    <label for="spacingBase">Base Spacing</label>
+                    <select class="form-select form-select-sm" id="spacingBase">
+                        <option value="0.25rem">Tight (0.25rem)</option>
+                        <option value="0.5rem">Compact (0.5rem)</option>
+                        <option value="1rem" selected>Normal (1rem)</option>
+                        <option value="1.25rem">Comfortable (1.25rem)</option>
+                        <option value="1.5rem">Spacious (1.5rem)</option>
                     </select>
                 </div>
 
                 <div class="variable-item">
-                    <label for="borderRadiusSm">Small</label>
+                    <label for="containerPadding">Container Padding</label>
+                    <select class="form-select form-select-sm" id="containerPadding">
+                        <option value="1rem">Small (1rem)</option>
+                        <option value="1.5rem" selected>Normal (1.5rem)</option>
+                        <option value="2rem">Large (2rem)</option>
+                        <option value="3rem">X-Large (3rem)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="componentPadding">Component Padding</label>
+                    <select class="form-select form-select-sm" id="componentPadding">
+                        <option value="0.375rem 0.75rem">Small</option>
+                        <option value="0.5rem 1rem" selected>Normal</option>
+                        <option value="0.75rem 1.5rem">Large</option>
+                        <option value="1rem 2rem">X-Large</option>
+                    </select>
+                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Borders Accordion -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingBorders">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBorders" aria-expanded="false">
+                            <i class="fas fa-border-style me-2"></i> Borders & Shapes
+                        </button>
+                    </h2>
+                    <div id="collapseBorders" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+                        <div class="accordion-body">
+                
+                <div class="variable-item">
+                    <label for="borderRadius">Border Radius</label>
+                    <select class="form-select form-select-sm" id="borderRadius">
+                        <option value="0">Sharp (0)</option>
+                        <option value="0.25rem">Subtle (4px)</option>
+                        <option value="0.375rem" selected>Normal (6px)</option>
+                        <option value="0.5rem">Medium (8px)</option>
+                        <option value="0.75rem">Rounded (12px)</option>
+                        <option value="1rem">Large (16px)</option>
+                        <option value="1.5rem">X-Large (24px)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="borderRadiusSm">Small Radius</label>
                     <select class="form-select form-select-sm" id="borderRadiusSm">
                         <option value="0">None (0)</option>
-                        <option value="0.125rem">X-Small (0.125rem)</option>
-                        <option value="0.25rem" selected>Small (0.25rem)</option>
-                        <option value="0.375rem">Normal (0.375rem)</option>
+                        <option value="0.125rem">Tiny (2px)</option>
+                        <option value="0.25rem" selected>Small (4px)</option>
+                        <option value="0.375rem">Normal (6px)</option>
                     </select>
                 </div>
 
                 <div class="variable-item">
-                    <label for="borderRadiusLg">Large</label>
+                    <label for="borderRadiusLg">Large Radius</label>
                     <select class="form-select form-select-sm" id="borderRadiusLg">
-                        <option value="0.375rem">Normal (0.375rem)</option>
-                        <option value="0.5rem" selected>Large (0.5rem)</option>
-                        <option value="0.75rem">X-Large (0.75rem)</option>
-                        <option value="1rem">XX-Large (1rem)</option>
+                        <option value="0.375rem">Normal (6px)</option>
+                        <option value="0.5rem" selected>Large (8px)</option>
+                        <option value="0.75rem">X-Large (12px)</option>
+                        <option value="1rem">XX-Large (16px)</option>
+                        <option value="1.5rem">Huge (24px)</option>
                     </select>
                 </div>
-            </div>
 
-            <!-- Action Buttons -->
-            <div class="d-grid gap-2 px-3 pb-3">
+                <div class="variable-item">
+                    <label for="borderWidth">Border Width</label>
+                    <select class="form-select form-select-sm" id="borderWidth">
+                        <option value="0">None</option>
+                        <option value="1px" selected>Thin (1px)</option>
+                        <option value="2px">Medium (2px)</option>
+                        <option value="3px">Thick (3px)</option>
+                        <option value="4px">Bold (4px)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="borderStyle">Border Style</label>
+                    <select class="form-select form-select-sm" id="borderStyle">
+                        <option value="solid" selected>Solid</option>
+                        <option value="dashed">Dashed</option>
+                        <option value="dotted">Dotted</option>
+                        <option value="double">Double</option>
+                    </select>
+                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Shadows Accordion -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingShadows">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShadows" aria-expanded="false">
+                            <i class="fas fa-layer-group me-2"></i> Shadows & Effects
+                        </button>
+                    </h2>
+                    <div id="collapseShadows" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+                        <div class="accordion-body">
+                
+                <div class="variable-item">
+                    <label for="boxShadow">Box Shadow</label>
+                    <select class="form-select form-select-sm" id="boxShadow">
+                        <option value="none">None</option>
+                        <option value="0 1px 2px rgba(0,0,0,0.05)">Subtle</option>
+                        <option value="0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)" selected>Small</option>
+                        <option value="0 4px 6px rgba(0,0,0,0.1)">Medium</option>
+                        <option value="0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)">Large</option>
+                        <option value="0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)">X-Large</option>
+                        <option value="0 25px 50px -12px rgba(0,0,0,0.25)">Dramatic</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="boxShadowHover">Hover Shadow</label>
+                    <select class="form-select form-select-sm" id="boxShadowHover">
+                        <option value="none">None</option>
+                        <option value="0 4px 6px rgba(0,0,0,0.1)">Subtle Lift</option>
+                        <option value="0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)" selected>Medium Lift</option>
+                        <option value="0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)">High Lift</option>
+                        <option value="0 25px 50px -12px rgba(0,0,0,0.25)">Dramatic Lift</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="textShadow">Text Shadow</label>
+                    <select class="form-select form-select-sm" id="textShadow">
+                        <option value="none" selected>None</option>
+                        <option value="0 1px 2px rgba(0,0,0,0.1)">Subtle</option>
+                        <option value="0 2px 4px rgba(0,0,0,0.1)">Soft</option>
+                        <option value="1px 1px 2px rgba(0,0,0,0.2)">Classic</option>
+                        <option value="2px 2px 4px rgba(0,0,0,0.2)">Strong</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="glowEffect">Glow Effect</label>
+                    <select class="form-select form-select-sm" id="glowEffect">
+                        <option value="none" selected>None</option>
+                        <option value="0 0 10px rgba(13,110,253,0.25)">Subtle Blue</option>
+                        <option value="0 0 20px rgba(13,110,253,0.35)">Medium Blue</option>
+                        <option value="0 0 30px rgba(13,110,253,0.45)">Strong Blue</option>
+                        <option value="0 0 20px rgba(255,255,255,0.5)">White Glow</option>
+                    </select>
+                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Animations Accordion -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingAnimations">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAnimations" aria-expanded="false">
+                            <i class="fas fa-magic me-2"></i> Animations & Transitions
+                        </button>
+                    </h2>
+                    <div id="collapseAnimations" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
+                        <div class="accordion-body">
+                
+                <div class="variable-item">
+                    <label for="transitionDuration">Transition Duration</label>
+                    <select class="form-select form-select-sm" id="transitionDuration">
+                        <option value="0ms">None</option>
+                        <option value="150ms">Fast (150ms)</option>
+                        <option value="300ms" selected>Normal (300ms)</option>
+                        <option value="500ms">Slow (500ms)</option>
+                        <option value="750ms">X-Slow (750ms)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="transitionTiming">Transition Timing</label>
+                    <select class="form-select form-select-sm" id="transitionTiming">
+                        <option value="linear">Linear</option>
+                        <option value="ease" selected>Ease</option>
+                        <option value="ease-in">Ease In</option>
+                        <option value="ease-out">Ease Out</option>
+                        <option value="ease-in-out">Ease In-Out</option>
+                        <option value="cubic-bezier(0.4, 0, 0.2, 1)">Material Design</option>
+                        <option value="cubic-bezier(0.68, -0.55, 0.265, 1.55)">Bounce</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="hoverScale">Hover Scale</label>
+                    <select class="form-select form-select-sm" id="hoverScale">
+                        <option value="1" selected>None</option>
+                        <option value="1.02">Subtle (1.02)</option>
+                        <option value="1.05">Small (1.05)</option>
+                        <option value="1.1">Medium (1.1)</option>
+                        <option value="1.15">Large (1.15)</option>
+                    </select>
+                </div>
+
+                <div class="variable-item">
+                    <label for="animationIntensity">Animation Style</label>
+                    <select class="form-select form-select-sm" id="animationIntensity">
+                        <option value="none">No Animations</option>
+                        <option value="subtle" selected>Subtle</option>
+                        <option value="smooth">Smooth</option>
+                        <option value="playful">Playful</option>
+                        <option value="energetic">Energetic</option>
+                    </select>
+                </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- End Accordion -->
+        </div>
+        
+        <!-- Fixed Footer with Action Buttons -->
+        <div class="sidebar-footer">
+            <div class="d-grid gap-2">
                 <button class="btn btn-primary" onclick="toggleCssView()">
-                    <i class="fas fa-code"></i> Ver CSS Generado
+                    <i class="fas fa-code"></i> View Generated CSS
                 </button>
-                <button class="btn btn-warning" onclick="surpriseMe()">
-                    <i class="fas fa-magic"></i> ¡Sorpréndeme!
-                </button>
-                <button class="btn btn-outline-danger btn-sm" onclick="resetDefaults()">
-                    <i class="fas fa-undo"></i> Restaurar Valores por Defecto
+                <button class="btn btn-secondary" onclick="resetDefaults()">
+                    <i class="fas fa-undo"></i> Reset to Defaults
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Main Content with Preview -->
-    <div class="main-content">
+    <div class="main-content theme-preview">
         <div class="container-fluid">
-            <h2 class="mb-4">Vista Previa de Componentes</h2>
+            <h4 class="mb-4">Component Preview</h4>
 
             <!-- Buttons Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Botones</h5>
+                <h5 class="preview-title">Buttons</h5>
                 <div class="row g-3">
                     <div class="col-auto">
                         <button class="btn btn-primary">Primary</button>
@@ -220,7 +523,7 @@
 
             <!-- Alerts Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Alertas</h5>
+                <h5 class="preview-title">Alerts</h5>
                 <div class="alert alert-primary" role="alert">
                     <i class="fas fa-info-circle"></i> This is a primary alert with custom color
                 </div>
@@ -277,7 +580,7 @@
 
             <!-- Forms Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Formularios</h5>
+                <h5 class="preview-title">Forms</h5>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -334,7 +637,7 @@
 
             <!-- Tabs Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Tabs y Navegación</h5>
+                <h5 class="preview-title">Tabs & Navigation</h5>
                 <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button">Home</button>
@@ -377,7 +680,7 @@
 
             <!-- Dropdowns and Modals -->
             <div class="preview-section">
-                <h5 class="preview-title">Dropdowns y Modales</h5>
+                <h5 class="preview-title">Dropdowns & Modals</h5>
                 <div class="row g-3">
                     <div class="col-auto">
                         <div class="dropdown">
@@ -424,7 +727,7 @@
 
             <!-- Badges and Pills -->
             <div class="preview-section">
-                <h5 class="preview-title">Badges y Pills</h5>
+                <h5 class="preview-title">Badges & Pills</h5>
                 <div class="row g-2">
                     <div class="col-auto">
                         <span class="badge bg-primary">Primary</span>
@@ -481,23 +784,23 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">
-                                <i class="fas fa-code"></i> CSS Personalizado Generado
+                                <i class="fas fa-code"></i> Generated Custom CSS
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-muted">Puedes copiar este CSS y usarlo en tu proyecto</span>
+                                <span class="text-muted">You can copy this CSS and use it in your project</span>
                                 <button class="btn btn-sm btn-primary" onclick="copyCssFromModal()">
-                                    <i class="fas fa-copy"></i> Copiar CSS
+                                    <i class="fas fa-copy"></i> Copy CSS
                                 </button>
                             </div>
                             <pre id="cssOutput" style="background: #f8f9fa; padding: 20px; border-radius: 5px; max-height: 500px; overflow-y: auto;"></pre>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-success" onclick="downloadCss()">
-                                <i class="fas fa-download"></i> Descargar CSS
+                                <i class="fas fa-download"></i> Download CSS
                             </button>
                         </div>
                     </div>
@@ -531,7 +834,7 @@
             <div class="d-flex">
                 <div class="toast-body">
                     <i class="fas fa-check-circle me-2"></i>
-                    CSS copiado al portapapeles!
+                    CSS copied to clipboard!
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
