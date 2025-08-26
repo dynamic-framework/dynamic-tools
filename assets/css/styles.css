@@ -103,6 +103,11 @@ body {
     flex-shrink: 0;
 }
 
+/* Match border radius for action buttons */
+.sidebar-footer .btn {
+    border-radius: 0.5rem;
+}
+
 /* Accordion styles for sidebar */
 .sidebar .accordion-button {
     background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);

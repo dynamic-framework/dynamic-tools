@@ -23,21 +23,20 @@
     <div class="sidebar">
         <!-- Fixed Header -->
         <div class="sidebar-header">
-            <h2 class="mb-0">
+            <h2 class="mb-3">
                 Dynamic Framework<br>
                 <small class="text-muted" style="font-size: 0.9rem;">Theme Generator</small>
             </h2>
-        </div>
-        
-        <!-- Scrollable Content -->
-        <div class="sidebar-content">
             <!-- Surprise Me Button -->
-            <div class="d-grid mb-3 mt-3">
+            <div class="d-grid">
                 <button class="btn btn-gradient-ai" onclick="surpriseMe()">
                     ✨ Surprise Me!
                 </button>
             </div>
-
+        </div>
+        
+        <!-- Scrollable Content -->
+        <div class="sidebar-content">
             <!-- Accordion Container -->
             <div class="accordion accordion-flush" id="customizationAccordion">
                 
@@ -795,7 +794,7 @@
                                     <i class="fas fa-copy"></i> Copy CSS
                                 </button>
                             </div>
-                            <pre id="cssOutput" style="background: #f8f9fa; padding: 20px; border-radius: 5px; max-height: 500px; overflow-y: auto;"></pre>
+                            <pre id="cssOutput"></pre>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
