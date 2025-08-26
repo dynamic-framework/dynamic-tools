@@ -13,12 +13,12 @@
 ## 🚀 Quick Start
 
 ### Online Version
-Visit the live app: [https://[your-username].github.io/dynamic-tools/](https://[your-username].github.io/dynamic-tools/)
+[Visit the live app](https://themes.dynamicframework.dev/)
 
 ### Local Development
 ```bash
 # Clone the repository
-git clone https://github.com/[your-username]/dynamic-tools.git
+git clone git@github.com:dynamic-framework/dynamic-tools.git
 
 # Navigate to project directory
 cd dynamic-tools
