@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     });
+    
+    // Listen for tab changes to generate CSS when Code tab is shown
+    const codeTab = document.getElementById('code-tab');
+    if (codeTab) {
+        codeTab.addEventListener('shown.bs.tab', function() {
+            generateCss();
+        });
+    }
 
     // Initial generation
     generateCss();
@@ -248,34 +256,68 @@ const themes = [
 
 // Function to add syntax highlighting to CSS
 function highlightCSS(css) {
-    // Replace CSS comments
+    // Escape HTML first to prevent injection
+    css = css.replace(/&/g, '&amp;')
+             .replace(/</g, '&lt;')
+             .replace(/>/g, '&gt;');
+    
+    // Apply highlighting in specific order for correct precedence
+    
+    // 1. CSS Comments
     css = css.replace(/(\/\*[^*]*\*+(?:[^/*][^*]*\*+)*\/)/g, '<span class="css-comment">$1</span>');
     
-    // Replace CSS selectors (simplified)
-    css = css.replace(/^([^{]+){/gm, function(match, selector) {
-        // Handle property lines inside curly braces
-        if (selector.includes(':')) return match;
-        return '<span class="css-selector">' + selector + '</span>{';
+    // 2. CSS Variables in property names (must be before general properties)
+    css = css.replace(/(--[\w-]+)(\s*:)/g, '<span class="css-variable">$1</span>$2');
+    
+    // 3. CSS Selectors (at the beginning of lines)
+    css = css.replace(/^([^\{]*?)(\s*\{)/gm, function(match, selector, bracket) {
+        // Don't highlight if it contains a colon (unless it's a pseudo-class)
+        if (selector.includes(':') && !selector.match(/:hover|:focus|:active|:visited|:first-child|:last-child|:nth-child|::before|::after/)) {
+            return match;
+        }
+        return '<span class="css-selector">' + selector + '</span>' + bracket;
     });
     
-    // Replace CSS properties
-    css = css.replace(/([\w-]+)\s*:/g, '<span class="css-property">$1</span>:');
+    // 4. CSS Properties (more precise pattern)
+    css = css.replace(/(\n\s*|;\s*|\{\s*)([\w-]+)(\s*:)(?!:)/g, function(match, prefix, prop, colon) {
+        // Skip if it's already wrapped (CSS variable)
+        if (prop.startsWith('--')) {
+            return match;
+        }
+        return prefix + '<span class="css-property">' + prop + '</span>' + colon;
+    });
     
-    // Replace CSS values (colors)
-    css = css.replace(/(#[0-9a-fA-F]{3,8})/g, '<span class="css-color">$1</span>');
-    
-    // Replace CSS values (numbers with units)
-    css = css.replace(/(\d+(?:\.\d+)?(?:px|rem|em|%|ms|s|deg))/g, '<span class="css-number">$1</span>');
-    
-    // Replace CSS important
-    css = css.replace(/(!important)/g, '<span class="css-important">$1</span>');
-    
-    // Replace CSS variables
-    css = css.replace(/(var\([^)]+\))/g, '<span class="css-variable">$1</span>');
-    css = css.replace(/(--[\w-]+)/g, '<span class="css-variable">$1</span>');
-    
-    // Replace CSS functions
-    css = css.replace(/(rgba?|scale|translate|rotate)\(/g, '<span class="css-function">$1</span>(');
+    // 5. CSS Values - process everything after colons
+    css = css.replace(/(:\s*)([^;}\n]+)/g, function(match, colon, value) {
+        // Important flag
+        value = value.replace(/(!important)/gi, '<span class="css-important">$1</span>');
+        
+        // CSS Variables in values
+        value = value.replace(/(var\([^)]+\))/g, '<span class="css-variable">$1</span>');
+        
+        // Color values (hex) - more precise
+        value = value.replace(/(#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?(?:[0-9a-fA-F]{2})?)\b/g, '<span class="css-color">$1</span>');
+        
+        // Color functions and other CSS functions
+        value = value.replace(/\b(rgb|rgba|hsl|hsla|linear-gradient|radial-gradient|scale|translate|rotate|calc)(\([^)]*\))/g, 
+            '<span class="css-function">$1</span>$2');
+        
+        // Numbers with units (more comprehensive)
+        value = value.replace(/\b(\d*\.?\d+)(px|rem|em|%|vh|vw|vmin|vmax|ms|s|deg|fr|ch|ex)\b/g, 
+            '<span class="css-number">$1$2</span>');
+        
+        // Plain numbers (without units)
+        value = value.replace(/\b(\d+(?:\.\d+)?)\b(?![a-z])/g, '<span class="css-number">$1</span>');
+        
+        // String values in quotes
+        value = value.replace(/(["'][^"']*["'])/g, '<span class="css-string">$1</span>');
+        
+        // Keywords (common CSS keywords)
+        value = value.replace(/\b(none|auto|inherit|initial|unset|normal|bold|italic|underline|solid|dashed|dotted|hidden|visible|block|inline|flex|grid|absolute|relative|fixed|sticky)\b/g, 
+            '<span class="css-keyword">$1</span>');
+        
+        return colon + value;
+    });
     
     return css;
 }
@@ -445,11 +487,11 @@ function updateCssVariables() {
     // Typography
     root.style.setProperty('--bs-font-family', document.getElementById('fontFamily').value);
     root.style.setProperty('--bs-heading-font-family', document.getElementById('headingFontFamily').value);
-    root.style.setProperty('--bs-body-font-size', document.getElementById('fontSize').value);
+    root.style.setProperty('--bs-body-font-size', document.getElementById('fontSize').value + 'px');
     root.style.setProperty('--bs-font-weight', document.getElementById('fontWeight').value);
     root.style.setProperty('--bs-heading-weight', document.getElementById('headingWeight').value);
     root.style.setProperty('--bs-body-line-height', document.getElementById('lineHeight').value);
-    root.style.setProperty('--bs-letter-spacing', document.getElementById('letterSpacing').value);
+    root.style.setProperty('--bs-letter-spacing', document.getElementById('letterSpacing').value + 'em');
     
     // Spacing
     root.style.setProperty('--bs-spacing-base', document.getElementById('spacingBase').value);
@@ -457,10 +499,10 @@ function updateCssVariables() {
     root.style.setProperty('--bs-component-padding', document.getElementById('componentPadding').value);
     
     // Borders
-    root.style.setProperty('--bs-border-radius', document.getElementById('borderRadius').value);
-    root.style.setProperty('--bs-border-radius-sm', document.getElementById('borderRadiusSm').value);
-    root.style.setProperty('--bs-border-radius-lg', document.getElementById('borderRadiusLg').value);
-    root.style.setProperty('--bs-border-width', document.getElementById('borderWidth').value);
+    root.style.setProperty('--bs-border-radius', document.getElementById('borderRadius').value + 'px');
+    root.style.setProperty('--bs-border-radius-sm', document.getElementById('borderRadiusSm').value + 'px');
+    root.style.setProperty('--bs-border-radius-lg', document.getElementById('borderRadiusLg').value + 'px');
+    root.style.setProperty('--bs-border-width', document.getElementById('borderWidth').value + 'px');
     root.style.setProperty('--bs-border-style', document.getElementById('borderStyle').value);
     
     // Shadows & Effects
@@ -474,6 +516,42 @@ function updateCssVariables() {
     root.style.setProperty('--bs-transition-timing', document.getElementById('transitionTiming').value);
     root.style.setProperty('--bs-hover-scale', document.getElementById('hoverScale').value);
     root.style.setProperty('--bs-animation-intensity', document.getElementById('animationIntensity').value);
+    
+    // Links & Focus
+    const linkColor = document.getElementById('linkColor');
+    if (linkColor) root.style.setProperty('--bs-link-color', linkColor.value);
+    
+    const linkHoverColor = document.getElementById('linkHoverColor');
+    if (linkHoverColor) root.style.setProperty('--bs-link-hover-color', linkHoverColor.value);
+    
+    const focusRingColor = document.getElementById('focusRingColor');
+    if (focusRingColor) root.style.setProperty('--bs-focus-ring-color', focusRingColor.value);
+    
+    const focusRingWidth = document.getElementById('focusRingWidth');
+    if (focusRingWidth) root.style.setProperty('--bs-focus-ring-width', focusRingWidth.value + 'px');
+    
+    const focusRingOpacity = document.getElementById('focusRingOpacity');
+    if (focusRingOpacity) root.style.setProperty('--bs-focus-ring-opacity', focusRingOpacity.value);
+    
+    // Forms & Inputs
+    const inputBg = document.getElementById('inputBg');
+    if (inputBg) root.style.setProperty('--bs-input-bg', inputBg.value);
+    
+    const inputBorderColor = document.getElementById('inputBorderColor');
+    if (inputBorderColor) root.style.setProperty('--bs-input-border-color', inputBorderColor.value);
+    
+    const inputFocusColor = document.getElementById('inputFocusColor');
+    if (inputFocusColor) root.style.setProperty('--bs-input-focus-border-color', inputFocusColor.value);
+    
+    const inputPaddingY = document.getElementById('inputPaddingY');
+    if (inputPaddingY) root.style.setProperty('--bs-input-padding-y', (inputPaddingY.value / 16) + 'rem');
+    
+    const inputPaddingX = document.getElementById('inputPaddingX');
+    if (inputPaddingX) root.style.setProperty('--bs-input-padding-x', (inputPaddingX.value / 16) + 'rem');
+    
+    // Grid System
+    const gridGutterWidth = document.getElementById('gridGutterWidth');
+    if (gridGutterWidth) root.style.setProperty('--bs-grid-gutter-width', gridGutterWidth.value + 'px');
     
     generateCss();
 }
@@ -708,20 +786,15 @@ function copyCss() {
     });
 }
 
-// Copy CSS from modal
-function copyCssFromModal() {
-    const css = document.getElementById('cssOutput').textContent;
+// Copy CSS to clipboard
+function copyCss() {
+    const css = generateCss();
     navigator.clipboard.writeText(css).then(() => {
-        const toast = new bootstrap.Toast(document.getElementById('copyToast'));
+        // Show toast notification
+        const toastEl = document.getElementById('copyToast');
+        const toast = new bootstrap.Toast(toastEl);
         toast.show();
     });
-}
-
-// Toggle CSS view modal
-function toggleCssView() {
-    generateCss();
-    const modal = new bootstrap.Modal(document.getElementById('cssModal'));
-    modal.show();
 }
 
 // Download CSS file

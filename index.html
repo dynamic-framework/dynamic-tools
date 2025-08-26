@@ -572,10 +572,7 @@
         <!-- Fixed Footer with Action Buttons -->
         <div class="sidebar-footer">
             <div class="d-grid gap-2">
-                <button class="btn btn-primary" onclick="toggleCssView()">
-                    <i class="fas fa-code"></i> View Generated CSS
-                </button>
-                <button class="btn btn-secondary" onclick="resetDefaults()">
+                <button class="btn btn-light" onclick="resetDefaults()">
                     <i class="fas fa-undo"></i> Reset to Defaults
                 </button>
             </div>
@@ -583,12 +580,30 @@
     </div>
 
     <!-- Main Content with Preview -->
-    <div class="main-content theme-preview">
-        <div class="container-fluid">
-            <h4 class="mb-4">Component Preview</h4>
-            
-            <!-- Two Column Layout -->
-            <div class="row">
+    <div class="main-content">
+        <!-- Fixed Tab Navigation -->
+        <div class="preview-tabs-header">
+            <ul class="nav nav-tabs" id="previewTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-content" type="button" role="tab" aria-controls="preview-content" aria-selected="true">
+                        <i class="fas fa-eye me-2"></i>Preview
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="code-tab" data-bs-toggle="tab" data-bs-target="#code-content" type="button" role="tab" aria-controls="code-content" aria-selected="false">
+                        <i class="fas fa-code me-2"></i>Code
+                    </button>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Tab Content -->
+        <div class="tab-content" id="previewTabContent">
+            <!-- Preview Tab -->
+            <div class="tab-pane fade show active theme-preview" id="preview-content" role="tabpanel" aria-labelledby="preview-tab">
+                <div class="container-fluid">
+                    <!-- Two Column Layout -->
+                    <div class="row">
                 <!-- Left Column -->
                 <div class="col-xl-6">
                     
@@ -835,38 +850,33 @@
             
                 </div>
                 <!-- End Right Column -->
+                    </div>
+                    <!-- End Two Column Layout -->
+                </div>
             </div>
-            <!-- End Two Column Layout -->
-
-
-            <!-- CSS Output Modal -->
-            <div class="modal fade" id="cssModal" tabindex="-1">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">
-                                <i class="fas fa-code"></i> Generated Custom CSS
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-muted">You can copy this CSS and use it in your project</span>
-                                <button class="btn btn-sm btn-primary" onclick="copyCssFromModal()">
-                                    <i class="fas fa-copy"></i> Copy CSS
+            
+            <!-- Code Tab -->
+            <div class="tab-pane fade" id="code-content" role="tabpanel" aria-labelledby="code-tab">
+                <div class="container-fluid">
+                    <div class="code-output-container">
+                        <div class="code-header">
+                            <h5 class="mb-0">Generated CSS</h5>
+                            <div class="code-actions">
+                                <button class="btn btn-sm btn-light" onclick="copyCss()">
+                                    <i class="fas fa-copy me-2"></i>Copy to Clipboard
+                                </button>
+                                <button class="btn btn-sm btn-light" onclick="downloadCss()">
+                                    <i class="fas fa-download me-2"></i>Download CSS
                                 </button>
                             </div>
-                            <pre id="cssOutput"></pre>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success" onclick="downloadCss()">
-                                <i class="fas fa-download"></i> Download CSS
-                            </button>
-                        </div>
+                        <pre id="cssOutput" class="code-output"></pre>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
         </div>
     </div>
 
@@ -906,5 +916,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="assets/js/theme-generator.js"></script>
+    <script src="assets/js/surprise-me.js"></script>
 </body>
 </html>
