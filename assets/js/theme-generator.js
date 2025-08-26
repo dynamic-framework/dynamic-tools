@@ -781,15 +781,6 @@ function bindSliderListeners() {
 function copyCss() {
     const css = generateCss();
     navigator.clipboard.writeText(css).then(() => {
-        const toast = new bootstrap.Toast(document.getElementById('copyToast'));
-        toast.show();
-    });
-}
-
-// Copy CSS to clipboard
-function copyCss() {
-    const css = generateCss();
-    navigator.clipboard.writeText(css).then(() => {
         // Show toast notification
         const toastEl = document.getElementById('copyToast');
         const toast = new bootstrap.Toast(toastEl);
@@ -804,7 +795,7 @@ function downloadCss() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'bootstrap-custom.css';
+    a.download = 'dynamic-framework-theme.css';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -814,8 +805,8 @@ function downloadCss() {
 // Reset to default values
 function resetDefaults() {
     if (confirm('¿Estás seguro de que quieres restaurar todos los valores por defecto?')) {
-        // Reset colors
-        document.getElementById('primary').value = '#0d6efd';
+        // Reset colors (Dynamic Framework defaults)
+        document.getElementById('primary').value = '#d81b60';
         document.getElementById('secondary').value = '#6c757d';
         document.getElementById('success').value = '#198754';
         document.getElementById('danger').value = '#dc3545';
