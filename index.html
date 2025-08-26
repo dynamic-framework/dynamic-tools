@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Customizer - Dynamic Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar with Controls -->
+            <div class="col-md-4 col-lg-3 sidebar">
+                <div class="p-3">
+                    <h2 class="h4 mb-4">Bootstrap Customizer</h2>
+                    
+                    <!-- Theme Colors Section -->
+                    <div class="section mb-4">
+                        <h3 class="h5 mb-3">Colores del Tema</h3>
+                        
+                        <div class="form-group mb-3">
+                            <label for="primary-color" class="form-label">Primary</label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" id="primary-color" value="#0d6efd" data-variable="--bs-primary">
+                                <input type="text" class="form-control" id="primary-color-text" value="#0d6efd">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="secondary-color" class="form-label">Secondary</label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" id="secondary-color" value="#6c757d" data-variable="--bs-secondary">
+                                <input type="text" class="form-control" id="secondary-color-text" value="#6c757d">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="success-color" class="form-label">Success</label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" id="success-color" value="#198754" data-variable="--bs-success">
+                                <input type="text" class="form-control" id="success-color-text" value="#198754">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="warning-color" class="form-label">Warning</label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" id="warning-color" value="#ffc107" data-variable="--bs-warning">
+                                <input type="text" class="form-control" id="warning-color-text" value="#ffc107">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="danger-color" class="form-label">Danger</label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" id="danger-color" value="#dc3545" data-variable="--bs-danger">
+                                <input type="text" class="form-control" id="danger-color-text" value="#dc3545">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="info-color" class="form-label">Info</label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" id="info-color" value="#0dcaf0" data-variable="--bs-info">
+                                <input type="text" class="form-control" id="info-color-text" value="#0dcaf0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Typography Section -->
+                    <div class="section mb-4">
+                        <h3 class="h5 mb-3">Tipografía</h3>
+                        
+                        <div class="form-group mb-3">
+                            <label for="font-family" class="form-label">Familia de Fuente</label>
+                            <select class="form-select" id="font-family" data-variable="--bs-font-sans-serif">
+                                <option value="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif">Sistema (Predeterminada)</option>
+                                <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                                <option value="'Arial', sans-serif">Arial</option>
+                                <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
+                                <option value="'Georgia', serif">Georgia</option>
+                                <option value="'Roboto', sans-serif">Roboto</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="font-size-base" class="form-label">Tamaño Base</label>
+                            <div class="input-group">
+                                <input type="range" class="form-range" id="font-size-base" min="12" max="20" step="1" value="16" data-variable="--bs-body-font-size">
+                                <span class="input-group-text" id="font-size-value">16px</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Border Radius Section -->
+                    <div class="section mb-4">
+                        <h3 class="h5 mb-3">Bordes</h3>
+                        
+                        <div class="form-group mb-3">
+                            <label for="border-radius" class="form-label">Radio de Borde</label>
+                            <div class="input-group">
+                                <input type="range" class="form-range" id="border-radius" min="0" max="20" step="1" value="6" data-variable="--bs-border-radius">
+                                <span class="input-group-text" id="border-radius-value">6px</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="section">
+                        <button class="btn btn-primary w-100 mb-2" id="copy-css">
+                            📋 Copiar CSS
+                        </button>
+                        <button class="btn btn-outline-secondary w-100 mb-2" id="reset-defaults">
+                            🔄 Restablecer
+                        </button>
+                        <button class="btn btn-outline-info w-100" id="download-css">
+                            💾 Descargar CSS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-md-8 col-lg-9 main-content">
+                <div class="p-4">
+                    <h1 class="mb-4">Vista Previa de Bootstrap Personalizado</h1>
+                    
+                    <!-- Preview Components -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h3>Botones</h3>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <button class="btn btn-primary">Primary</button>
+                                <button class="btn btn-secondary">Secondary</button>
+                                <button class="btn btn-success">Success</button>
+                                <button class="btn btn-warning">Warning</button>
+                                <button class="btn btn-danger">Danger</button>
+                                <button class="btn btn-info">Info</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Alertas</h3>
+                            <div class="alert alert-primary" role="alert">
+                                Esta es una alerta primary
+                            </div>
+                            <div class="alert alert-success" role="alert">
+                                Esta es una alerta success
+                            </div>
+                            <div class="alert alert-warning" role="alert">
+                                Esta es una alerta warning
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h3>Tarjetas</h3>
+                            <div class="card">
+                                <div class="card-header">
+                                    Encabezado de tarjeta
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Título de tarjeta</h5>
+                                    <p class="card-text">Contenido de ejemplo para la tarjeta.</p>
+                                    <a href="#" class="btn btn-primary">Ir a algún lugar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Formularios</h3>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="example-email" class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="example-email" placeholder="nombre@ejemplo.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="example-select" class="form-label">Seleccionar opción</label>
+                                    <select class="form-select" id="example-select">
+                                        <option>Opción 1</option>
+                                        <option>Opción 2</option>
+                                        <option>Opción 3</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- CSS Output -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>CSS Generado</h3>
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <span>Personalización CSS</span>
+                                    <button class="btn btn-sm btn-outline-primary" id="copy-css-inline">Copiar</button>
+                                </div>
+                                <div class="card-body">
+                                    <pre><code id="css-output">:root {
+  /* Las variables personalizadas aparecerán aquí */
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

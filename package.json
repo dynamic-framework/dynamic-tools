@@ -1,0 +1,25 @@
+{
+  "name": "bootstrap-customizer",
+  "version": "1.0.0",
+  "description": "Una herramienta web para personalizar variables de Bootstrap con selectores y color pickers",
+  "main": "index.html",
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "serve-alt": "python -m SimpleHTTPServer 8000"
+  },
+  "keywords": [
+    "bootstrap",
+    "customizer",
+    "css",
+    "variables",
+    "color-picker",
+    "web-tool"
+  ],
+  "author": "Dynamic Framework",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dynamic-framework/dynamic-tools.git"
+  },
+  "homepage": "https://github.com/dynamic-framework/dynamic-tools#readme"
+}
