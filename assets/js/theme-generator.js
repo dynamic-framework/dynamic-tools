@@ -24,11 +24,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Listen for tab changes to generate CSS when Code tab is shown
     if (codeTab) {
         codeTab.addEventListener('shown.bs.tab', function() {
+            console.log('Code tab shown, generating CSS...');
             // Generate CSS when Code tab is shown
             setTimeout(() => {
                 const outputEl = document.getElementById('cssOutput');
                 if (outputEl) {
-                    generateCss();
+                    console.log('Generating CSS...');
+                    try {
+                        generateCss();
+                        console.log('CSS generated successfully');
+                    } catch (error) {
+                        console.error('Error generating CSS:', error);
+                    }
+                } else {
+                    console.error('CSS output element not found');
                 }
             }, 200);
         });
@@ -718,49 +727,55 @@ const themes = [
 ];
 
 function generateCss() {
+    // Helper function to safely get element values
+    const getValue = (id, defaultValue = '') => {
+        const element = document.getElementById(id);
+        return element ? element.value : defaultValue;
+    };
+    
     const variables = {
         // Colors
-        '--bs-primary': document.getElementById('primary').value,
-        '--bs-secondary': document.getElementById('secondary').value,
-        '--bs-success': document.getElementById('success').value,
-        '--bs-danger': document.getElementById('danger').value,
-        '--bs-warning': document.getElementById('warning').value,
-        '--bs-info': document.getElementById('info').value,
-        '--bs-light': document.getElementById('light').value,
-        '--bs-dark': document.getElementById('dark').value,
+        '--bs-primary': getValue('primary', '#0d6efd'),
+        '--bs-secondary': getValue('secondary', '#6c757d'),
+        '--bs-success': getValue('success', '#198754'),
+        '--bs-danger': getValue('danger', '#dc3545'),
+        '--bs-warning': getValue('warning', '#ffc107'),
+        '--bs-info': getValue('info', '#0dcaf0'),
+        '--bs-light': getValue('light', '#f8f9fa'),
+        '--bs-dark': getValue('dark', '#212529'),
         
         // Typography
-        '--bs-font-family': document.getElementById('fontFamily').value,
-        '--bs-heading-font-family': document.getElementById('headingFontFamily').value,
-        '--bs-body-font-size': (document.getElementById('fontSize').value / 16) + 'rem',
-        '--bs-font-weight': document.getElementById('fontWeight').value,
-        '--bs-heading-weight': document.getElementById('headingWeight').value,
-        '--bs-body-line-height': document.getElementById('lineHeight').value,
-        '--bs-letter-spacing': document.getElementById('letterSpacing').value + 'em',
+        '--bs-font-family': getValue('fontFamily', 'Inter'),
+        '--bs-heading-font-family': getValue('headingFontFamily', 'Inter'),
+        '--bs-body-font-size': (getValue('fontSize', 16) / 16) + 'rem',
+        '--bs-font-weight': getValue('fontWeight', '400'),
+        '--bs-heading-weight': getValue('headingWeight', '600'),
+        '--bs-body-line-height': getValue('lineHeight', '1.5'),
+        '--bs-letter-spacing': getValue('letterSpacing', '0') + 'em',
         
         // Spacing
-        '--bs-spacing-base': document.getElementById('spacingBase').value,
-        '--bs-container-padding': document.getElementById('containerPadding').value,
-        '--bs-component-padding': document.getElementById('componentPadding').value,
+        '--bs-spacing-base': getValue('spacingBase', '1rem'),
+        '--bs-container-padding': getValue('containerPadding', '1rem'),
+        '--bs-component-padding': getValue('componentPadding', '0.75rem 1.25rem'),
         
         // Borders
-        '--bs-border-radius': (document.getElementById('borderRadius').value / 16) + 'rem',
-        '--bs-border-radius-sm': (document.getElementById('borderRadiusSm').value / 16) + 'rem',
-        '--bs-border-radius-lg': (document.getElementById('borderRadiusLg').value / 16) + 'rem',
-        '--bs-border-width': document.getElementById('borderWidth').value + 'px',
-        '--bs-border-style': document.getElementById('borderStyle').value,
+        '--bs-border-radius': (getValue('borderRadius', 6) / 16) + 'rem',
+        '--bs-border-radius-sm': (getValue('borderRadiusSm', 4) / 16) + 'rem',
+        '--bs-border-radius-lg': (getValue('borderRadiusLg', 8) / 16) + 'rem',
+        '--bs-border-width': getValue('borderWidth', '1') + 'px',
+        '--bs-border-style': getValue('borderStyle', 'solid'),
         
         // Shadows & Effects
-        '--bs-box-shadow': document.getElementById('boxShadow').value,
-        '--bs-box-shadow-hover': document.getElementById('boxShadowHover').value,
-        '--bs-text-shadow': document.getElementById('textShadow').value,
-        '--bs-glow-effect': document.getElementById('glowEffect').value,
+        '--bs-box-shadow': getValue('boxShadow', '0 0.125rem 0.25rem rgba(0,0,0,0.075)'),
+        '--bs-box-shadow-hover': getValue('boxShadowHover', '0 0.25rem 0.5rem rgba(0,0,0,0.1)'),
+        '--bs-text-shadow': getValue('textShadow', 'none'),
+        '--bs-glow-effect': getValue('glowEffect', 'none'),
         
         // Animations
-        '--bs-transition-duration': document.getElementById('transitionDuration').value,
-        '--bs-transition-timing': document.getElementById('transitionTiming').value,
-        '--bs-hover-scale': document.getElementById('hoverScale').value,
-        '--bs-animation-intensity': document.getElementById('animationIntensity').value,
+        '--bs-transition-duration': getValue('transitionDuration', '0.3s'),
+        '--bs-transition-timing': getValue('transitionTiming', 'ease-in-out'),
+        '--bs-hover-scale': getValue('hoverScale', '1.02'),
+        '--bs-animation-intensity': getValue('animationIntensity', 'normal'),
         
         // Links & Focus States
         '--bs-link-color': document.getElementById('linkColor')?.value || '#0d6efd',
@@ -865,12 +880,19 @@ function generateCss() {
     // Display the CSS with Prism.js syntax highlighting
     const outputElement = document.getElementById('cssOutput');
     if (outputElement) {
+        console.log('Setting CSS output, length:', cssOutput.length);
         outputElement.textContent = cssOutput;
         // Apply Prism highlighting if available
         if (typeof Prism !== 'undefined') {
+            console.log('Applying Prism highlighting...');
             Prism.highlightElement(outputElement);
+        } else {
+            console.log('Prism not available');
         }
+    } else {
+        console.error('Output element not found!');
     }
+    console.log('First 200 chars of CSS:', cssOutput.substring(0, 200));
     return cssOutput;
 }
 
@@ -1181,9 +1203,9 @@ function bindSliderListeners() {
     }
 }
 
-// Copy CSS to clipboard
+// Copy CSS to clipboard (using raw CSS without highlighting)
 function copyCss() {
-    const css = generateCss();
+    const css = window.rawCssOutput || generateCss();
     navigator.clipboard.writeText(css).then(() => {
         // Show toast notification
         const toastEl = document.getElementById('copyToast');

@@ -24,44 +24,47 @@
   <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Sidebar with Controls -->
-    <div class="sidebar">
-        <!-- Fixed Header -->
-        <div class="sidebar-header">
-            <h2 class="mb-3">
-                Dynamic Framework<br>
-                <small class="text-muted" style="font-size: 0.9rem;">Theme Generator</small>
-            </h2>
-            <!-- Surprise Me Button -->
-            <div class="d-grid">
-                <button class="btn btn-gradient-ai" onclick="surpriseMe()">
-                    ✨ Surprise Me!
-                </button>
+<!-- Sidebar with Controls -->
+<div class="sidebar">
+  <!-- Fixed Header -->
+  <div class="sidebar-header">
+    <a href="/" style="display: block;">
+      <img src="https://cdn.modyo.cloud/uploads/8c051a86-0d5b-4064-b5fd-76fb346e0fb0/original/logo_dynamic_white.svg"
+           alt="Dynamic Framework"
+           class="sidebar-logo mb-4">
+    </a>
+    <!-- Surprise Me Button -->
+    <div class="d-grid">
+      <button class="btn btn-gradient-ai" onclick="surpriseMe()">
+        ✨ Surprise Me!
+      </button>
+    </div>
+  </div>
+
+  <!-- Scrollable Content -->
+  <div class="sidebar-content">
+    <!-- Accordion Container -->
+    <div class="accordion accordion-flush" id="customizationAccordion">
+
+      <!-- Colors Accordion -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingColors">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseColors" aria-expanded="true">
+            <i class="fas fa-palette me-2"></i> Theme Colors
+          </button>
+        </h2>
+        <div id="collapseColors" class="accordion-collapse collapse show"
+             data-bs-parent="#customizationAccordion">
+          <div class="accordion-body">
+
+            <div class="variable-item">
+              <label for="primary">Primary</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="primary" value="#0d6efd">
+                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+              </div>
             </div>
-        </div>
-        
-        <!-- Scrollable Content -->
-        <div class="sidebar-content">
-            <!-- Accordion Container -->
-            <div class="accordion accordion-flush" id="customizationAccordion">
-                
-                <!-- Colors Accordion -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingColors">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseColors" aria-expanded="true">
-                            <i class="fas fa-palette me-2"></i> Theme Colors
-                        </button>
-                    </h2>
-                    <div id="collapseColors" class="accordion-collapse collapse show" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                
-                <div class="variable-item">
-                    <label for="primary">Primary</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="primary" value="#d81b60">
-                        <input type="text" class="form-control form-control-sm color-value" value="#d81b60">
-                    </div>
-                </div>
 
             <div class="variable-item">
               <label for="secondary">Secondary</label>
@@ -620,95 +623,61 @@
                      step="20" value="960">
             </div>
 
-                <div class="variable-item slider-item">
-                    <label for="containerMaxWidthXl">Container XL <span class="slider-value" id="containerMaxWidthXlValue">1140px</span></label>
-                    <input type="range" class="form-range" id="containerMaxWidthXl" min="1000" max="1400" step="20" value="1140">
-                </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Color Scales Preview -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingScales">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseScales" aria-expanded="false">
-                            <i class="fas fa-palette me-2"></i> Color Scales Preview
-                        </button>
-                    </h2>
-                    <div id="collapseScales" class="accordion-collapse collapse" data-bs-parent="#customizationAccordion">
-                        <div class="accordion-body">
-                            <!-- Color Scales Info -->
-                            <div class="alert alert-info small mb-3">
-                                <i class="fas fa-info-circle"></i>
-                                Dynamic Framework automatically generates:
-                                <ul class="mb-0 mt-1">
-                                    <li>Color scales (25, 50, 100-900) for each base color</li>
-                                    <li>Surface colors (reference scale-50)</li>
-                                    <li>Soft colors (reference scale-25)</li>
-                                    <li>Extended spacing (spacer-6 to spacer-30)</li>
-                                </ul>
-                            </div>
-
-                            <!-- Color Scale Preview -->
-                            <div id="colorScalePreview">
-                                <h6 class="mb-2">Generated Color Scales</h6>
-                                <div id="scaleContainer">
-                                    <!-- Scales will be generated dynamically -->
-                                </div>
-                            </div>
-
-                            <!-- Extended Spacing Preview -->
-                            <div id="spacingPreview" class="mt-4">
-                                <h6 class="mb-2">Extended Spacing</h6>
-                                <div class="small text-muted">
-                                    <div>spacer-6: 1.5rem</div>
-                                    <div>spacer-7: 1.75rem</div>
-                                    <div>spacer-8: 2rem</div>
-                                    <div>... up to spacer-30</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="variable-item slider-item">
+              <label for="containerMaxWidthXl">Container XL <span class="slider-value"
+                                                                  id="containerMaxWidthXlValue">1140px</span></label>
+              <input type="range" class="form-range" id="containerMaxWidthXl" min="1000" max="1400"
+                     step="20" value="1140">
             </div>
-            <!-- End Accordion -->
+          </div>
         </div>
-        
-        <!-- Fixed Footer with Action Buttons -->
-        <div class="sidebar-footer">
-            <div class="d-grid gap-2">
-                <button class="btn btn-light" onclick="resetDefaults()">
-                    <i class="fas fa-undo"></i> Reset to Defaults
-                </button>
-            </div>
-        </div>
+      </div>
+
     </div>
+    <!-- End Accordion -->
+  </div>
 
-    <!-- Main Content with Preview -->
-    <div class="main-content">
-        <!-- Fixed Tab Navigation -->
-        <div class="preview-tabs-header">
-            <nav class="nav nav-underline" id="previewTabs" role="tablist">
-                <button class="nav-link active" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-content" type="button" role="tab" aria-controls="preview-content" aria-selected="true">
-                    <i class="fas fa-eye me-2"></i>Preview
-                </button>
-                <button class="nav-link" id="code-tab" data-bs-toggle="tab" data-bs-target="#code-content" type="button" role="tab" aria-controls="code-content" aria-selected="false">
-                    <i class="fas fa-code me-2"></i>Code
-                </button>
-            </nav>
-        </div>
-        
-        <!-- Tab Content -->
-        <div class="tab-content" id="previewTabContent">
-            <!-- Preview Tab -->
-            <div class="tab-pane fade show active theme-preview" id="preview-content" role="tabpanel" aria-labelledby="preview-tab">
-                <div class="container-fluid">
-                    <!-- Two Column Layout -->
-                    <div class="row">
-                <!-- Left Column -->
-                <div class="col-xl-6">
-                    
+  <!-- Fixed Footer with Action Buttons -->
+  <div class="sidebar-footer">
+    <div class="d-grid gap-2">
+      <button class="btn btn-light" onclick="resetDefaults()">
+        <i class="fas fa-undo"></i> Reset to Defaults
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content with Preview -->
+<div class="main-content">
+  <!-- Fixed Tab Navigation -->
+  <div class="preview-tabs-header">
+    <ul class="nav nav-tabs" id="previewTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-content"
+                type="button" role="tab" aria-controls="preview-content" aria-selected="true">
+          <i class="fas fa-eye me-2"></i>Preview
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="code-tab" data-bs-toggle="tab" data-bs-target="#code-content" type="button"
+                role="tab" aria-controls="code-content" aria-selected="false">
+          <i class="fas fa-code me-2"></i>Code
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content" id="previewTabContent">
+    <!-- Preview Tab -->
+    <div class="tab-pane fade show active theme-preview" id="preview-content" role="tabpanel"
+         aria-labelledby="preview-tab">
+      <div class="container-fluid">
+        <!-- Two Column Layout -->
+        <div class="row">
+          <!-- Left Column -->
+          <div class="col-xl-6">
+
             <!-- Buttons Preview -->
             <div class="preview-section">
               <h5 class="preview-title">Buttons</h5>
@@ -788,59 +757,71 @@
 
             <!-- Tabs Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Alerts</h5>
-                <div class="alert alert-primary" role="alert">
-                    <i class="fas fa-info-circle"></i> This is an info alert with custom color
-                </div>
-                <div class="alert alert-success" role="alert">
-                    <i class="fas fa-check-circle"></i> Success! Your changes have been saved
-                </div>
-                <div class="alert alert-danger" role="alert">
-                    <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
-                </div>
-                <div class="alert alert-warning" role="alert">
-                    <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
-                </div>
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle"></i> Info message with helpful details
-                </div>
+              <h5 class="preview-title">Alerts</h5>
+              <div class="alert alert-primary" role="alert">
+                <i class="fas fa-info-circle"></i> This is a primary alert with custom color
+              </div>
+              <div class="alert alert-success" role="alert">
+                <i class="fas fa-check-circle"></i> Success! Your changes have been saved
+              </div>
+              <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
+              </div>
+              <div class="alert alert-warning" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
+              </div>
+              <div class="alert alert-info" role="alert">
+                <i class="fas fa-info-circle"></i> Info message with helpful details
+              </div>
             </div>
 
             <!-- Tabs Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Tabs & Navigation</h5>
-                <nav class="nav nav-underline mb-3">
-                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-                </nav>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home">
-                        <p>Home tab content. Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    <div class="tab-pane fade" id="profile">
-                        <p>Profile tab content. Sed do eiusmod tempor incididunt.</p>
-                    </div>
-                    <div class="tab-pane fade" id="contact">
-                        <p>Contact tab content. Ut enim ad minim veniam.</p>
-                    </div>
-                </div>
+              <h5 class="preview-title">Tabs & Navigation</h5>
+              <ul class="nav nav-tabs mb-3">
+                <li class="nav-item">
+                  <button class="nav-link active">Home</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link">Profile</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link">Contact</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link disabled">Disabled</button>
+                </li>
+              </ul>
+
+              <!-- Pills variation -->
+              <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Another</a>
+                </li>
+              </ul>
             </div>
 
             <!-- Progress Bars -->
             <div class="preview-section">
-                <h5 class="preview-title">Progress Bars</h5>
-                <div class="progress mb-3">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">25%</div>
-                </div>
-                <div class="progress mb-3">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%">50%</div>
-                </div>
-                <div class="progress mb-3">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%">75%</div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%">100%</div>
+              <h5 class="preview-title">Progress Bars</h5>
+              <div class="progress mb-3">
+                <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">25%</div>
+              </div>
+              <div class="progress mb-3">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 50%">50%</div>
+              </div>
+              <div class="progress mb-3">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%">75%</div>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                     role="progressbar" style="width: 100%">100%
                 </div>
               </div>
             </div>
@@ -1007,62 +988,62 @@
 
             <!-- Alerts Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Alerts</h5>
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle"></i> This is an info alert with custom color
-                </div>
-                <div class="alert alert-success" role="alert">
-                    <i class="fas fa-check-circle"></i> Success! Your changes have been saved
-                </div>
-                <div class="alert alert-danger" role="alert">
-                    <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
-                </div>
-                <div class="alert alert-warning" role="alert">
-                    <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
-                </div>
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle"></i> Info message with helpful details
-                </div>
+              <h5 class="preview-title">Alerts</h5>
+              <div class="alert alert-primary" role="alert">
+                <i class="fas fa-info-circle"></i> This is a primary alert with custom color
+              </div>
+              <div class="alert alert-success" role="alert">
+                <i class="fas fa-check-circle"></i> Success! Your changes have been saved
+              </div>
+              <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle"></i> Danger! Something went wrong
+              </div>
+              <div class="alert alert-warning" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Warning! Please review your input
+              </div>
+              <div class="alert alert-info" role="alert">
+                <i class="fas fa-info-circle"></i> Info message with helpful details
+              </div>
             </div>
 
             <!-- Cards Preview -->
             <div class="preview-section">
-                <h5 class="preview-title">Cards</h5>
-                <div class="card mb-3">
-                    <div class="card-header bg-info text-white">
-                        Featured Card
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card Title</h5>
-                        <p class="card-text">Example text to build on the card title.</p>
-                        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-                    </div>
+              <h5 class="preview-title">Cards</h5>
+              <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                  Featured Card
                 </div>
-                <div class="card border-success mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title text-success">Success Card</h5>
-                        <p class="card-text">This card has a success border color.</p>
-                        <button class="btn btn-success btn-sm">Success Action</button>
-                    </div>
+                <div class="card-body">
+                  <h5 class="card-title">Card Title</h5>
+                  <p class="card-text">Example text to build on the card title.</p>
+                  <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
                 </div>
+              </div>
+              <div class="card border-success mb-3">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Success Card</h5>
+                  <p class="card-text">This card has a success border color.</p>
+                  <button class="btn btn-success btn-sm">Success Action</button>
+                </div>
+              </div>
             </div>
 
             <!-- Badges & Pills -->
             <div class="preview-section">
-                <h5 class="preview-title">Badges & Pills</h5>
-                <div class="mb-3">
-                    <span class="badge bg-info me-2">Info</span>
-                    <span class="badge bg-secondary me-2">Secondary</span>
-                    <span class="badge bg-success me-2">Success</span>
-                    <span class="badge bg-danger me-2">Danger</span>
-                    <span class="badge bg-warning text-dark me-2">Warning</span>
-                    <span class="badge bg-info text-dark me-2">Info</span>
-                </div>
-                <div>
-                    <span class="badge rounded-pill bg-info me-2">Info Pill</span>
-                    <span class="badge rounded-pill bg-success me-2">Success Pill</span>
-                    <span class="badge rounded-pill bg-danger">Danger Pill</span>
-                </div>
+              <h5 class="preview-title">Badges & Pills</h5>
+              <div class="mb-3">
+                <span class="badge bg-primary me-2">Primary</span>
+                <span class="badge bg-secondary me-2">Secondary</span>
+                <span class="badge bg-success me-2">Success</span>
+                <span class="badge bg-danger me-2">Danger</span>
+                <span class="badge bg-warning text-dark me-2">Warning</span>
+                <span class="badge bg-info text-dark me-2">Info</span>
+              </div>
+              <div>
+                <span class="badge rounded-pill bg-primary me-2">Pill Badge</span>
+                <span class="badge rounded-pill bg-success me-2">Success Pill</span>
+                <span class="badge rounded-pill bg-danger">Danger Pill</span>
+              </div>
             </div>
 
             <!-- Dropdowns and Modals -->
@@ -1503,25 +1484,27 @@
     <!-- End Code Tab -->
   </div>
   <!-- End tab-content -->
+</div>
+<!-- End main-content -->
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-info text-white">
-                    <h5 class="modal-title">Modal Title</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>This is a modal with customized colors based on your theme.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Modal Title</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
+        <div class="modal-body">
+          <p>This is a modal with customized colors based on your theme.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
     </div>
+  </div>
 
   <!-- Toast for copy notification -->
   <div class="toast-container">
@@ -1536,15 +1519,17 @@
     </div>
   </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Prism.js for syntax highlighting -->
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="assets/js/dynamic-variables-extractor.js"></script>
-    <script src="assets/js/theme-generator.js"></script>
-    <script src="assets/js/dynamic-framework-integration.js"></script>
-    <script src="assets/js/surprise-me.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="assets/js/dynamic-variables-extractor.js"></script>
+  <script src="assets/js/theme-generator.js"></script>
+  <!-- Temporarily disabled due to conflict
+  <script src="assets/js/dynamic-framework-integration.js"></script>
+  -->
+  <script src="assets/js/surprise-me.js"></script>
 </body>
 </html>
