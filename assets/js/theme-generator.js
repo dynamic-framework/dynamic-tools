@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const codeTab = document.getElementById('code-tab');
     const previewContent = document.getElementById('preview-content');
     const codeContent = document.getElementById('code-content');
-    
+
     // Tab elements initialized
-    
+
     // Manually initialize Bootstrap tabs if needed
     if (previewTab && codeTab) {
         const tabList = [previewTab, codeTab];
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             new bootstrap.Tab(tabEl);
         });
     }
-    
+
     // Listen for tab changes to generate CSS when Code tab is shown
     if (codeTab) {
         codeTab.addEventListener('shown.bs.tab', function() {
@@ -861,7 +861,7 @@ function generateCss() {
 
     // Store raw CSS for copy/download operations
     window.rawCssOutput = cssOutput;
-    
+
     // Display the CSS with Prism.js syntax highlighting
     const outputElement = document.getElementById('cssOutput');
     if (outputElement) {
@@ -1182,9 +1182,8 @@ function bindSliderListeners() {
 }
 
 // Copy CSS to clipboard
-// Copy CSS to clipboard (using raw CSS without highlighting)
 function copyCss() {
-    const css = window.rawCssOutput || generateCss();
+    const css = generateCss();
     navigator.clipboard.writeText(css).then(() => {
         // Show toast notification
         const toastEl = document.getElementById('copyToast');
@@ -1200,7 +1199,7 @@ function downloadCss() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'bootstrap-custom.css';
+    a.download = 'dynamic-framework-theme.css';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1210,8 +1209,8 @@ function downloadCss() {
 // Reset to default values
 function resetDefaults() {
     if (confirm('¿Estás seguro de que quieres restaurar todos los valores por defecto?')) {
-        // Reset colors
-        document.getElementById('primary').value = '#0d6efd';
+        // Reset colors (Dynamic Framework defaults)
+        document.getElementById('primary').value = '#d81b60';
         document.getElementById('secondary').value = '#6c757d';
         document.getElementById('success').value = '#198754';
         document.getElementById('danger').value = '#dc3545';
