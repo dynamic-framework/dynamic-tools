@@ -38,7 +38,7 @@ function generateDynamicScales() {
     });
     
     // Also generate gray scales
-    const grayBase = document.getElementById('secondary')?.value || '#6c757d';
+    const grayBase = document.getElementById('secondary')?.value || '#4848b7';
     const grayScales = dynamicVariablesExtractor.generateColorScale(grayBase, 'gray');
     Object.assign(dynamicScales, grayScales);
 }

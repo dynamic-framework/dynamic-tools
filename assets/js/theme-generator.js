@@ -58,6 +58,30 @@ document.addEventListener('DOMContentLoaded', function() {
 // Professional theme presets
 const themes = [
     {
+        name: 'Dynamic Framework',
+        description: 'Default Dynamic Framework theme',
+        colors: {
+            primary: '#d81b60',
+            secondary: '#4848b7',
+            success: '#198754',
+            danger: '#dc3545',
+            warning: '#ffc107',
+            info: '#0d6efd',
+            light: '#f8f9fa',
+            dark: '#212529'
+        },
+        typography: {
+            fontFamily: "'Source Sans 3', sans-serif",
+            fontSize: '1rem',
+            lineHeight: '1.5'
+        },
+        borderRadius: {
+            default: '0.375rem',
+            sm: '0.25rem',
+            lg: '0.5rem'
+        }
+    },
+    {
         name: 'Fintech Trust',
         description: 'Azul confianza con acentos modernos',
         colors: {
@@ -735,7 +759,7 @@ function generateCss() {
     
     const variables = {
         // Colors
-        '--bs-primary': getValue('primary', '#0d6efd'),
+        '--bs-primary': getValue('primary', '#d81b60'),
         '--bs-secondary': getValue('secondary', '#6c757d'),
         '--bs-success': getValue('success', '#198754'),
         '--bs-danger': getValue('danger', '#dc3545'),
@@ -745,8 +769,8 @@ function generateCss() {
         '--bs-dark': getValue('dark', '#212529'),
         
         // Typography
-        '--bs-font-family': getValue('fontFamily', 'Inter'),
-        '--bs-heading-font-family': getValue('headingFontFamily', 'Inter'),
+        '--bs-font-family': getValue('fontFamily', '\'Source Sans 3\', sans-serif'),
+        '--bs-heading-font-family': getValue('headingFontFamily', 'inherit'),
         '--bs-body-font-size': (getValue('fontSize', 16) / 16) + 'rem',
         '--bs-font-weight': getValue('fontWeight', '400'),
         '--bs-heading-weight': getValue('headingWeight', '600'),
@@ -778,17 +802,17 @@ function generateCss() {
         '--bs-animation-intensity': getValue('animationIntensity', 'normal'),
         
         // Links & Focus States
-        '--bs-link-color': document.getElementById('linkColor')?.value || '#0d6efd',
+        '--bs-link-color': document.getElementById('linkColor')?.value || '#d81b60',
         '--bs-link-hover-color': document.getElementById('linkHoverColor')?.value || '#0a58ca',
         '--bs-link-decoration': document.getElementById('linkDecoration')?.value || 'underline',
-        '--bs-focus-ring-color': document.getElementById('focusRingColor')?.value || '#0d6efd',
+        '--bs-focus-ring-color': document.getElementById('focusRingColor')?.value || '#d81b60',
         '--bs-focus-ring-width': (document.getElementById('focusRingWidth')?.value || 3) + 'px',
         '--bs-focus-ring-opacity': document.getElementById('focusRingOpacity')?.value || '0.25',
         
         // Forms & Inputs
         '--bs-input-bg': document.getElementById('inputBg')?.value || '#ffffff',
         '--bs-input-border-color': document.getElementById('inputBorderColor')?.value || '#ced4da',
-        '--bs-input-focus-border-color': document.getElementById('inputFocusColor')?.value || '#0d6efd',
+        '--bs-input-focus-border-color': document.getElementById('inputFocusColor')?.value || '#d81b60',
         '--bs-input-placeholder-color': document.getElementById('inputPlaceholderColor')?.value || '#6c757d',
         '--bs-input-disabled-bg': document.getElementById('inputDisabledBg')?.value || '#e9ecef',
         '--bs-input-padding-y': (document.getElementById('inputPaddingY')?.value || 6) / 16 + 'rem',
@@ -1233,11 +1257,11 @@ function resetDefaults() {
     if (confirm('¿Estás seguro de que quieres restaurar todos los valores por defecto?')) {
         // Reset colors (Dynamic Framework defaults)
         document.getElementById('primary').value = '#d81b60';
-        document.getElementById('secondary').value = '#6c757d';
+        document.getElementById('secondary').value = '#4848b7';
         document.getElementById('success').value = '#198754';
         document.getElementById('danger').value = '#dc3545';
         document.getElementById('warning').value = '#ffc107';
-        document.getElementById('info').value = '#0dcaf0';
+        document.getElementById('info').value = '#0d6efd';
         document.getElementById('light').value = '#f8f9fa';
         document.getElementById('dark').value = '#212529';
         
@@ -1282,6 +1306,9 @@ function surpriseMe() {
         });
         
         // Set typography
+        if (randomTheme.typography.fontFamily) {
+            document.getElementById('fontFamily').value = randomTheme.typography.fontFamily;
+        }
         document.getElementById('fontSize').value = randomTheme.typography.fontSize;
         document.getElementById('lineHeight').value = randomTheme.typography.lineHeight;
         
@@ -1299,7 +1326,7 @@ function surpriseMe() {
 function showThemeNotification(themeName, description) {
     // Create custom toast for theme
     const toastHtml = `
-        <div class="toast align-items-center border-0" role="alert" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="toast align-items-center border-0" role="alert" style="background: linear-gradient(135deg, #d81b60 0%, #e91e63 100%);">
             <div class="d-flex">
                 <div class="toast-body text-white">
                     <strong><i class="fas fa-palette me-2"></i>${themeName}</strong><br>
