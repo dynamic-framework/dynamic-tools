@@ -6,24 +6,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Debug: Check if tabs are properly initialized
-    const previewTab = document.getElementById('preview-tab');
-    const codeTab = document.getElementById('code-tab');
-    const previewContent = document.getElementById('preview-content');
-    const codeContent = document.getElementById('code-content');
+    const htmlPreviewTab = document.getElementById('html-preview-tab');
+    const reactPreviewTab = document.getElementById('react-preview-tab');
+    const cssCodeTab = document.getElementById('css-code-tab');
+    const htmlPreviewContent = document.getElementById('html-preview-content');
+    const reactPreviewContent = document.getElementById('react-preview-content');
+    const cssCodeContent = document.getElementById('css-code-content');
 
     // Tab elements initialized
 
     // Manually initialize Bootstrap tabs if needed
-    if (previewTab && codeTab) {
-        const tabList = [previewTab, codeTab];
+    if (htmlPreviewTab && reactPreviewTab && cssCodeTab) {
+        const tabList = [htmlPreviewTab, reactPreviewTab, cssCodeTab];
         tabList.forEach(tabEl => {
             new bootstrap.Tab(tabEl);
         });
     }
 
-    // Listen for tab changes to generate CSS when Code tab is shown
-    if (codeTab) {
-        codeTab.addEventListener('shown.bs.tab', function() {
+    // Listen for tab changes to generate CSS when CSS Code tab is shown
+    if (cssCodeTab) {
+        cssCodeTab.addEventListener('shown.bs.tab', function() {
             console.log('Code tab shown, generating CSS...');
             // Generate CSS when Code tab is shown
             setTimeout(() => {
@@ -47,6 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         const outputEl = document.getElementById('cssOutput');
         if (outputEl) {
+            console.log('Initializing CSS variables and generating CSS...');
+            updateCssVariables(); // Ensure RGB variables are set correctly first
             generateCss();
         }
     }, 500);
@@ -57,6 +61,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Professional theme presets
 const themes = [
+    {
+        name: 'Dynamic Framework',
+        description: 'Default Dynamic Framework theme',
+        colors: {
+            primary: '#d81b60',
+            secondary: '#4848b7',
+            success: '#198754',
+            danger: '#dc3545',
+            warning: '#ffc107',
+            info: '#0d6efd',
+            light: '#f8f9fa',
+            dark: '#212529'
+        },
+        typography: {
+            fontFamily: "'Source Sans 3', sans-serif",
+            fontSize: '1rem',
+            lineHeight: '1.5'
+        },
+        borderRadius: {
+            default: '0.375rem',
+            sm: '0.25rem',
+            lg: '0.5rem'
+        }
+    },
     {
         name: 'Fintech Trust',
         description: 'Azul confianza con acentos modernos',
@@ -735,7 +763,7 @@ function generateCss() {
     
     const variables = {
         // Colors
-        '--bs-primary': getValue('primary', '#0d6efd'),
+        '--bs-primary': getValue('primary', '#d81b60'),
         '--bs-secondary': getValue('secondary', '#6c757d'),
         '--bs-success': getValue('success', '#198754'),
         '--bs-danger': getValue('danger', '#dc3545'),
@@ -745,8 +773,8 @@ function generateCss() {
         '--bs-dark': getValue('dark', '#212529'),
         
         // Typography
-        '--bs-font-family': getValue('fontFamily', 'Inter'),
-        '--bs-heading-font-family': getValue('headingFontFamily', 'Inter'),
+        '--bs-font-family': getValue('fontFamily', '\'Source Sans 3\', sans-serif'),
+        '--bs-heading-font-family': getValue('headingFontFamily', 'inherit'),
         '--bs-body-font-size': (getValue('fontSize', 16) / 16) + 'rem',
         '--bs-font-weight': getValue('fontWeight', '400'),
         '--bs-heading-weight': getValue('headingWeight', '600'),
@@ -778,17 +806,17 @@ function generateCss() {
         '--bs-animation-intensity': getValue('animationIntensity', 'normal'),
         
         // Links & Focus States
-        '--bs-link-color': document.getElementById('linkColor')?.value || '#0d6efd',
+        '--bs-link-color': document.getElementById('linkColor')?.value || '#d81b60',
         '--bs-link-hover-color': document.getElementById('linkHoverColor')?.value || '#0a58ca',
         '--bs-link-decoration': document.getElementById('linkDecoration')?.value || 'underline',
-        '--bs-focus-ring-color': document.getElementById('focusRingColor')?.value || '#0d6efd',
+        '--bs-focus-ring-color': document.getElementById('focusRingColor')?.value || '#d81b60',
         '--bs-focus-ring-width': (document.getElementById('focusRingWidth')?.value || 3) + 'px',
         '--bs-focus-ring-opacity': document.getElementById('focusRingOpacity')?.value || '0.25',
         
         // Forms & Inputs
         '--bs-input-bg': document.getElementById('inputBg')?.value || '#ffffff',
         '--bs-input-border-color': document.getElementById('inputBorderColor')?.value || '#ced4da',
-        '--bs-input-focus-border-color': document.getElementById('inputFocusColor')?.value || '#0d6efd',
+        '--bs-input-focus-border-color': document.getElementById('inputFocusColor')?.value || '#d81b60',
         '--bs-input-placeholder-color': document.getElementById('inputPlaceholderColor')?.value || '#6c757d',
         '--bs-input-disabled-bg': document.getElementById('inputDisabledBg')?.value || '#e9ecef',
         '--bs-input-padding-y': (document.getElementById('inputPaddingY')?.value || 6) / 16 + 'rem',
@@ -900,15 +928,35 @@ function generateCss() {
 function updateCssVariables() {
     const root = document.documentElement;
     
-    // Colors
+    // Helper function to convert hex to RGB for theme-generator
+    function hexToRgbForTheme(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        if (result) {
+            const r = parseInt(result[1], 16);
+            const g = parseInt(result[2], 16);
+            const b = parseInt(result[3], 16);
+            return `${r}, ${g}, ${b}`;
+        }
+        return '0, 0, 0';
+    }
+
+    // Colors - both hex and RGB
     root.style.setProperty('--bs-primary', document.getElementById('primary').value);
+    root.style.setProperty('--bs-primary-rgb', hexToRgbForTheme(document.getElementById('primary').value));
     root.style.setProperty('--bs-secondary', document.getElementById('secondary').value);
+    root.style.setProperty('--bs-secondary-rgb', hexToRgbForTheme(document.getElementById('secondary').value));
     root.style.setProperty('--bs-success', document.getElementById('success').value);
+    root.style.setProperty('--bs-success-rgb', hexToRgbForTheme(document.getElementById('success').value));
     root.style.setProperty('--bs-danger', document.getElementById('danger').value);
+    root.style.setProperty('--bs-danger-rgb', hexToRgbForTheme(document.getElementById('danger').value));
     root.style.setProperty('--bs-warning', document.getElementById('warning').value);
+    root.style.setProperty('--bs-warning-rgb', hexToRgbForTheme(document.getElementById('warning').value));
     root.style.setProperty('--bs-info', document.getElementById('info').value);
+    root.style.setProperty('--bs-info-rgb', hexToRgbForTheme(document.getElementById('info').value));
     root.style.setProperty('--bs-light', document.getElementById('light').value);
+    root.style.setProperty('--bs-light-rgb', hexToRgbForTheme(document.getElementById('light').value));
     root.style.setProperty('--bs-dark', document.getElementById('dark').value);
+    root.style.setProperty('--bs-dark-rgb', hexToRgbForTheme(document.getElementById('dark').value));
     
     // Typography
     root.style.setProperty('--bs-font-family', document.getElementById('fontFamily').value);
@@ -980,6 +1028,16 @@ function updateCssVariables() {
     if (gridGutterWidth) root.style.setProperty('--bs-grid-gutter-width', gridGutterWidth.value + 'px');
     
     generateCss();
+    
+    // Update React preview if available
+    if (window.reactPreviewManager) {
+        // Debounce React updates for performance
+        clearTimeout(window.reactUpdateTimeout);
+        window.reactUpdateTimeout = setTimeout(() => {
+            console.log('🎨 Updating React preview with new theme...');
+            window.reactPreviewManager.updateTheme();
+        }, 150);
+    }
 }
 
 // Bind event listeners
@@ -1233,11 +1291,11 @@ function resetDefaults() {
     if (confirm('¿Estás seguro de que quieres restaurar todos los valores por defecto?')) {
         // Reset colors (Dynamic Framework defaults)
         document.getElementById('primary').value = '#d81b60';
-        document.getElementById('secondary').value = '#6c757d';
+        document.getElementById('secondary').value = '#4848b7';
         document.getElementById('success').value = '#198754';
         document.getElementById('danger').value = '#dc3545';
         document.getElementById('warning').value = '#ffc107';
-        document.getElementById('info').value = '#0dcaf0';
+        document.getElementById('info').value = '#0d6efd';
         document.getElementById('light').value = '#f8f9fa';
         document.getElementById('dark').value = '#212529';
         
@@ -1282,6 +1340,9 @@ function surpriseMe() {
         });
         
         // Set typography
+        if (randomTheme.typography.fontFamily) {
+            document.getElementById('fontFamily').value = randomTheme.typography.fontFamily;
+        }
         document.getElementById('fontSize').value = randomTheme.typography.fontSize;
         document.getElementById('lineHeight').value = randomTheme.typography.lineHeight;
         
@@ -1299,7 +1360,7 @@ function surpriseMe() {
 function showThemeNotification(themeName, description) {
     // Create custom toast for theme
     const toastHtml = `
-        <div class="toast align-items-center border-0" role="alert" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="toast align-items-center border-0" role="alert" style="background: linear-gradient(135deg, #d81b60 0%, #e91e63 100%);">
             <div class="d-flex">
                 <div class="toast-body text-white">
                     <strong><i class="fas fa-palette me-2"></i>${themeName}</strong><br>

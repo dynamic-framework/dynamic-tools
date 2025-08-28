@@ -9,6 +9,7 @@ let dynamicSpacing = {};
 
 // Initialize Dynamic Framework integration
 function initializeDynamicFramework() {
+    console.log('Initializing Dynamic Framework integration...');
     dynamicVariablesExtractor = new DynamicVariablesExtractor();
     
     // Generate initial scales (always enabled)
@@ -20,6 +21,16 @@ function initializeDynamicFramework() {
     
     // Bind event listeners for color changes
     bindDynamicEventListeners();
+    
+    // Force generate CSS on initialization
+    setTimeout(() => {
+        if (window.generateCss) {
+            console.log('Forcing CSS generation...');
+            // Debug RGB conversion
+            testRgbConversion();
+            window.generateCss();
+        }
+    }, 300);
 }
 
 // Generate Dynamic color scales for all base colors
@@ -38,7 +49,7 @@ function generateDynamicScales() {
     });
     
     // Also generate gray scales
-    const grayBase = document.getElementById('secondary')?.value || '#6c757d';
+    const grayBase = document.getElementById('secondary')?.value || '#4848b7';
     const grayScales = dynamicVariablesExtractor.generateColorScale(grayBase, 'gray');
     Object.assign(dynamicScales, grayScales);
 }
@@ -140,8 +151,7 @@ function bindDynamicEventListeners() {
     });
 }
 
-// Extend the generateCss function
-const originalGenerateCss = window.generateCss;
+// Override the generateCss function completely
 window.generateCss = function() {
     let cssOutput = '';
     
@@ -295,12 +305,26 @@ window.generateCss = function() {
     cssOutput += `.bg-warning-soft { background-color: rgb(var(--bs-warning-soft-rgb)) !important; }\n`;
     cssOutput += `.bg-info-soft { background-color: rgb(var(--bs-info-soft-rgb)) !important; }\n`;
     
-    // Apply syntax highlighting
+    // Store raw CSS for copy/download operations
+    window.rawCssOutput = cssOutput;
+
+    // Display the CSS with Prism.js syntax highlighting
     const outputElement = document.getElementById('cssOutput');
-    if (outputElement && window.highlightCSS) {
-        outputElement.innerHTML = window.highlightCSS(cssOutput);
+    if (outputElement) {
+        console.log('Setting Dynamic Framework CSS output, length:', cssOutput.length);
+        outputElement.textContent = cssOutput;
+        // Apply Prism highlighting if available
+        if (typeof Prism !== 'undefined') {
+            console.log('Applying Prism highlighting...');
+            Prism.highlightElement(outputElement);
+        } else {
+            console.log('Prism not available');
+        }
+    } else {
+        console.error('CSS Output element not found!');
     }
     
+    console.log('Dynamic CSS generated successfully, first 200 chars:', cssOutput.substring(0, 200));
     return cssOutput;
 };
 
@@ -316,9 +340,53 @@ function hexToRgb(hex) {
     return '0, 0, 0';
 }
 
+// Test function to verify RGB conversion
+function testRgbConversion() {
+    console.log('=== RGB CONVERSION TEST ===');
+    const primaryHex = document.getElementById('primary')?.value || '#d81b60';
+    const secondaryHex = document.getElementById('secondary')?.value || '#4848b7';
+    
+    console.log('Primary HEX:', primaryHex);
+    console.log('Primary RGB:', hexToRgb(primaryHex));
+    console.log('Expected RGB for #d81b60: 216, 27, 96');
+    
+    console.log('Secondary HEX:', secondaryHex);
+    console.log('Secondary RGB:', hexToRgb(secondaryHex));
+    console.log('Expected RGB for #4848b7: 72, 72, 183');
+    
+    // Check current CSS variable values
+    const computedStyle = getComputedStyle(document.documentElement);
+    const currentPrimaryRgb = computedStyle.getPropertyValue('--bs-primary-rgb').trim();
+    const currentSecondaryRgb = computedStyle.getPropertyValue('--bs-secondary-rgb').trim();
+    
+    console.log('Current CSS --bs-primary-rgb:', currentPrimaryRgb);
+    console.log('Current CSS --bs-secondary-rgb:', currentSecondaryRgb);
+    
+    // Verification
+    if (currentPrimaryRgb !== hexToRgb(primaryHex)) {
+        console.error('❌ PRIMARY RGB MISMATCH!');
+        console.error('Expected:', hexToRgb(primaryHex));
+        console.error('Actual:', currentPrimaryRgb);
+    } else {
+        console.log('✅ Primary RGB is correct');
+    }
+    
+    if (currentSecondaryRgb !== hexToRgb(secondaryHex)) {
+        console.error('❌ SECONDARY RGB MISMATCH!');
+        console.error('Expected:', hexToRgb(secondaryHex));
+        console.error('Actual:', currentSecondaryRgb);
+    } else {
+        console.log('✅ Secondary RGB is correct');
+    }
+    
+    console.log('=== END RGB TEST ===');
+}
+
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeDynamicFramework);
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initializeDynamicFramework, 100);
+    });
 } else {
-    initializeDynamicFramework();
+    setTimeout(initializeDynamicFramework, 100);
 }

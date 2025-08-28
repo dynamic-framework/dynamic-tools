@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dynamic Framework - Theme Generator</title>
   <meta name="description"
-        content="Professional Bootstrap theme generator with real-time preview. Create custom color schemes for fintech, AI startups, and modern web applications.">
+        content="Professional Dynamic Framework theme generator with real-time preview. Create custom color schemes for fintech, AI startups, and modern web applications.">
   <meta name="keywords" content="Bootstrap, theme generator, CSS customizer, fintech design, AI startup themes">
 
-  <!-- Bootstrap CSS -->
+  <!-- 1. Bootstrap CSS base -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 2. Dynamic Framework Bootstrap Overrides - MUST load after Bootstrap -->
+  <link href="dynamic-overrides.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
   <!-- Google Fonts - Popular Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,16 +65,16 @@
             <div class="variable-item">
               <label for="primary">Primary</label>
               <div class="color-input-wrapper">
-                <input type="color" id="primary" value="#0d6efd">
-                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+                <input type="color" id="primary" value="#d81b60">
+                <input type="text" class="form-control form-control-sm color-value" value="#d81b60">
               </div>
             </div>
 
             <div class="variable-item">
               <label for="secondary">Secondary</label>
               <div class="color-input-wrapper">
-                <input type="color" id="secondary" value="#6c757d">
-                <input type="text" class="form-control form-control-sm color-value" value="#6c757d">
+                <input type="color" id="secondary" value="#4848b7">
+                <input type="text" class="form-control form-control-sm color-value" value="#4848b7">
               </div>
             </div>
 
@@ -101,8 +105,8 @@
             <div class="variable-item">
               <label for="info">Info</label>
               <div class="color-input-wrapper">
-                <input type="color" id="info" value="#0dcaf0">
-                <input type="text" class="form-control form-control-sm color-value" value="#0dcaf0">
+                <input type="color" id="info" value="#0d6efd">
+                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
               </div>
             </div>
 
@@ -365,8 +369,8 @@
             <div class="variable-item">
               <label for="linkColor">Link Color</label>
               <div class="color-input-wrapper">
-                <input type="color" id="linkColor" value="#0d6efd">
-                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+                <input type="color" id="linkColor" value="#d81b60">
+                <input type="text" class="form-control form-control-sm color-value" value="#d81b60">
               </div>
             </div>
 
@@ -391,8 +395,8 @@
             <div class="variable-item">
               <label for="focusRingColor">Focus Ring Color</label>
               <div class="color-input-wrapper">
-                <input type="color" id="focusRingColor" value="#0d6efd">
-                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+                <input type="color" id="focusRingColor" value="#d81b60">
+                <input type="text" class="form-control form-control-sm color-value" value="#d81b60">
               </div>
             </div>
 
@@ -443,8 +447,8 @@
             <div class="variable-item">
               <label for="inputFocusColor">Input Focus Color</label>
               <div class="color-input-wrapper">
-                <input type="color" id="inputFocusColor" value="#0d6efd">
-                <input type="text" class="form-control form-control-sm color-value" value="#0d6efd">
+                <input type="color" id="inputFocusColor" value="#d81b60">
+                <input type="text" class="form-control form-control-sm color-value" value="#d81b60">
               </div>
             </div>
 
@@ -507,7 +511,7 @@
                     value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
                   System Default
                 </option>
-                <option value="'Inter', sans-serif" selected>Inter (Modern Tech)</option>
+                <option value="'Inter', sans-serif">Inter (Modern Tech)</option>
                 <option value="'Roboto', sans-serif">Roboto (Google)</option>
                 <option value="'Open Sans', sans-serif">Open Sans (Clean)</option>
                 <option value="'Poppins', sans-serif">Poppins (Rounded)</option>
@@ -516,7 +520,7 @@
                 <option value="'Lato', sans-serif">Lato (Friendly)</option>
                 <option value="'Nunito', sans-serif">Nunito (Soft)</option>
                 <option value="'Work Sans', sans-serif">Work Sans (Simple)</option>
-                <option value="'Source Sans 3', sans-serif">Source Sans 3</option>
+                <option value="'Source Sans 3', sans-serif" selected>Source Sans 3 (Dynamic Framework)</option>
                 <option value="'DM Sans', sans-serif">DM Sans (Geometric)</option>
                 <option value="'Manrope', sans-serif">Manrope (Modern)</option>
                 <option value="'Space Grotesk', sans-serif">Space Grotesk (Tech)</option>
@@ -528,7 +532,7 @@
             <div class="variable-item">
               <label for="headingFontFamily">Heading Font</label>
               <select class="form-select form-select-sm" id="headingFontFamily">
-                <option value="inherit">Same as Body</option>
+                <option value="inherit" selected>Same as Body</option>
                 <option value="'Inter', sans-serif">Inter</option>
                 <option value="'Poppins', sans-serif">Poppins</option>
                 <option value="'Montserrat', sans-serif">Montserrat</option>
@@ -653,15 +657,21 @@
   <div class="preview-tabs-header">
     <ul class="nav nav-tabs" id="previewTabs" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-content"
-                type="button" role="tab" aria-controls="preview-content" aria-selected="true">
-          <i class="fas fa-eye me-2"></i>Preview
+        <button class="nav-link active" id="html-preview-tab" data-bs-toggle="tab" data-bs-target="#html-preview-content"
+                type="button" role="tab" aria-controls="html-preview-content" aria-selected="true">
+          <i class="bi bi-code-square me-2"></i>HTML Preview
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="code-tab" data-bs-toggle="tab" data-bs-target="#code-content" type="button"
-                role="tab" aria-controls="code-content" aria-selected="false">
-          <i class="fas fa-code me-2"></i>Code
+        <button class="nav-link" id="react-preview-tab" data-bs-toggle="tab" data-bs-target="#react-preview-content" 
+                type="button" role="tab" aria-controls="react-preview-content" aria-selected="false">
+          <i class="bi bi-layers me-2"></i>React Preview
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="css-code-tab" data-bs-toggle="tab" data-bs-target="#css-code-content" 
+                type="button" role="tab" aria-controls="css-code-content" aria-selected="false">
+          <i class="bi bi-file-earmark-code me-2"></i>CSS Code
         </button>
       </li>
     </ul>
@@ -669,9 +679,9 @@
 
   <!-- Tab Content -->
   <div class="tab-content" id="previewTabContent">
-    <!-- Preview Tab -->
-    <div class="tab-pane fade show active theme-preview" id="preview-content" role="tabpanel"
-         aria-labelledby="preview-tab">
+    <!-- HTML Preview Tab -->
+    <div class="tab-pane fade show active theme-preview" id="html-preview-content" role="tabpanel"
+         aria-labelledby="html-preview-tab">
       <div class="container-fluid">
         <!-- Two Column Layout -->
         <div class="row">
@@ -778,20 +788,15 @@
             <!-- Tabs Preview -->
             <div class="preview-section">
               <h5 class="preview-title">Tabs & Navigation</h5>
-              <ul class="nav nav-tabs mb-3">
-                <li class="nav-item">
-                  <button class="nav-link active">Home</button>
-                </li>
-                <li class="nav-item">
-                  <button class="nav-link">Profile</button>
-                </li>
-                <li class="nav-item">
-                  <button class="nav-link">Contact</button>
-                </li>
-                <li class="nav-item">
-                  <button class="nav-link disabled">Disabled</button>
-                </li>
-              </ul>
+              <nav class="nav nav-underline mb-3">
+                <button class="nav-link active" type="button">Home</button>
+                <button class="nav-link" type="button">Profile</button>
+                <button class="nav-link" type="button">Contact</button>
+              </nav>
+              
+              <div class="tab-content p-3" style="background: white; border: 1px solid var(--bs-nav-tabs-border-color); border-radius: 0 0 var(--bs-border-radius) var(--bs-border-radius);">
+                <p>Home tab content. Lorem ipsum dolor sit amet.</p>
+              </div>
 
               <!-- Pills variation -->
               <ul class="nav nav-pills">
@@ -1444,10 +1449,25 @@
         </div>
       </div>
     </div>
-    <!-- End Preview Tab -->
+    <!-- End HTML Preview Tab -->
 
-    <!-- Code Tab -->
-    <div class="tab-pane fade" id="code-content" role="tabpanel" aria-labelledby="code-tab">
+    <!-- React Preview Tab -->
+    <div class="tab-pane fade" id="react-preview-content" role="tabpanel" aria-labelledby="react-preview-tab">
+      <div id="react-preview-container" class="p-4">
+        <div class="placeholder-message text-center py-5">
+          <i class="bi bi-layers display-1 text-muted mb-4"></i>
+          <h4 class="text-muted">Loading React Components...</h4>
+          <p class="text-muted">Dynamic Framework React components are being loaded</p>
+          <div class="spinner-border text-primary mt-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End React Preview Tab -->
+
+    <!-- CSS Code Tab -->
+    <div class="tab-pane fade" id="css-code-content" role="tabpanel" aria-labelledby="css-code-tab">
       <div class="code-output-container">
         <div class="code-header">
           <h5 class="mb-0">Generated CSS</h5>
@@ -1463,7 +1483,7 @@
         <pre><code id="cssOutput" class="language-css code-output">/* Loading CSS... */</code></pre>
       </div>
     </div>
-    <!-- End Code Tab -->
+    <!-- End CSS Code Tab -->
   </div>
   <!-- End tab-content -->
 </div>
@@ -1509,9 +1529,15 @@
   <!-- Custom JavaScript -->
   <script src="assets/js/dynamic-variables-extractor.js"></script>
   <script src="assets/js/theme-generator.js"></script>
-  <!-- Temporarily disabled due to conflict
   <script src="assets/js/dynamic-framework-integration.js"></script>
-  -->
+  
+  <!-- React Preview - Try ESM first, then UMD fallback -->
+  <script src="assets/js/react-preview.js"></script>
+  
+  <!-- UMD Fallback for React (loaded but not used if ESM works) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
   <script src="assets/js/surprise-me.js"></script>
 </body>
 </html>

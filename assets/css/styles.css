@@ -19,7 +19,7 @@
     --bs-nav-link-hover-color: var(--bs-primary);
 
     /* Typography */
-    --bs-font-family: 'Inter', sans-serif;
+    --bs-font-family: 'Source Sans 3', sans-serif;
     --bs-heading-font-family: inherit;
     --bs-body-font-size: 1rem;
     --bs-font-weight: 400;
@@ -55,6 +55,8 @@
 
 body {
     background-color: #f0f0f0;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Apply custom typography only to preview area */
@@ -218,7 +220,7 @@ body {
 
 /* Gradient AI Button */
 .btn-gradient-ai {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #fda085 75%, #ffc107 100%);
+    background: linear-gradient(135deg, #d81b60 0%, #e91e63 25%, #f093fb 50%, #fda085 75%, #ffc107 100%);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
     color: white;
@@ -397,7 +399,7 @@ body {
 }
 
 .preview-tabs-header .nav-tabs .nav-link.active {
-    color: #764ba2 !important;
+    color: #d81b60 !important;
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
@@ -410,14 +412,14 @@ body {
 }
 
 .preview-tabs-header .nav-tabs .nav-link.active::after {
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(90deg, #d81b60 0%, #e91e63 100%);
 }
 
 /* Tab Content */
 .tab-content {
     flex: 1;
     overflow-y: auto;
-    background: #f0f0f0;
+    background: white;
     height: calc(100vh - 60px);
 }
 
@@ -521,7 +523,7 @@ body {
 }
 
 .slider-value {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #d81b60 0%, #e91e63 100%);
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
@@ -570,7 +572,7 @@ body {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #d81b60 0%, #e91e63 100%);
     border: 3px solid white;
     box-shadow: 0 2px 8px rgba(118, 75, 162, 0.3), 0 0 0 1px rgba(118, 75, 162, 0.2);
     cursor: pointer;
@@ -582,7 +584,7 @@ body {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #d81b60 0%, #e91e63 100%);
     border: 3px solid white;
     box-shadow: 0 2px 8px rgba(118, 75, 162, 0.3), 0 0 0 1px rgba(118, 75, 162, 0.2);
     cursor: pointer;
@@ -645,6 +647,101 @@ input[type="color"] {
     border-color: rgba(102, 126, 234, 0.5);
     color: white;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* React Preview Styles */
+.react-preview-container {
+    min-height: 60vh;
+    background: #ffffff;
+    /* Apply Dynamic Framework typography */
+    font-family: var(--bs-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-font-weight);
+    line-height: var(--bs-body-line-height);
+    letter-spacing: var(--bs-letter-spacing);
+}
+
+.react-preview-container.p-4 {
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+/* Loading placeholder styles */
+.placeholder-message {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+}
+
+.placeholder-message .display-1 {
+    font-size: 4rem;
+    opacity: 0.3;
+}
+
+/* React components preview sections */
+.preview-sections {
+    max-width: 100%;
+    /* Inherit all typography from container */
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
+.preview-sections h4 {
+    color: var(--bs-dark);
+    font-family: var(--bs-heading-font-family);
+    font-weight: var(--bs-heading-weight);
+    border-bottom: 2px solid var(--bs-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Ensure React components inherit theme styling */
+#react-preview-container .btn {
+    font-family: var(--bs-font-family);
+    font-weight: var(--bs-font-weight);
+    transition: all var(--bs-transition-duration) ease;
+}
+
+#react-preview-container .card {
+    font-family: var(--bs-font-family);
+    border-radius: var(--bs-border-radius);
+    box-shadow: var(--bs-box-shadow);
+}
+
+#react-preview-container .alert {
+    font-family: var(--bs-font-family);
+    border-radius: var(--bs-border-radius);
+}
+
+#react-preview-container .badge {
+    font-family: var(--bs-font-family);
+    font-weight: var(--bs-font-weight);
+    border-radius: var(--bs-border-radius);
+}
+
+#react-preview-container .form-control,
+#react-preview-container .form-select,
+#react-preview-container .form-label {
+    font-family: var(--bs-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-font-weight);
+}
+
+#react-preview-container .card-title {
+    font-family: var(--bs-heading-font-family);
+    font-weight: var(--bs-heading-weight);
+}
+
+#react-preview-container .card-text {
+    font-family: var(--bs-font-family);
+    font-size: var(--bs-body-font-size);
+    line-height: var(--bs-body-line-height);
 }
 
 .sidebar .form-select option {
@@ -914,8 +1011,8 @@ input[type="color"] {
 
 /* Tab Content within preview */
 .theme-preview .tab-content {
-    background-color: transparent;
-    padding: 1rem 0;
+    background-color: white;
+    padding: 1rem;
 }
 
 .theme-preview .tab-pane {
@@ -1193,8 +1290,8 @@ body {
 
 #dynamicInfo {
     font-size: 0.875rem;
-    background: rgba(13, 110, 253, 0.1);
-    border-color: rgba(13, 110, 253, 0.2);
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    border-color: rgba(var(--bs-primary-rgb), 0.2);
 }
 
 #spacingPreview {
@@ -1322,39 +1419,39 @@ body {
 /* Accordion */
 .theme-preview .accordion-button:not(.collapsed) {
     color: var(--bs-primary);
-    background-color: rgba(13, 110, 253, 0.05);
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
 }
 
 .theme-preview .accordion-button:focus {
     border-color: var(--bs-primary);
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 /* Offcanvas */
 .theme-preview .offcanvas-header .btn-close:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 /* Modal */
 .theme-preview .modal-header .btn-close:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 /* Custom primary colored focus states */
 .theme-preview .form-control:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 .theme-preview .form-select:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 .theme-preview .btn-primary:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.5);
 }
 
 .theme-preview .btn-outline-primary:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.5);
 }
 
 /* Range input */
@@ -1367,36 +1464,36 @@ body {
 }
 
 .theme-preview .form-range:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 .theme-preview .form-range:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 /* Custom control indicators */
 .theme-preview .form-check-input:focus {
     border-color: var(--bs-primary);
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 .theme-preview .form-switch .form-check-input:focus {
     border-color: var(--bs-primary);
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 /* Table */
 .theme-preview .table-primary {
-    --bs-table-bg: rgba(13, 110, 253, 0.075);
-    --bs-table-striped-bg: rgba(13, 110, 253, 0.125);
-    --bs-table-active-bg: rgba(13, 110, 253, 0.175);
-    --bs-table-hover-bg: rgba(13, 110, 253, 0.125);
+    --bs-table-bg: rgba(var(--bs-primary-rgb), 0.075);
+    --bs-table-striped-bg: rgba(var(--bs-primary-rgb), 0.125);
+    --bs-table-active-bg: rgba(var(--bs-primary-rgb), 0.175);
+    --bs-table-hover-bg: rgba(var(--bs-primary-rgb), 0.125);
     color: var(--bs-primary);
 }
 
 /* Carousel indicators */
 .theme-preview .carousel-indicators [data-bs-target] {
-    background-color: rgba(13, 110, 253, 0.5);
+    background-color: rgba(var(--bs-primary-rgb), 0.5);
 }
 
 .theme-preview .carousel-indicators .active {
@@ -1405,7 +1502,7 @@ body {
 
 /* Close button focus */
 .theme-preview .btn-close:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
 /* Timeline circles - ensure they maintain perfect circles */
