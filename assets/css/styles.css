@@ -55,6 +55,8 @@
 
 body {
     background-color: #f0f0f0;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Apply custom typography only to preview area */
@@ -645,6 +647,101 @@ input[type="color"] {
     border-color: rgba(102, 126, 234, 0.5);
     color: white;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* React Preview Styles */
+.react-preview-container {
+    min-height: 60vh;
+    background: #ffffff;
+    /* Apply Dynamic Framework typography */
+    font-family: var(--bs-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-font-weight);
+    line-height: var(--bs-body-line-height);
+    letter-spacing: var(--bs-letter-spacing);
+}
+
+.react-preview-container.p-4 {
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+/* Loading placeholder styles */
+.placeholder-message {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+}
+
+.placeholder-message .display-1 {
+    font-size: 4rem;
+    opacity: 0.3;
+}
+
+/* React components preview sections */
+.preview-sections {
+    max-width: 100%;
+    /* Inherit all typography from container */
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
+.preview-sections h4 {
+    color: var(--bs-dark);
+    font-family: var(--bs-heading-font-family);
+    font-weight: var(--bs-heading-weight);
+    border-bottom: 2px solid var(--bs-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Ensure React components inherit theme styling */
+#react-preview-container .btn {
+    font-family: var(--bs-font-family);
+    font-weight: var(--bs-font-weight);
+    transition: all var(--bs-transition-duration) ease;
+}
+
+#react-preview-container .card {
+    font-family: var(--bs-font-family);
+    border-radius: var(--bs-border-radius);
+    box-shadow: var(--bs-box-shadow);
+}
+
+#react-preview-container .alert {
+    font-family: var(--bs-font-family);
+    border-radius: var(--bs-border-radius);
+}
+
+#react-preview-container .badge {
+    font-family: var(--bs-font-family);
+    font-weight: var(--bs-font-weight);
+    border-radius: var(--bs-border-radius);
+}
+
+#react-preview-container .form-control,
+#react-preview-container .form-select,
+#react-preview-container .form-label {
+    font-family: var(--bs-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-font-weight);
+}
+
+#react-preview-container .card-title {
+    font-family: var(--bs-heading-font-family);
+    font-weight: var(--bs-heading-weight);
+}
+
+#react-preview-container .card-text {
+    font-family: var(--bs-font-family);
+    font-size: var(--bs-body-font-size);
+    line-height: var(--bs-body-line-height);
 }
 
 .sidebar .form-select option {

@@ -6,24 +6,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Debug: Check if tabs are properly initialized
-    const previewTab = document.getElementById('preview-tab');
-    const codeTab = document.getElementById('code-tab');
-    const previewContent = document.getElementById('preview-content');
-    const codeContent = document.getElementById('code-content');
+    const htmlPreviewTab = document.getElementById('html-preview-tab');
+    const reactPreviewTab = document.getElementById('react-preview-tab');
+    const cssCodeTab = document.getElementById('css-code-tab');
+    const htmlPreviewContent = document.getElementById('html-preview-content');
+    const reactPreviewContent = document.getElementById('react-preview-content');
+    const cssCodeContent = document.getElementById('css-code-content');
 
     // Tab elements initialized
 
     // Manually initialize Bootstrap tabs if needed
-    if (previewTab && codeTab) {
-        const tabList = [previewTab, codeTab];
+    if (htmlPreviewTab && reactPreviewTab && cssCodeTab) {
+        const tabList = [htmlPreviewTab, reactPreviewTab, cssCodeTab];
         tabList.forEach(tabEl => {
             new bootstrap.Tab(tabEl);
         });
     }
 
-    // Listen for tab changes to generate CSS when Code tab is shown
-    if (codeTab) {
-        codeTab.addEventListener('shown.bs.tab', function() {
+    // Listen for tab changes to generate CSS when CSS Code tab is shown
+    if (cssCodeTab) {
+        cssCodeTab.addEventListener('shown.bs.tab', function() {
             console.log('Code tab shown, generating CSS...');
             // Generate CSS when Code tab is shown
             setTimeout(() => {
@@ -47,6 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         const outputEl = document.getElementById('cssOutput');
         if (outputEl) {
+            console.log('Initializing CSS variables and generating CSS...');
+            updateCssVariables(); // Ensure RGB variables are set correctly first
             generateCss();
         }
     }, 500);
@@ -924,15 +928,35 @@ function generateCss() {
 function updateCssVariables() {
     const root = document.documentElement;
     
-    // Colors
+    // Helper function to convert hex to RGB for theme-generator
+    function hexToRgbForTheme(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        if (result) {
+            const r = parseInt(result[1], 16);
+            const g = parseInt(result[2], 16);
+            const b = parseInt(result[3], 16);
+            return `${r}, ${g}, ${b}`;
+        }
+        return '0, 0, 0';
+    }
+
+    // Colors - both hex and RGB
     root.style.setProperty('--bs-primary', document.getElementById('primary').value);
+    root.style.setProperty('--bs-primary-rgb', hexToRgbForTheme(document.getElementById('primary').value));
     root.style.setProperty('--bs-secondary', document.getElementById('secondary').value);
+    root.style.setProperty('--bs-secondary-rgb', hexToRgbForTheme(document.getElementById('secondary').value));
     root.style.setProperty('--bs-success', document.getElementById('success').value);
+    root.style.setProperty('--bs-success-rgb', hexToRgbForTheme(document.getElementById('success').value));
     root.style.setProperty('--bs-danger', document.getElementById('danger').value);
+    root.style.setProperty('--bs-danger-rgb', hexToRgbForTheme(document.getElementById('danger').value));
     root.style.setProperty('--bs-warning', document.getElementById('warning').value);
+    root.style.setProperty('--bs-warning-rgb', hexToRgbForTheme(document.getElementById('warning').value));
     root.style.setProperty('--bs-info', document.getElementById('info').value);
+    root.style.setProperty('--bs-info-rgb', hexToRgbForTheme(document.getElementById('info').value));
     root.style.setProperty('--bs-light', document.getElementById('light').value);
+    root.style.setProperty('--bs-light-rgb', hexToRgbForTheme(document.getElementById('light').value));
     root.style.setProperty('--bs-dark', document.getElementById('dark').value);
+    root.style.setProperty('--bs-dark-rgb', hexToRgbForTheme(document.getElementById('dark').value));
     
     // Typography
     root.style.setProperty('--bs-font-family', document.getElementById('fontFamily').value);
@@ -1004,6 +1028,16 @@ function updateCssVariables() {
     if (gridGutterWidth) root.style.setProperty('--bs-grid-gutter-width', gridGutterWidth.value + 'px');
     
     generateCss();
+    
+    // Update React preview if available
+    if (window.reactPreviewManager) {
+        // Debounce React updates for performance
+        clearTimeout(window.reactUpdateTimeout);
+        window.reactUpdateTimeout = setTimeout(() => {
+            console.log('🎨 Updating React preview with new theme...');
+            window.reactPreviewManager.updateTheme();
+        }, 150);
+    }
 }
 
 // Bind event listeners
