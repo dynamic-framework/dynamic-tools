@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Editor Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="p-4">
+    <div class="container">
+        <h2>CSS Editor Test</h2>
+        <p>Test the bidirectional CSS editor by pasting this CSS snippet:</p>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5>Sample Figma Export CSS</h5>
+            </div>
+            <div class="card-body">
+                <pre class="bg-light p-3 rounded"><code>/* Paste this into the CSS Editor */
+:root {
+    --bs-primary: #6f42c1;
+    --bs-primary-rgb: 111, 66, 193;
+    --bs-secondary: #6c757d;
+    --bs-secondary-rgb: 108, 117, 125;
+    --bs-success: #198754;
+    --bs-success-rgb: 25, 135, 84;
+    --bs-danger: #dc3545;
+    --bs-danger-rgb: 220, 53, 69;
+    --bs-warning: #ffc107;
+    --bs-warning-rgb: 255, 193, 7;
+    --bs-info: #0dcaf0;
+    --bs-info-rgb: 13, 202, 240;
+    --bs-border-radius: 0.375rem;
+    --bs-font-family: 'Inter', sans-serif;
+    --bs-heading-font-family: 'Poppins', sans-serif;
+}</code></pre>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <h6>Test Steps:</h6>
+            <ol>
+                <li>Go to <a href="index.html" target="_blank">Theme Generator</a></li>
+                <li>Click on "CSS Code" tab</li>
+                <li>Click "Edit Mode" button</li>
+                <li>Copy and paste the CSS above</li>
+                <li>Click "Apply Changes"</li>
+                <li>Check that the theme updates to use purple primary color</li>
+                <li>Verify that form inputs are updated accordingly</li>
+            </ol>
+        </div>
+        
+        <div class="mt-3 alert alert-info">
+            <strong>Expected Result:</strong> The theme should change to use a purple primary color (#6f42c1), 
+            and the form controls should reflect the new values.
+        </div>
+        
+        <div class="mt-3">
+            <h6>Keyboard Shortcuts to Test:</h6>
+            <ul>
+                <li><kbd>Ctrl/Cmd + E</kbd> - Toggle Edit Mode</li>
+                <li><kbd>Ctrl/Cmd + S</kbd> - Apply Changes (in edit mode)</li>
+                <li><kbd>Esc</kbd> - Cancel Edit</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

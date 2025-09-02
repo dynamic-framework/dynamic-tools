@@ -905,17 +905,22 @@ function generateCss() {
     // Store raw CSS for copy/download operations
     window.rawCssOutput = cssOutput;
 
-    // Display the CSS with Prism.js syntax highlighting
+    // Display the CSS in the textarea (or code element for backwards compatibility)
     const outputElement = document.getElementById('cssOutput');
     if (outputElement) {
         console.log('Setting CSS output, length:', cssOutput.length);
-        outputElement.textContent = cssOutput;
-        // Apply Prism highlighting if available
-        if (typeof Prism !== 'undefined') {
-            console.log('Applying Prism highlighting...');
-            Prism.highlightElement(outputElement);
+        // Check if it's a textarea (new) or code element (old)
+        if (outputElement.tagName === 'TEXTAREA') {
+            outputElement.value = cssOutput;
         } else {
-            console.log('Prism not available');
+            outputElement.textContent = cssOutput;
+            // Apply Prism highlighting if available and it's a code element
+            if (typeof Prism !== 'undefined') {
+                console.log('Applying Prism highlighting...');
+                Prism.highlightElement(outputElement);
+            } else {
+                console.log('Prism not available');
+            }
         }
     } else {
         console.error('Output element not found!');

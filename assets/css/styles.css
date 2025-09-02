@@ -1517,3 +1517,138 @@ body {
     aspect-ratio: 1 !important;
     flex-shrink: 0 !important;
 }
+
+/* CSS Editor Styles */
+#cssOutput {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    tab-size: 2;
+    white-space: pre;
+    overflow-x: auto;
+    transition: all 0.3s ease;
+}
+
+#cssOutput:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-warning-rgb), 0.25);
+}
+
+/* Edit mode indicator animation */
+#editIndicator .badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Validation panel styles */
+#validationPanel .alert {
+    border-left: 4px solid;
+    font-size: 0.875rem;
+}
+
+#validationPanel .alert-danger {
+    border-left-color: var(--bs-danger);
+    background-color: rgba(var(--bs-danger-rgb), 0.1);
+}
+
+#validationPanel .alert-warning {
+    border-left-color: var(--bs-warning);
+    background-color: rgba(var(--bs-warning-rgb), 0.1);
+}
+
+#validationPanel ul {
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+}
+
+#validationPanel li {
+    margin-bottom: 0.25rem;
+}
+
+/* Toast container positioning */
+.toast-container {
+    z-index: 9999;
+}
+
+/* Edit help text styling */
+#editHelp {
+    background-color: rgba(13, 110, 253, 0.1);
+    border: 1px solid rgba(13, 110, 253, 0.2);
+    border-radius: 0.375rem;
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+}
+
+#editHelp kbd {
+    background-color: #495057;
+    color: white;
+    border: 1px solid #6c757d;
+    border-radius: 0.25rem;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.875rem;
+    font-family: 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.1);
+    margin: 0 0.125rem;
+}
+
+/* Code output container adjustments */
+.code-output-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.code-output-container .position-relative {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.code-output-container textarea {
+    flex: 1;
+    min-height: 400px;
+}
+
+/* Button states for edit mode */
+#editModeBtn:hover {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+#applyBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(var(--bs-success-rgb), 0.3);
+}
+
+#cancelBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(var(--bs-secondary-rgb), 0.3);
+}
+
+/* Ensure proper scrollbar styling in edit mode */
+#cssOutput::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#cssOutput::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#cssOutput::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#cssOutput::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

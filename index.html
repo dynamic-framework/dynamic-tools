@@ -1472,15 +1472,51 @@
         <div class="code-header">
           <h5 class="mb-0">Generated CSS</h5>
           <div class="code-actions">
+            <button class="btn btn-sm btn-outline-primary" id="editModeBtn" onclick="toggleEditMode()">
+              <i class="bi bi-pencil me-1"></i>Edit Mode
+            </button>
+            <button class="btn btn-sm btn-success d-none" id="applyBtn" onclick="applyCSSChanges()">
+              <i class="bi bi-check-circle me-1"></i>Apply Changes
+            </button>
+            <button class="btn btn-sm btn-secondary d-none" id="cancelBtn" onclick="cancelEdit()">
+              <i class="bi bi-x-circle me-1"></i>Cancel
+            </button>
+            <span class="mx-2 text-muted d-none" id="editSeparator">|</span>
             <button class="btn btn-sm btn-light" onclick="copyCss()">
-              <i class="fas fa-copy me-2"></i>Copy to Clipboard
+              <i class="bi bi-clipboard me-1"></i>Copy
             </button>
             <button class="btn btn-sm btn-light" onclick="downloadCss()">
-              <i class="fas fa-download me-2"></i>Download CSS
+              <i class="bi bi-download me-1"></i>Download
             </button>
           </div>
         </div>
-        <pre><code id="cssOutput" class="language-css code-output">/* Loading CSS... */</code></pre>
+        
+        <div class="position-relative">
+          <textarea 
+            id="cssOutput" 
+            class="form-control font-monospace code-output" 
+            rows="25"
+            readonly
+            spellcheck="false"
+            style="resize: vertical; background: #f8f9fa; border: 1px solid #dee2e6;">/* Loading CSS... */</textarea>
+          
+          <!-- Edit mode indicator -->
+          <div id="editIndicator" class="position-absolute top-0 end-0 m-2 d-none">
+            <span class="badge bg-warning text-dark">
+              <i class="bi bi-pencil-square me-1"></i>Editing
+            </span>
+          </div>
+        </div>
+        
+        <!-- Validation panel -->
+        <div id="validationPanel" class="mt-2 d-none"></div>
+        
+        <!-- Help text -->
+        <div class="d-none" id="editHelp">
+          <i class="bi bi-info-circle me-2"></i>
+          <strong>Tip:</strong> You can paste CSS variables from Figma or other design tools. Use <kbd>Ctrl</kbd><kbd>S</kbd> to apply changes or <kbd>Esc</kbd> to cancel.
+        </div>
+        </div>
       </div>
     </div>
     <!-- End CSS Code Tab -->
@@ -1533,6 +1569,7 @@
   
   <!-- React Preview - Try ESM first, then UMD fallback -->
   <script src="assets/js/react-preview.js"></script>
+  <script src="assets/js/css-editor.js"></script>
   
   <!-- UMD Fallback for React (loaded but not used if ESM works) -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>

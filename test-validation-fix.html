@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Validation Fix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-light p-4">
+    <div class="container">
+        <h2>Validation Fix Test</h2>
+        <p>This test simulates the validation error scenario:</p>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5>Test Scenario</h5>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li>Go to the main <a href="index.html" target="_blank">Theme Generator</a></li>
+                    <li>Click on "CSS Code" tab</li>
+                    <li>Click "Edit Mode" button</li>
+                    <li><strong>Do NOT change anything</strong> in the textarea</li>
+                    <li>Click "Apply Changes" immediately</li>
+                </ol>
+                
+                <div class="alert alert-success mt-3">
+                    <h6>Expected Result (Fixed):</h6>
+                    <p class="mb-0">Should apply successfully without validation errors, since it's the original generated CSS.</p>
+                </div>
+                
+                <div class="alert alert-danger">
+                    <h6>Previous Problem (Should be Fixed):</h6>
+                    <p class="mb-0">Was showing validation errors for valid CSS functions like <code>var(--bs-primary-25-rgb)</code> and <code>rgb(var(--bs-primary-rgb))</code></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <h6>What was fixed:</h6>
+            <ul>
+                <li>✅ Bypass validation for unchanged original CSS</li>
+                <li>✅ Recognize CSS functions like <code>var()</code> and <code>rgb(var())</code> as valid</li>
+                <li>✅ Only show critical errors, not CSS function "errors"</li>
+                <li>✅ Improved RGB validation to accept CSS variables</li>
+            </ul>
+        </div>
+        
+        <div class="mt-4">
+            <h6>Test Cases to Try:</h6>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Valid CSS (Should Work)</div>
+                        <div class="card-body">
+                            <pre class="small"><code>:root {
+    --bs-primary: #6f42c1;
+    --bs-primary-rgb: var(--bs-primary-25-rgb);
+    --bs-nav-link-hover-color: rgb(var(--bs-primary-rgb));
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Invalid CSS (Should Show Error)</div>
+                        <div class="card-body">
+                            <pre class="small"><code>:root {
+    --bs-primary: invalid-color-value;
+    --bs-primary-rgb: not,valid,rgb;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
