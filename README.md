@@ -1,121 +1,125 @@
-# Dynamic Framework Theme Generator
+# Dynamic Framework Theme Builder
 
-🎨 Professional Bootstrap theme generator with real-time preview. Create custom color schemes for fintech, AI startups, and modern web applications.
+A professional Bootstrap 5 theme generator with real-time preview, designed for creating custom color schemes for fintech, AI startups, and modern web applications.
 
-## ✨ Features
+🌐 **Live Demo**: [themes.dynamicframework.dev](https://themes.dynamicframework.dev/)
 
-- **Real-time Preview**: See changes instantly as you customize
-- **Professional Presets**: 10+ carefully crafted themes for different industries
-- **Component Library**: Preview all Bootstrap components with your custom theme
-- **Export Options**: Download or copy your custom CSS
-- **Responsive Design**: Works perfectly on desktop and mobile devices
+## Features
 
-## 🚀 Quick Start
+- **Real-time Preview** - See your theme changes instantly as you customize
+- **10+ Professional Presets** - Pre-designed themes for various industries
+- **Bootstrap 5 Compatible** - Generates standard Bootstrap CSS variables
+- **Export Options** - Copy to clipboard or download your custom CSS
+- **No Build Required** - Pure HTML/CSS/JS, runs directly in browser
+- **Surprise Me** - Random theme generator for inspiration
+- **Live Components** - Preview themes on real Bootstrap components
 
-### Online Version
-[Visit the live app](https://themes.dynamicframework.dev/)
+## Quick Start
 
-### Local Development
+### Option 1: Direct Browser Access
+Simply open `index.html` in your browser
+
+### Option 2: Local Server
 ```bash
-# Clone the repository
-git clone git@github.com:dynamic-framework/dynamic-tools.git
-
-# Navigate to project directory
-cd dynamic-tools
-
-# Open in browser
-open index.html
-# or use a local server
+# Python 3
 python -m http.server 8000
-# Then visit http://localhost:8000
+
+# Python 2
+python -m SimpleHTTPServer 8000
+
+# Node.js
+npx http-server
 ```
 
-## 🎯 Theme Presets
+Then visit `http://localhost:8000`
 
-The generator includes professional themes designed for:
+## Usage
 
-1. **Fintech Trust** - Traditional banking and financial services
-2. **Digital Banking** - Modern neo-banks and digital finance
-3. **AI Startup** - Artificial intelligence and tech companies
-4. **Corporate Tech** - Enterprise software solutions
-5. **Modern Crypto** - Cryptocurrency and blockchain platforms
-6. **Health Tech** - Medical and healthcare applications
-7. **Neobank** - Young, modern banking interfaces
-8. **Enterprise SaaS** - B2B software platforms
-9. **Gradient Tech** - Innovative startups with vibrant designs
-10. **Dark Mode Pro** - Professional dark theme interfaces
+1. **Choose a Preset** - Start with a professional theme template
+2. **Customize Colors** - Adjust primary, secondary, and accent colors
+3. **Preview Components** - See your theme applied to various UI elements
+4. **Export Theme** - Copy CSS or download as a file
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 dynamic-tools/
-├── index.html              # Main application file
+├── index.html                 # Main application
 ├── assets/
-│   ├── css/
-│   │   └── styles.css     # Custom styles
-│   └── js/
-│       └── theme-generator.js  # Application logic
-├── .github/
-│   └── workflows/
-│       └── deploy.yml     # GitHub Pages deployment
-└── README.md              # This file
+│   ├── js/
+│   │   ├── theme-generator.js # Core theme logic
+│   │   └── surprise-me.js     # Random theme generator
+│   └── css/
+│       └── styles.css          # Custom styles
+└── test-dynamic-theme.html    # Theme testing page
 ```
 
-## 🛠️ Technologies Used
+## Integration
 
-- **Bootstrap 5.3**: CSS framework for components
-- **Font Awesome 6.4**: Icon library
-- **Vanilla JavaScript**: No dependencies, pure JS
-- **GitHub Pages**: Free hosting solution
-- **GitHub Actions**: Automated deployment
+### Basic Implementation
+```html
+<!-- Add generated CSS to your project -->
+<link rel="stylesheet" href="path/to/your-theme.css">
+```
 
-## 📝 Usage Guide
+### CSS Variables
+The generator creates Bootstrap-compatible CSS variables:
+```css
+:root {
+  --bs-primary: #your-color;
+  --bs-secondary: #your-color;
+  --bs-success: #your-color;
+  /* ... more variables */
+}
+```
 
-### Customizing Colors
-1. Use the color pickers in the sidebar to select your brand colors
-2. Type hex values directly for precise color matching
-3. See changes reflected instantly in all components
+## Available Presets
 
-### Typography & Spacing
-- Adjust font size and line height for better readability
-- Customize border radius for different design styles (sharp, rounded, pill)
+- **Default** - Classic Bootstrap theme
+- **Fintech Blue** - Professional financial services
+- **AI Startup** - Modern tech aesthetic
+- **Healthcare** - Medical and wellness
+- **E-commerce** - Retail and shopping
+- **Education** - Learning platforms
+- **Real Estate** - Property and housing
+- **Dark Mode** - Night-friendly theme
+- **High Contrast** - Accessibility focused
+- **Minimalist** - Clean and simple
 
-### Exporting Your Theme
-1. Click "Ver CSS Generado" to open the CSS modal
-2. Copy the CSS to clipboard or download as a file
-3. Include the CSS in your Bootstrap project
+## Browser Support
 
-### Using Presets
-1. Click "¡Sorpréndeme!" to explore random professional themes
-2. Each preset is optimized for specific industries
-3. Use presets as starting points and customize further
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-## 🚢 Deployment
+## Dependencies
 
-The project automatically deploys to GitHub Pages when you push to the main branch.
+All dependencies are loaded via CDN:
+- Bootstrap 5.3.0
+- Font Awesome 6.4.0
+- Google Fonts (Inter)
 
-### Setup GitHub Pages
-1. Go to Settings → Pages in your GitHub repository
-2. Set Source to "GitHub Actions"
-3. Push changes to main branch
-4. Your site will be available at `https://[your-username].github.io/dynamic-tools/`
+## Deployment
 
-## 🤝 Contributing
+The project automatically deploys to GitHub Pages when changes are pushed to the main branch.
 
-Contributions are welcome! Feel free to:
-- Add new theme presets
-- Improve the UI/UX
-- Add more Bootstrap components
-- Fix bugs or improve performance
+## Contributing
 
-## 📄 License
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-This project is open source and available under the MIT License.
+## License
 
-## 🙏 Credits
+This project is part of the Dynamic Framework ecosystem. For licensing information, please contact the Dynamic Framework team.
 
-Created with Bootstrap, Font Awesome, and lots of ☕
+## Support
+
+For issues, questions, or suggestions, please open an issue on GitHub.
 
 ---
 
-Made with ❤️ for the design community
+Built with ❤️ by [Dynamic Framework](https://dynamicframework.dev)
