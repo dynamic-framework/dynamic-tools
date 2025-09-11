@@ -5,9 +5,10 @@ let cssValidator = null;
 
 // Initialize validator
 class CSSValidator {
-  constructor() {
+  constructor(strictMode = false) {
+    this.strictMode = strictMode; // Disable strict mode by default for Dynamic Framework
     this.knownVariables = new Set([
-      // Core Bootstrap colors
+      // Core Bootstrap colors and Dynamic Framework extended colors
       '--bs-primary', '--bs-primary-rgb',
       '--bs-secondary', '--bs-secondary-rgb',
       '--bs-success', '--bs-success-rgb',
@@ -17,23 +18,140 @@ class CSSValidator {
       '--bs-light', '--bs-light-rgb',
       '--bs-dark', '--bs-dark-rgb',
       
+      // Extended color palette for Dynamic Framework
+      '--bs-blue', '--bs-blue-rgb',
+      '--bs-indigo', '--bs-indigo-rgb',
+      '--bs-purple', '--bs-purple-rgb',
+      '--bs-pink', '--bs-pink-rgb',
+      '--bs-red', '--bs-red-rgb',
+      '--bs-orange', '--bs-orange-rgb',
+      '--bs-yellow', '--bs-yellow-rgb',
+      '--bs-green', '--bs-green-rgb',
+      '--bs-teal', '--bs-teal-rgb',
+      '--bs-cyan', '--bs-cyan-rgb',
+      '--bs-black', '--bs-black-rgb',
+      '--bs-white', '--bs-white-rgb',
+      '--bs-gray', '--bs-gray-rgb',
+      '--bs-gray-dark', '--bs-gray-dark-rgb',
+      
+      // Gray scale variants
+      '--bs-gray-25', '--bs-gray-25-rgb',
+      '--bs-gray-50', '--bs-gray-50-rgb',
+      '--bs-gray-100', '--bs-gray-100-rgb',
+      '--bs-gray-200', '--bs-gray-200-rgb',
+      '--bs-gray-300', '--bs-gray-300-rgb',
+      '--bs-gray-400', '--bs-gray-400-rgb',
+      '--bs-gray-500', '--bs-gray-500-rgb',
+      '--bs-gray-600', '--bs-gray-600-rgb',
+      '--bs-gray-700', '--bs-gray-700-rgb',
+      '--bs-gray-800', '--bs-gray-800-rgb',
+      '--bs-gray-900', '--bs-gray-900-rgb',
+      
+      // Surface colors
+      '--bs-surface-gray', '--bs-surface-gray-rgb',
+      '--bs-surface-primary', '--bs-surface-primary-rgb',
+      '--bs-surface-secondary', '--bs-surface-secondary-rgb',
+      '--bs-surface-success', '--bs-surface-success-rgb',
+      '--bs-surface-info', '--bs-surface-info-rgb',
+      '--bs-surface-warning', '--bs-surface-warning-rgb',
+      '--bs-surface-danger', '--bs-surface-danger-rgb',
+      
+      // Soft colors
+      '--bs-gray-soft', '--bs-gray-soft-rgb',
+      '--bs-primary-soft', '--bs-primary-soft-rgb',
+      '--bs-secondary-soft', '--bs-secondary-soft-rgb',
+      '--bs-success-soft', '--bs-success-soft-rgb',
+      '--bs-info-soft', '--bs-info-soft-rgb',
+      '--bs-warning-soft', '--bs-warning-soft-rgb',
+      '--bs-danger-soft', '--bs-danger-soft-rgb',
+      
+      // Color scales (25-900 for primary, secondary, success, info, warning, danger)
+      ...this.generateColorScales(),
+      
       // Typography
       '--bs-font-family', '--bs-heading-font-family',
-      '--bs-body-font-size', '--bs-body-font-weight',
+      '--bs-font-sans-serif', '--bs-font-monospace',
+      '--bs-body-font-family', '--bs-body-font-size', '--bs-body-font-weight',
       '--bs-body-line-height', '--bs-letter-spacing',
+      '--bs-root-font-size', '--bs-gradient',
       '--bs-h1-font-size', '--bs-h2-font-size', '--bs-h3-font-size',
       '--bs-h4-font-size', '--bs-h5-font-size', '--bs-h6-font-size',
-      '--bs-heading-font-weight', '--bs-heading-line-height',
+      '--bs-heading-font-weight', '--bs-heading-line-height', '--bs-heading-color',
+      
+      // Font sizes
+      '--bs-fs-1', '--bs-fs-2', '--bs-fs-3', '--bs-fs-4', '--bs-fs-5', '--bs-fs-6',
+      '--bs-fs-small', '--bs-fs-body-large', '--bs-fs-body-medium', 
+      '--bs-fs-body-normal', '--bs-fs-body-small', '--bs-fs-body-tiny',
+      '--bs-fs-display-1', '--bs-fs-display-2', '--bs-fs-display-3',
+      '--bs-fs-display-4', '--bs-fs-display-5', '--bs-fs-display-6',
+      
+      // RFS variants
+      '--bs-rfs-fs-1', '--bs-rfs-fs-2', '--bs-rfs-fs-3', '--bs-rfs-fs-4', 
+      '--bs-rfs-fs-5', '--bs-rfs-fs-6', '--bs-rfs-fs-small',
+      '--bs-rfs-fs-body-large', '--bs-rfs-fs-body-medium', '--bs-rfs-fs-body-normal',
+      '--bs-rfs-fs-body-small', '--bs-rfs-fs-body-tiny',
+      '--bs-rfs-display-1', '--bs-rfs-display-2', '--bs-rfs-display-3',
+      '--bs-rfs-display-4', '--bs-rfs-display-5', '--bs-rfs-display-6',
+      
+      // Font weights
+      '--bs-fw-lighter', '--bs-fw-light', '--bs-fw-normal',
+      '--bs-fw-semibold', '--bs-fw-bold', '--bs-fw-bolder',
+      
+      // Line heights
+      '--bs-lh-base', '--bs-lh-sm', '--bs-lh-lg',
       
       // Borders and shadows
       '--bs-border-radius', '--bs-border-radius-sm', '--bs-border-radius-lg',
-      '--bs-border-width', '--bs-border-color',
+      '--bs-border-radius-xl', '--bs-border-radius-xxl', '--bs-border-radius-2xl',
+      '--bs-border-radius-pill', '--bs-border-width', '--bs-border-color',
+      '--bs-border-style', '--bs-border-color-translucent',
       '--bs-box-shadow', '--bs-box-shadow-sm', '--bs-box-shadow-lg',
+      '--bs-box-shadow-inset',
       
-      // Body
+      // Body and text
       '--bs-body-bg', '--bs-body-bg-rgb',
       '--bs-body-color', '--bs-body-color-rgb',
       '--bs-emphasis-color', '--bs-emphasis-color-rgb',
+      '--bs-secondary-color', '--bs-secondary-color-rgb',
+      '--bs-secondary-bg', '--bs-secondary-bg-rgb',
+      '--bs-tertiary-color', '--bs-tertiary-color-rgb',
+      '--bs-tertiary-bg', '--bs-tertiary-bg-rgb',
+      '--bs-code-color', '--bs-code-color-rgb',
+      '--bs-highlight-bg',
+      
+      // Text emphasis and backgrounds
+      '--bs-primary-text-emphasis', '--bs-secondary-text-emphasis',
+      '--bs-success-text-emphasis', '--bs-info-text-emphasis',
+      '--bs-warning-text-emphasis', '--bs-danger-text-emphasis',
+      '--bs-light-text-emphasis', '--bs-dark-text-emphasis',
+      '--bs-primary-bg-subtle', '--bs-secondary-bg-subtle',
+      '--bs-success-bg-subtle', '--bs-info-bg-subtle',
+      '--bs-warning-bg-subtle', '--bs-danger-bg-subtle',
+      '--bs-light-bg-subtle', '--bs-dark-bg-subtle',
+      '--bs-primary-border-subtle', '--bs-secondary-border-subtle',
+      '--bs-success-border-subtle', '--bs-info-border-subtle',
+      '--bs-warning-border-subtle', '--bs-danger-border-subtle',
+      '--bs-light-border-subtle', '--bs-dark-border-subtle',
+      
+      // Focus ring
+      '--bs-focus-ring-width', '--bs-focus-ring-opacity',
+      '--bs-focus-ring-border-color-rgb', '--bs-focus-ring-border-color',
+      '--bs-focus-ring-base-color-rgb', '--bs-focus-ring-base-color',
+      '--bs-focus-ring-color',
+      
+      // Forms
+      '--bs-form-valid-color', '--bs-form-valid-border-color',
+      '--bs-form-invalid-color', '--bs-form-invalid-border-color',
+      '--bs-form-feedback-icon-valid', '--bs-form-feedback-icon-invalid',
+      
+      // Labels
+      '--bs-label-padding-y', '--bs-label-padding-x',
+      '--bs-label-margin-bottom', '--bs-label-font-size',
+      '--bs-label-font-weight', '--bs-label-color',
+      
+      // Button variables
+      '--bs-btn-border-radius', '--bs-btn-lg-border-radius', '--bs-btn-sm-border-radius',
+      ...this.generateButtonVariables(),
       
       // Links
       '--bs-link-color', '--bs-link-color-rgb',
@@ -45,8 +163,66 @@ class CSSValidator {
       '--bs-nav-link-color', '--bs-nav-link-hover-color',
       '--bs-nav-tabs-border-color', '--bs-nav-tabs-link-active-color',
       '--bs-navbar-color', '--bs-navbar-hover-color',
-      '--bs-navbar-active-color', '--bs-navbar-brand-color'
+      '--bs-navbar-active-color', '--bs-navbar-brand-color',
+      
+      // Spacers
+      ...Array.from({length: 31}, (_, i) => `--bs-ref-spacer-${i}`),
+      
+      // Accordion
+      '--bs-default-placeholder-bg',
+      '--bs-default-accordion-padding-x', '--bs-default-accordion-padding-y',
+      '--bs-default-accordion-color', '--bs-default-accordion-bg',
+      '--bs-default-accordion-transition', '--bs-default-accordion-border-color',
+      '--bs-default-accordion-border-width', '--bs-default-accordion-border-radius',
+      '--bs-default-accordion-inner-border-radius',
+      '--bs-default-accordion-btn-padding-x', '--bs-default-accordion-btn-padding-y',
+      '--bs-default-accordion-btn-color', '--bs-default-accordion-btn-bg',
+      '--bs-default-accordion-btn-icon', '--bs-default-accordion-btn-icon-width',
+      '--bs-default-accordion-btn-icon-transform', '--bs-default-accordion-btn-icon-transition',
+      '--bs-default-accordion-btn-active-icon', '--bs-default-accordion-btn-focus-box-shadow',
+      '--bs-default-accordion-btn-font-weight', '--bs-default-accordion-btn-font-size',
+      '--bs-default-accordion-body-padding-top', '--bs-default-accordion-body-padding-x',
+      '--bs-default-accordion-body-padding-y',
+      '--bs-default-accordion-active-color', '--bs-default-accordion-active-bg'
     ]);
+  }
+  
+  generateColorScales() {
+    const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
+    const scales = ['25', '50', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
+    const result = [];
+    
+    colors.forEach(color => {
+      scales.forEach(scale => {
+        result.push(`--bs-${color}-${scale}`);
+        result.push(`--bs-${color}-${scale}-rgb`);
+      });
+    });
+    
+    return result;
+  }
+  
+  generateButtonVariables() {
+    const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark'];
+    const variants = ['', 'outline-', 'link-'];
+    const states = [
+      'color', 'bg', 'border-color', 'box-shadow',
+      'hover-color', 'hover-bg', 'hover-border-color',
+      'focus-color', 'focus-bg', 'focus-border-color', 'focus-shadow-rgb',
+      'active-color', 'active-bg', 'active-border-color', 'active-box-shadow',
+      'disabled-color', 'disabled-bg', 'disabled-border-color', 'disabled-opacity'
+    ];
+    const result = [];
+    
+    colors.forEach(color => {
+      variants.forEach(variant => {
+        states.forEach(state => {
+          result.push(`--bs-btn-${variant}${color}-${state}`);
+        });
+      });
+    });
+    
+    return result;
   }
   
   validate(cssText) {
@@ -54,17 +230,18 @@ class CSSValidator {
     const warnings = [];
     const variables = {};
     
-    // Extract :root section
-    const rootMatch = cssText.match(/:root\s*{([^}]*)}/);
+    // Extract :root section - support various Dynamic Framework selector formats
+    // More flexible regex that matches any selector containing :root
+    const rootMatch = cssText.match(/([^{]*:root[^{]*)\s*{([^}]*)}/s);
     if (!rootMatch) {
       errors.push({
         type: 'structure',
-        message: 'No :root selector found. CSS variables must be defined within :root { }'
+        message: 'No :root selector found. CSS variables must be defined within :root { } or [data-bs-theme] :root { }'
       });
       return { variables, errors, warnings };
     }
     
-    const content = rootMatch[1];
+    const content = rootMatch[2]; // Use the second capture group for the content
     
     // Parse variables
     const varRegex = /(--[\w-]+):\s*([^;]+);/g;
@@ -74,12 +251,13 @@ class CSSValidator {
       const [, name, value] = match;
       variables[name] = value.trim();
       
-      // Check if it's a known variable
-      if (!this.knownVariables.has(name) && name.startsWith('--bs-')) {
+      // Check if it's a known variable (only warn if strict mode is enabled)
+      // For Dynamic Framework, we allow many extended variables
+      if (!this.knownVariables.has(name) && name.startsWith('--bs-') && this.strictMode) {
         warnings.push({
           type: 'unknown',
           variable: name,
-          message: `"${name}" is not a standard Bootstrap variable`
+          message: `"${name}" is not a standard Bootstrap/Dynamic Framework variable`
         });
       }
     }
@@ -132,6 +310,19 @@ class CSSValidator {
   }
   
   isColorVariable(name) {
+    // Variables that are NOT colors despite their names
+    const nonColorVariables = [
+      'box-shadow', 'opacity', 'weight', 'width', 'height', 'size', 'radius',
+      'padding', 'margin', 'font', 'line', 'letter', 'spacing', 'index', 'duration',
+      'delay', 'timing', 'transition', 'transform', 'scale', 'rotate', 'translate'
+    ];
+    
+    // Check if variable contains non-color keywords
+    if (nonColorVariables.some(keyword => name.includes(keyword))) {
+      return false;
+    }
+    
+    // Check for actual color variables
     return name.includes('color') || 
            ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'].some(color => 
              name.includes(color) && !name.endsWith('-rgb')
@@ -141,27 +332,38 @@ class CSSValidator {
   isValidColor(value) {
     const cleanValue = value.trim();
     
+    // For non-color variables that got through, accept any value
+    if (cleanValue === 'transparent' || cleanValue === '0 0 0 transparent' || 
+        cleanValue === 'none' || cleanValue === 'lighter' || 
+        /^\d+$/.test(cleanValue) || /^[\d.]+$/.test(cleanValue)) {
+      return true;
+    }
+    
     // Basic color patterns
     const patterns = [
       /^#[0-9A-F]{6}$/i,                                    // #hex6
       /^#[0-9A-F]{3}$/i,                                    // #hex3
+      /^#[0-9A-F]{8}$/i,                                    // #hex8 with alpha
       /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/,          // rgb(r,g,b)
       /^rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)$/, // rgba(r,g,b,a)
       /^hsl\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*\)$/,        // hsl(h,s,l)
       /^hsla\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*,\s*[\d.]+\s*\)$/, // hsla(h,s,l,a)
       /^var\(--[\w-]+\)$/,                                  // var(--variable)
       /^rgb\(\s*var\(--[\w-]+\)\s*\)$/,                    // rgb(var(--rgb-variable))
-      /^rgba\(\s*var\(--[\w-]+\)\s*,\s*[\d.]+\s*\)$/      // rgba(var(--rgb-var), alpha)
+      /^rgba\(\s*var\(--[\w-]+\)\s*,\s*[\w\s(),.-]+\)$/   // rgba with complex var
     ];
     
     // CSS color keywords
     const colorKeywords = [
       'transparent', 'currentColor', 'inherit', 'initial', 'unset',
-      'red', 'green', 'blue', 'white', 'black', 'gray', 'grey'
+      'red', 'green', 'blue', 'white', 'black', 'gray', 'grey',
+      'silver', 'maroon', 'olive', 'lime', 'aqua', 'teal', 'navy',
+      'fuchsia', 'purple', 'yellow', 'orange'
     ];
     
     return patterns.some(pattern => pattern.test(cleanValue)) || 
-           colorKeywords.includes(cleanValue.toLowerCase());
+           colorKeywords.includes(cleanValue.toLowerCase()) ||
+           this.isCSSDFunction(value);  // Accept any CSS function
   }
   
   isValidRGB(value) {
@@ -183,14 +385,26 @@ class CSSValidator {
     const functionPatterns = [
       /^var\(--[\w-]+\)$/,                                  // var(--variable)
       /^rgb\(\s*var\(--[\w-]+\)\s*\)$/,                    // rgb(var(--variable))
-      /^rgba\(\s*var\(--[\w-]+\)\s*,\s*[\d.]+\s*\)$/,     // rgba(var(--variable), alpha)
+      /^rgba\([^)]+\)$/,                                    // rgba with any content
       /^calc\([^)]+\)$/,                                    // calc(expression)
       /^color-mix\([^)]+\)$/,                              // color-mix()
       /^hsl\(\s*var\(--[\w-]+\)\s*\)$/,                    // hsl(var(--variable))
-      /^hsla\(\s*var\(--[\w-]+\)\s*,\s*[\d.]+\s*\)$/      // hsla(var(--variable), alpha)
+      /^hsla\([^)]+\)$/,                                    // hsla with any content
+      /^url\([^)]+\)$/,                                     // url() for images
+      /^linear-gradient\([^)]+\)$/,                        // gradients
+      /^radial-gradient\([^)]+\)$/,
+      /^conic-gradient\([^)]+\)$/,
+      /^min\([^)]+\)$/,                                     // CSS math functions
+      /^max\([^)]+\)$/,
+      /^clamp\([^)]+\)$/
     ];
     
-    return functionPatterns.some(pattern => pattern.test(cleanValue));
+    // Check if it contains any CSS function keyword
+    const functionKeywords = ['var(', 'rgb(', 'rgba(', 'hsl(', 'hsla(', 'calc(', 
+                             'url(', 'gradient(', 'min(', 'max(', 'clamp('];
+    
+    return functionPatterns.some(pattern => pattern.test(cleanValue)) ||
+           functionKeywords.some(keyword => cleanValue.includes(keyword));
   }
 }
 

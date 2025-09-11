@@ -805,6 +805,15 @@ function generateCss() {
         '--bs-hover-scale': getValue('hoverScale', '1.02'),
         '--bs-animation-intensity': getValue('animationIntensity', 'normal'),
         
+        // Dynamic Framework specific variables
+        '--bs-badge-bg': getValue('primary', '#d81b60'),
+        '--bs-badge-color': '#fff',
+        '--bs-badge-font-size': '0.75em',
+        '--bs-badge-font-weight': '700',
+        '--bs-badge-padding-x': '0.65em',
+        '--bs-badge-padding-y': '0.35em',
+        '--bs-badge-border-radius': getValue('borderRadius', 6) / 16 + 'rem',
+        
         // Links & Focus States
         '--bs-link-color': document.getElementById('linkColor')?.value || '#d81b60',
         '--bs-link-hover-color': document.getElementById('linkHoverColor')?.value || '#0a58ca',
@@ -847,6 +856,20 @@ function generateCss() {
     cssOutput += `.btn-warning {\n    background-color: var(--bs-warning);\n    border-color: var(--bs-warning);\n}\n\n`;
     cssOutput += `.btn-info {\n    background-color: var(--bs-info);\n    border-color: var(--bs-info);\n}\n\n`;
     
+    cssOutput += '/* Outline Buttons */\n';
+    cssOutput += `.btn-outline-primary { color: var(--bs-primary); border-color: var(--bs-primary); }\n`;
+    cssOutput += `.btn-outline-primary:hover { background-color: var(--bs-primary); border-color: var(--bs-primary); }\n`;
+    cssOutput += `.btn-outline-secondary { color: var(--bs-secondary); border-color: var(--bs-secondary); }\n`;
+    cssOutput += `.btn-outline-secondary:hover { background-color: var(--bs-secondary); border-color: var(--bs-secondary); }\n`;
+    cssOutput += `.btn-outline-success { color: var(--bs-success); border-color: var(--bs-success); }\n`;
+    cssOutput += `.btn-outline-success:hover { background-color: var(--bs-success); border-color: var(--bs-success); }\n`;
+    cssOutput += `.btn-outline-danger { color: var(--bs-danger); border-color: var(--bs-danger); }\n`;
+    cssOutput += `.btn-outline-danger:hover { background-color: var(--bs-danger); border-color: var(--bs-danger); }\n`;
+    cssOutput += `.btn-outline-warning { color: var(--bs-warning); border-color: var(--bs-warning); }\n`;
+    cssOutput += `.btn-outline-warning:hover { background-color: var(--bs-warning); border-color: var(--bs-warning); }\n`;
+    cssOutput += `.btn-outline-info { color: var(--bs-info); border-color: var(--bs-info); }\n`;
+    cssOutput += `.btn-outline-info:hover { background-color: var(--bs-info); border-color: var(--bs-info); }\n\n`;
+    
     cssOutput += '/* Text Colors */\n';
     cssOutput += `.text-primary { color: var(--bs-primary) !important; }\n`;
     cssOutput += `.text-secondary { color: var(--bs-secondary) !important; }\n`;
@@ -862,6 +885,49 @@ function generateCss() {
     cssOutput += `.bg-danger { background-color: var(--bs-danger) !important; }\n`;
     cssOutput += `.bg-warning { background-color: var(--bs-warning) !important; }\n`;
     cssOutput += `.bg-info { background-color: var(--bs-info) !important; }\n\n`;
+    
+    cssOutput += '/* Text-Background Utility Classes (Bootstrap 5.2+) */\n';
+    cssOutput += `.text-bg-primary { color: #fff !important; background-color: var(--bs-primary) !important; }\n`;
+    cssOutput += `.text-bg-secondary { color: #fff !important; background-color: var(--bs-secondary) !important; }\n`;
+    cssOutput += `.text-bg-success { color: #fff !important; background-color: var(--bs-success) !important; }\n`;
+    cssOutput += `.text-bg-danger { color: #fff !important; background-color: var(--bs-danger) !important; }\n`;
+    cssOutput += `.text-bg-warning { color: #000 !important; background-color: var(--bs-warning) !important; }\n`;
+    cssOutput += `.text-bg-info { color: #000 !important; background-color: var(--bs-info) !important; }\n`;
+    cssOutput += `.text-bg-light { color: #000 !important; background-color: var(--bs-light) !important; }\n`;
+    cssOutput += `.text-bg-dark { color: #fff !important; background-color: var(--bs-dark) !important; }\n\n`;
+    
+    cssOutput += '/* Border Utility Classes */\n';
+    cssOutput += `.border-primary { border-color: var(--bs-primary) !important; }\n`;
+    cssOutput += `.border-secondary { border-color: var(--bs-secondary) !important; }\n`;
+    cssOutput += `.border-success { border-color: var(--bs-success) !important; }\n`;
+    cssOutput += `.border-danger { border-color: var(--bs-danger) !important; }\n`;
+    cssOutput += `.border-warning { border-color: var(--bs-warning) !important; }\n`;
+    cssOutput += `.border-info { border-color: var(--bs-info) !important; }\n`;
+    cssOutput += `.border-light { border-color: var(--bs-light) !important; }\n`;
+    cssOutput += `.border-dark { border-color: var(--bs-dark) !important; }\n\n`;
+    
+    cssOutput += '/* Dynamic Framework Badge Components */\n';
+    cssOutput += `.badge {\n`;
+    cssOutput += `    background-color: var(--bs-badge-bg) !important;\n`;
+    cssOutput += `    color: var(--bs-badge-color) !important;\n`;
+    cssOutput += `    font-size: var(--bs-badge-font-size) !important;\n`;
+    cssOutput += `    font-weight: var(--bs-badge-font-weight) !important;\n`;
+    cssOutput += `    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x) !important;\n`;
+    cssOutput += `    border-radius: var(--bs-badge-border-radius) !important;\n`;
+    cssOutput += `}\n\n`;
+    
+    cssOutput += '/* Dynamic Framework Alert Components - Use body text color */\n';
+    cssOutput += `.alert {\n`;
+    cssOutput += `    color: var(--bs-body-color) !important;\n`;
+    cssOutput += `}\n`;
+    cssOutput += `.alert-primary { background-color: rgba(var(--bs-primary-rgb), 0.1); border-color: rgba(var(--bs-primary-rgb), 0.2); color: var(--bs-body-color) !important; }\n`;
+    cssOutput += `.alert-secondary { background-color: rgba(var(--bs-secondary-rgb), 0.1); border-color: rgba(var(--bs-secondary-rgb), 0.2); color: var(--bs-body-color) !important; }\n`;
+    cssOutput += `.alert-success { background-color: rgba(var(--bs-success-rgb), 0.1); border-color: rgba(var(--bs-success-rgb), 0.2); color: var(--bs-body-color) !important; }\n`;
+    cssOutput += `.alert-danger { background-color: rgba(var(--bs-danger-rgb), 0.1); border-color: rgba(var(--bs-danger-rgb), 0.2); color: var(--bs-body-color) !important; }\n`;
+    cssOutput += `.alert-warning { background-color: rgba(var(--bs-warning-rgb), 0.1); border-color: rgba(var(--bs-warning-rgb), 0.2); color: var(--bs-body-color) !important; }\n`;
+    cssOutput += `.alert-info { background-color: rgba(var(--bs-info-rgb), 0.1); border-color: rgba(var(--bs-info-rgb), 0.2); color: var(--bs-body-color) !important; }\n`;
+    cssOutput += `.alert-light { background-color: rgba(var(--bs-light-rgb), 0.1); border-color: rgba(var(--bs-light-rgb), 0.2); color: var(--bs-body-color) !important; }\n`;
+    cssOutput += `.alert-dark { background-color: rgba(var(--bs-dark-rgb), 0.1); border-color: rgba(var(--bs-dark-rgb), 0.2); color: var(--bs-body-color) !important; }\n\n`;
     
     cssOutput += '/* Links & Focus */\n';
     cssOutput += `a {\n    color: var(--bs-link-color);\n    text-decoration: var(--bs-link-decoration);\n}\n\n`;
@@ -962,6 +1028,15 @@ function updateCssVariables() {
     root.style.setProperty('--bs-light-rgb', hexToRgbForTheme(document.getElementById('light').value));
     root.style.setProperty('--bs-dark', document.getElementById('dark').value);
     root.style.setProperty('--bs-dark-rgb', hexToRgbForTheme(document.getElementById('dark').value));
+    
+    // Dynamic Framework specific variables
+    root.style.setProperty('--bs-badge-bg', document.getElementById('primary').value);
+    root.style.setProperty('--bs-badge-color', '#fff');
+    root.style.setProperty('--bs-badge-font-size', '0.75em');
+    root.style.setProperty('--bs-badge-font-weight', '700');
+    root.style.setProperty('--bs-badge-padding-x', '0.65em');
+    root.style.setProperty('--bs-badge-padding-y', '0.35em');
+    root.style.setProperty('--bs-badge-border-radius', (document.getElementById('borderRadius').value / 16) + 'rem');
     
     // Typography
     root.style.setProperty('--bs-font-family', document.getElementById('fontFamily').value);

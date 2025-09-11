@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test React</title>
+</head>
+<body>
+    <h1>React Test</h1>
+    <div id="root"></div>
+    
+    <!-- Load React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <script>
+        console.log('React loaded?', !!window.React);
+        console.log('ReactDOM loaded?', !!window.ReactDOM);
+        
+        if (window.React && window.ReactDOM) {
+            const e = React.createElement;
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            
+            root.render(
+                e('div', {style: {padding: '20px', background: '#d81b60', color: 'white'}}, 
+                    'Hello from React! If you see this, React is working.'
+                )
+            );
+        }
+    </script>
+</body>
+</html>

@@ -1,43 +1,59 @@
 // react-preview.js
-(async function initReactPreview() {
+console.log('📁 react-preview.js loaded');
+
+// Wait for DOM to be ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initReactPreview);
+} else {
+  // DOM is already ready
+  initReactPreview();
+}
+
+async function initReactPreview() {
   console.log('🚀 Starting React Preview initialization...');
+  console.log('React available?', typeof window.React !== 'undefined');
+  console.log('ReactDOM available?', typeof window.ReactDOM !== 'undefined');
   
   let React, ReactDOM, DynamicUI;
   
   try {
-    // Skip ESM for now and use UMD directly for better compatibility
-    console.log('🔄 Loading React via UMD scripts...');
+    // Use React from window (already loaded by UMD scripts)
+    if (window.React && window.ReactDOM) {
+      React = window.React;
+      ReactDOM = window.ReactDOM;
+      console.log('✅ React and ReactDOM available from window');
+    } else {
+      throw new Error('React or ReactDOM not available on window');
+    }
     
-    // Wait for UMD scripts to load
-    await new Promise((resolve, reject) => {
-      let attempts = 0;
-      const maxAttempts = 50; // 5 seconds max wait
+    // Try to load real Dynamic Framework components
+    console.log('🔄 Attempting to load Dynamic Framework components...');
+    
+    try {
+      // Try to load real Dynamic Framework components from ESM
+      const dynamicModule = await loadDynamicFrameworkComponents();
       
-      const checkUMD = () => {
-        attempts++;
-        
-        if (window.React && window.ReactDOM) {
-          React = window.React;
-          ReactDOM = window.ReactDOM;
-          console.log('✅ React and ReactDOM loaded via UMD');
-          resolve();
-        } else if (attempts >= maxAttempts) {
-          reject(new Error('React UMD scripts failed to load after 5 seconds'));
-        } else {
-          setTimeout(checkUMD, 100);
-        }
-      };
+      if (dynamicModule && Object.keys(dynamicModule).length > 0) {
+        console.log('✅ Real Dynamic Framework components loaded:', Object.keys(dynamicModule));
+        DynamicUI = dynamicModule;
+        window.usingRealDynamic = true;
+      } else {
+        throw new Error('Dynamic Framework ESM loaded but no components found');
+      }
+    } catch (error) {
+      console.log('⚠️ Could not load real Dynamic Framework, using mock components');
+      console.log('Error:', error.message);
+      window.usingRealDynamic = false;
       
-      checkUMD();
-    });
-    
-    // Skip Dynamic UI ESM import due to JSX runtime issues
-    // Create mock Dynamic UI components using Bootstrap classes
-    console.log('🔄 Creating Bootstrap-compatible React components...');
-    
-    DynamicUI = createMockDynamicUI(React);
-    
-    console.log('✅ Mock Dynamic UI components created:', Object.keys(DynamicUI));
+      DynamicUI = createMockDynamicUI(React);
+      
+      if (!DynamicUI) {
+        console.error('❌ Failed to create mock Dynamic UI components');
+        DynamicUI = {}; // Fallback to empty object
+      } else {
+        console.log('✅ Mock Dynamic UI components created:', Object.keys(DynamicUI));
+      }
+    }
     
     // Make available globally
     window.React = React;
@@ -53,7 +69,34 @@
     console.error('❌ Error loading React modules:', error);
     showReactLoadError(error);
   }
-})();
+}
+
+// Function to load Dynamic Framework components
+async function loadDynamicFrameworkComponents() {
+  console.log('🔄 Loading Dynamic Framework React components from ESM...');
+  
+  // Load the specific ESM distribution
+  const dynamicEsmUrl = 'https://unpkg.com/@dynamic-framework/ui-react@1.36.2/dist/index.esm.js';
+  
+  try {
+    console.log(`🔄 Loading Dynamic Framework from: ${dynamicEsmUrl}`);
+    
+    // Use dynamic import for ESM modules
+    const dynamicModule = await import(dynamicEsmUrl);
+    
+    console.log('✅ Dynamic Framework ESM loaded successfully');
+    console.log('Available exports:', Object.keys(dynamicModule));
+    
+    // Store in window for global access
+    window.DynamicFramework = dynamicModule;
+    
+    return dynamicModule;
+    
+  } catch (error) {
+    console.error('❌ Failed to load Dynamic Framework ESM:', error);
+    throw error;
+  }
+}
 
 // Create mock Dynamic UI components using Bootstrap classes
 function createMockDynamicUI(React) {
@@ -96,20 +139,50 @@ function createMockDynamicUI(React) {
     }, children);
   };
   
-  // DAlert component
+  // DAlert component - Updated for Dynamic Framework styling
   const DAlert = ({ theme = 'primary', children, showClose = true, ...props }) => {
+    const style = {
+      // Dynamic Framework alerts use body text color
+      color: 'var(--bs-body-color)',
+      backgroundColor: `rgba(var(--bs-${theme}-rgb), 0.1)`,
+      borderColor: `rgba(var(--bs-${theme}-rgb), 0.2)`,
+      ...props.style
+    };
+    
     return createElement('div', {
       className: `alert alert-${theme}${showClose ? ' alert-dismissible' : ''}`,
       role: 'alert',
+      style,
       ...props
     }, children);
   };
   
-  // DBadge component
+  // DBadge component - Updated to use Dynamic Framework styling
   const DBadge = ({ theme = 'primary', text, children, soft = false, ...props }) => {
-    const className = soft ? `badge text-bg-${theme} bg-opacity-25 text-${theme}` : `badge text-bg-${theme}`;
+    // Use Dynamic Framework's badge classes and CSS variables
+    const className = `badge ${soft ? `text-${theme} bg-${theme}-subtle` : ''}`;
+    
+    const style = {
+      // Primary badge uses --bs-badge-bg for Dynamic Framework compatibility
+      backgroundColor: theme === 'primary' && !soft ? 
+        `var(--bs-badge-bg, var(--bs-${theme}))` : 
+        soft ? `var(--bs-${theme}-bg-subtle, rgba(var(--bs-${theme}-rgb, 13, 110, 253), 0.1))` : `var(--bs-${theme})`,
+      color: soft ? `var(--bs-${theme}-text-emphasis, var(--bs-${theme}))` : `var(--bs-badge-color, #fff)`,
+      fontSize: 'var(--bs-badge-font-size, 0.75em)',
+      fontWeight: 'var(--bs-badge-font-weight, 700)',
+      padding: 'var(--bs-badge-padding-y, 0.35em) var(--bs-badge-padding-x, 0.65em)',
+      borderRadius: 'var(--bs-badge-border-radius, 0.375rem)',
+      display: 'inline-block',
+      lineHeight: '1',
+      textAlign: 'center',
+      whiteSpace: 'nowrap',
+      verticalAlign: 'baseline',
+      ...props.style
+    };
+    
     return createElement('span', {
       className,
+      style,
       ...props
     }, text || children);
   };
@@ -203,16 +276,169 @@ class ReactPreviewManager {
     try {
       const { React, ReactDOM, DynamicUI } = this;
       
-      // Extraer componentes específicos
-      const { 
-        DButton, 
-        DCard, 
-        DAlert, 
-        DBadge, 
-        DInput, 
-        DSelect,
-        DContextProvider 
-      } = DynamicUI;
+      // Check if we're using real Dynamic Framework components
+      const usingReal = window.usingRealDynamic;
+      console.log(`🎯 Rendering with ${usingReal ? 'REAL' : 'MOCK'} Dynamic Framework components`);
+      
+      if (usingReal) {
+        // Use real Dynamic Framework components
+        this.renderRealDynamicComponents();
+      } else {
+        // Use mock components
+        this.renderMockComponents();
+      }
+      
+    } catch (error) {
+      console.error('❌ Error rendering React components:', error);
+      this.showError(error);
+    }
+  }
+  
+  renderRealDynamicComponents() {
+    const { React, ReactDOM, DynamicUI } = this;
+    
+    console.log('🎯 Attempting to render REAL Dynamic Framework components');
+    console.log('DynamicUI keys:', Object.keys(DynamicUI || {}).slice(0, 10));
+    
+    // First, let's just render a simple React element to verify React works
+    const testElement = React.createElement('div', { className: 'alert alert-success' }, 
+      '✅ React is working! Now loading Dynamic Framework components...'
+    );
+    
+    // Clear and render test
+    this.container.innerHTML = '';
+    const root = ReactDOM.createRoot(this.container);
+    root.render(testElement);
+    
+    // Now try to extract Dynamic components
+    const {
+      Badge,
+      Button,
+      Card,
+      Alert,
+      Input,
+      Select,
+      DButton,
+      DBadge,
+      DCard,
+      // Try various possible naming conventions
+      ...otherComponents
+    } = DynamicUI || {};
+    
+    console.log('🎯 Component check:', {
+      Badge: !!Badge,
+      Button: !!Button,
+      DButton: !!DButton,
+      DBadge: !!DBadge,
+      hasAnyComponents: Object.keys(DynamicUI || {}).length > 0
+    });
+    
+    // If we have ANY components, try to use them
+    if (Object.keys(DynamicUI || {}).length > 0) {
+      setTimeout(() => {
+        const App = this.createRealDynamicApp(React, DynamicUI);
+        root.render(App);
+      }, 1000);
+    }
+  }
+  
+  createRealDynamicApp(React, components) {
+    const { Badge, Button, Card, Alert, Input } = components;
+    
+    return React.createElement('div', { className: 'preview-sections' }, [
+      
+      // Real Dynamic Framework Badges Section
+      Badge && React.createElement('div', { key: 'badges', className: 'mb-4' }, [
+        React.createElement('h4', { key: 'title', className: 'mb-3' }, 'Dynamic Framework Badges'),
+        React.createElement('p', { key: 'note', className: 'text-muted small mb-3' }, 
+          'Real Dynamic Framework Badge components using --bs-badge-bg CSS variable'),
+        React.createElement('div', { key: 'content', className: 'd-flex gap-2 flex-wrap' }, [
+          React.createElement(Badge, {
+            key: 'badge-primary',
+            theme: 'primary'
+          }, 'Primary Badge'),
+          React.createElement(Badge, {
+            key: 'badge-success',
+            theme: 'success'
+          }, 'Success Badge'),
+          React.createElement(Badge, {
+            key: 'badge-danger',
+            theme: 'danger'
+          }, 'Danger Badge'),
+          React.createElement(Badge, {
+            key: 'badge-warning',
+            theme: 'warning'
+          }, 'Warning Badge')
+        ])
+      ]),
+      
+      // Real Dynamic Framework Buttons Section
+      Button && React.createElement('div', { key: 'buttons', className: 'mb-4' }, [
+        React.createElement('h4', { key: 'title', className: 'mb-3' }, 'Dynamic Framework Buttons'),
+        React.createElement('div', { key: 'content', className: 'd-flex gap-2 flex-wrap' }, [
+          React.createElement(Button, {
+            key: 'btn-primary',
+            theme: 'primary'
+          }, 'Primary'),
+          React.createElement(Button, {
+            key: 'btn-secondary',
+            theme: 'secondary'
+          }, 'Secondary'),
+          React.createElement(Button, {
+            key: 'btn-success',
+            theme: 'success'
+          }, 'Success'),
+          React.createElement(Button, {
+            key: 'btn-danger',
+            theme: 'danger'
+          }, 'Danger')
+        ])
+      ]),
+      
+      // Real Dynamic Framework Card Section
+      Card && React.createElement('div', { key: 'cards', className: 'mb-4' }, [
+        React.createElement('h4', { key: 'title', className: 'mb-3' }, 'Dynamic Framework Cards'),
+        React.createElement('div', { key: 'content', className: 'row' }, [
+          React.createElement('div', { key: 'col1', className: 'col-md-6' }, 
+            React.createElement(Card, { key: 'card1' }, [
+              React.createElement('div', { key: 'header', className: 'card-header' }, 'Card Header'),
+              React.createElement('div', { key: 'body', className: 'card-body' }, [
+                React.createElement('h5', { key: 'title', className: 'card-title' }, 'Real Dynamic Card'),
+                React.createElement('p', { key: 'text', className: 'card-text' }, 
+                  'This card uses real Dynamic Framework components with theme colors')
+              ])
+            ])
+          )
+        ])
+      ]),
+      
+      // Fallback message if no recognizable components
+      !Badge && !Button && !Card && React.createElement('div', { key: 'fallback', className: 'alert alert-info' }, [
+        React.createElement('h5', { key: 'title' }, 'Dynamic Framework Loaded'),
+        React.createElement('p', { key: 'text' }, 
+          'Real Dynamic Framework components were loaded but with different naming conventions.'),
+        React.createElement('details', { key: 'details' }, [
+          React.createElement('summary', { key: 'summary' }, 'Available components:'),
+          React.createElement('pre', { key: 'list', className: 'mt-2 small' }, 
+            Object.keys(components).join(', '))
+        ])
+      ])
+    ]);
+  }
+  
+  renderMockComponents() {
+    const { React, ReactDOM, DynamicUI } = this;
+    
+    // Extraer componentes mock
+    const { 
+      DButton, 
+      DCard, 
+      DAlert, 
+      DBadge, 
+      DInput, 
+      DSelect,
+      DContextProvider 
+    } = DynamicUI;
       
       // Crear app con componentes
       const App = React.createElement('div', { className: 'preview-sections' }, [
@@ -296,9 +522,11 @@ class ReactPreviewManager {
           }, 'This is a primary alert using theme colors')
         ]),
         
-        // Sección Badges
+        // Sección Badges - Using Dynamic Framework CSS variables
         React.createElement('div', { key: 'badges', className: 'mb-4' }, [
           React.createElement('h4', { key: 'title', className: 'mb-3' }, 'Badges'),
+          React.createElement('p', { key: 'note', className: 'text-muted small mb-3' }, 
+            'These badges use Dynamic Framework CSS variables like --bs-badge-bg'),
           React.createElement('div', { key: 'content', className: 'd-flex gap-2 flex-wrap' }, [
             React.createElement(DBadge, {
               key: 'badge-primary',
@@ -365,16 +593,22 @@ class ReactPreviewManager {
       const root = ReactDOM.createRoot(this.container);
       root.render(AppWithContext);
       
-      console.log('✅ React components rendered successfully');
-      
-    } catch (error) {
-      console.error('❌ Error rendering React components:', error);
-      this.showError(error);
-    }
+      console.log('✅ Mock React components rendered successfully');
   }
   
   updateTheme() {
     console.log('🎨 Updating React theme...');
+    
+    // Log current CSS variables for debugging
+    const root = getComputedStyle(document.documentElement);
+    const primaryColor = root.getPropertyValue('--bs-primary').trim();
+    const badgeBg = root.getPropertyValue('--bs-badge-bg').trim();
+    
+    console.log('Current CSS variables:', {
+      '--bs-primary': primaryColor,
+      '--bs-badge-bg': badgeBg || 'not set, fallback to primary'
+    });
+    
     // Los componentes React usan las mismas variables CSS
     // Solo necesitamos re-renderizar para refrescar
     this.render();
