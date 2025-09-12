@@ -520,8 +520,10 @@ function applyCSSChanges() {
   // Update form inputs based on imported variables
   updateFormFromVariables(variables);
   
-  // Trigger theme update
-  if (window.updateTheme) {
+  // Trigger theme update - check for both possible update functions
+  if (window.updateCssVariables) {
+    window.updateCssVariables();
+  } else if (window.updateTheme) {
     window.updateTheme();
   }
   
@@ -537,6 +539,98 @@ function applyCSSChanges() {
       window.reactPreviewManager.updateTheme();
     }, 100);
   }
+}
+
+// Convert any CSS color format to hex
+function convertToHex(color) {
+  if (!color) return null;
+  
+  // Trim and clean the color value
+  color = color.trim();
+  
+  // If already hex, return as-is
+  if (/^#[0-9A-F]{6}$/i.test(color)) {
+    return color.toUpperCase();
+  }
+  
+  // If it's a short hex, expand it
+  if (/^#[0-9A-F]{3}$/i.test(color)) {
+    const r = color[1];
+    const g = color[2];
+    const b = color[3];
+    return '#' + r + r + g + g + b + b;
+  }
+  
+  // Handle rgb(var(--bs-*-rgb)) format
+  if (color.includes('rgb(var(')) {
+    // Extract the variable name and try to get its value
+    const varMatch = color.match(/var\((--bs-[\w-]+-rgb)\)/);
+    if (varMatch) {
+      const rgbVar = getComputedStyle(document.documentElement).getPropertyValue(varMatch[1]).trim();
+      if (rgbVar) {
+        const [r, g, b] = rgbVar.split(',').map(v => parseInt(v.trim()));
+        if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
+          return '#' + [r, g, b].map(x => {
+            const hex = x.toString(16).toUpperCase();
+            return hex.length === 1 ? '0' + hex : hex;
+          }).join('');
+        }
+      }
+    }
+  }
+  
+  // Named colors map (common CSS colors)
+  const namedColors = {
+    'green': '#008000',
+    'red': '#FF0000',
+    'blue': '#0000FF',
+    'yellow': '#FFFF00',
+    'cyan': '#00FFFF',
+    'magenta': '#FF00FF',
+    'black': '#000000',
+    'white': '#FFFFFF',
+    'gray': '#808080',
+    'grey': '#808080',
+    'orange': '#FFA500',
+    'purple': '#800080',
+    'brown': '#A52A2A',
+    'pink': '#FFC0CB',
+    'lime': '#00FF00',
+    'navy': '#000080',
+    'teal': '#008080',
+    'olive': '#808000',
+    'maroon': '#800000',
+    'aqua': '#00FFFF'
+  };
+  
+  // Check if it's a named color
+  if (namedColors[color.toLowerCase()]) {
+    return namedColors[color.toLowerCase()];
+  }
+  
+  // Try to compute the color using a temporary element
+  const tempElem = document.createElement('div');
+  tempElem.style.color = color;
+  tempElem.style.display = 'none';
+  document.body.appendChild(tempElem);
+  
+  const computedColor = getComputedStyle(tempElem).color;
+  document.body.removeChild(tempElem);
+  
+  // Parse rgb/rgba format
+  const rgbMatch = computedColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  if (rgbMatch) {
+    const r = parseInt(rgbMatch[1]);
+    const g = parseInt(rgbMatch[2]);
+    const b = parseInt(rgbMatch[3]);
+    return '#' + [r, g, b].map(x => {
+      const hex = x.toString(16).toUpperCase();
+      return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+  }
+  
+  // Return null if we couldn't convert the color
+  return null;
 }
 
 // Update form inputs from CSS variables
@@ -566,9 +660,15 @@ function updateFormFromVariables(variables) {
         if (cssVar.includes('color') || cssVar.includes('primary') || cssVar.includes('secondary') || 
             cssVar.includes('success') || cssVar.includes('danger') || cssVar.includes('warning') || 
             cssVar.includes('info') || cssVar.includes('light') || cssVar.includes('dark')) {
-          // Ensure hex format for color inputs
-          if (value.startsWith('#')) {
-            input.value = value;
+          // Convert color value to hex if possible
+          const hexColor = convertToHex(value);
+          if (hexColor) {
+            input.value = hexColor;
+            // Also update the associated text input if it exists
+            const textInput = input.nextElementSibling;
+            if (textInput && textInput.classList && textInput.classList.contains('color-value')) {
+              textInput.value = hexColor;
+            }
           }
         } else if (cssVar === '--bs-border-radius') {
           // Extract numeric value from rem/px

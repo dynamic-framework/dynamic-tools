@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dynamic Theme Color Changes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .test-section {
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            border: 2px solid #000;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Test Dynamic Theme Color Changes</h1>
+        
+        <div class="test-section">
+            <h2>Instructions:</h2>
+            <ol>
+                <li>Open the main application at <a href="index.html" target="_blank">index.html</a></li>
+                <li>Click on "Edit Mode" button in the CSS Code tab</li>
+                <li>Change <code>--bs-primary: #d81b60;</code> to <code>--bs-primary: green;</code></li>
+                <li>Click "Apply Changes"</li>
+                <li>Verify that primary color elements change to green</li>
+            </ol>
+        </div>
+
+        <div class="test-section">
+            <h2>Test Color Formats</h2>
+            <p>Test these different color formats in the CSS editor:</p>
+            <ul>
+                <li><code>green</code> - Named color</li>
+                <li><code>#00FF00</code> - Hex color</li>
+                <li><code>rgb(0, 255, 0)</code> - RGB format</li>
+                <li><code>rgba(0, 255, 0, 1)</code> - RGBA format</li>
+                <li><code>hsl(120, 100%, 50%)</code> - HSL format</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>Current Primary Color</h2>
+            <div class="color-box" style="background-color: var(--bs-primary);"></div>
+            <p>CSS Variable: <code id="primary-var">--</code></p>
+            <button class="btn btn-primary">Primary Button</button>
+            <span class="badge bg-primary ms-2">Primary Badge</span>
+        </div>
+
+        <div class="test-section">
+            <h2>Apply Test Colors</h2>
+            <button onclick="applyTestColor('green')" class="btn btn-sm btn-success">Apply Green</button>
+            <button onclick="applyTestColor('#FF0000')" class="btn btn-sm btn-danger">Apply Red</button>
+            <button onclick="applyTestColor('rgb(0, 0, 255)')" class="btn btn-sm btn-info">Apply Blue (RGB)</button>
+            <button onclick="applyTestColor('#FFA500')" class="btn btn-sm btn-warning">Apply Orange</button>
+        </div>
+    </div>
+
+    <script>
+        // Display current primary color value
+        function updateDisplay() {
+            const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--bs-primary');
+            document.getElementById('primary-var').textContent = primaryColor || 'not set';
+        }
+
+        // Apply test color directly to CSS variable
+        function applyTestColor(color) {
+            document.documentElement.style.setProperty('--bs-primary', color);
+            updateDisplay();
+            console.log('Applied color:', color);
+        }
+
+        // Initial display
+        updateDisplay();
+
+        // Monitor for changes
+        setInterval(updateDisplay, 1000);
+    </script>
+</body>
+</html>
